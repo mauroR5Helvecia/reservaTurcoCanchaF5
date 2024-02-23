@@ -1,0 +1,173 @@
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: "Poppins";
+}
+
+.layout__login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+
+}
+
+
+
+.login__form,
+.register__form {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 50px 40px 50px 40px;
+    background-color: #ffffff;
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
+    font-family: "Poppins", sans-serif;
+
+    .login__header,
+    .register__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        .login__title,
+        .register__title {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #212121;
+        }
+
+        .login__subtitle,
+        .register__subtitle {
+            font-size: 0.725rem;
+            max-width: 80%;
+            text-align: center;
+            line-height: 1.1rem;
+            color: #8B8E98
+        }
+    }
+
+    .login__form-group,
+    .register__form-group {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .login__form-label,
+        .register__form-label {
+            font-size: 0.75rem;
+            color: #8B8E98;
+            font-weight: 600;
+        }
+
+        .login__form-input,
+        .register__form-input {
+            width: auto;
+            height: 40px;
+            padding: 0 0 0 40px;
+            border-radius: 7px;
+            outline: none;
+            border: 1px solid #e5e5e5;
+            filter: drop-shadow(0px 1px 0px #efefef) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+            transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+
+            &:focus {
+                border: 1px solid transparent;
+                box-shadow: 0px 0px 0px 2px #242424;
+                background-color: transparent;
+            }
+        }
+
+        .login__form-icon,
+        .register__form-icon {
+            font-size: 1.4rem;
+            position: absolute;
+            z-index: 99;
+            left: 12px;
+            bottom: 11px;
+            pointer-events: none;
+        }
+    }
+
+    .login__form-submit,
+    .register__form-submit {
+        width: 100%;
+        height: 40px;
+        border: 0;
+        background: #115DFC;
+        border-radius: 7px;
+        outline: none;
+        color: #ffffff;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+    .login__form-register,
+    .register__form-register {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #212121;
+        border-radius: 7px;
+        outline: none;
+        color: #ffffff;
+        border: 1px solid #e5e5e5;
+        filter: drop-shadow(0px 1px 0px #efefef) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+        cursor: pointer;
+    }
+
+    .separator {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        color: #8B8E98;
+    }
+
+    .separator .line {
+        display: block;
+        width: 100%;
+        height: 1px;
+        border: 0;
+        background-color: #929292;
+    }
+
+    .note {
+        font-size: 0.75rem;
+        color: #8B8E98;
+        text-decoration: underline;
+    }
+}
+
+.register__form {
+    padding: 2.5rem 2rem;
+    padding-top: 1.5rem;
+
+    .register__form-submit {
+        background-color: rgb(36, 118, 36);
+    }
+}
