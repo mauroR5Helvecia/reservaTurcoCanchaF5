@@ -3,8 +3,9 @@ import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
-import { Panel } from "../components/user/Panel";
+
 import { PanelAdmin } from "../components/admin/PanelAdmin";
+import { Home } from "../components/user/Home";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -15,8 +16,8 @@ export const Router = () => {
           <Route path="register" element={<Register />} />
         </Route>
 
-        <Route path="/panel" element={<PrivateLayout />}>
-          <Route index element={<Panel />} />
+        <Route path="/home" element={<PrivateLayout />}>
+          <Route index element={<Home />} />
           <Route path="Admin" element={<PanelAdmin />} />
         </Route>
         <Route

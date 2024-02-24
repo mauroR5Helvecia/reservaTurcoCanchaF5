@@ -4,98 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../src/assets/css/styles.css" >
+    <link rel="stylesheet" href="../src/assets/css/pruebas.css" >
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
-</head>
+    </head>
 <body>
 
-    <main class="layout__login">
-        
-           
-        <form class="login__form">
-            <header class="login__header">
-                <p class="login__title">Inicia sesión </p>
-                <span class="login__subtitle">Create tu cuenta y disfrutá de poder reservar tus turnos cuando lo necesites.</span>
-              </header>
+    <div class="layout">
+        <header class="user__header">
+          <section class="header__title-container">
+            <h1 class="header__title">La canchita de los pibes</h1>
+          </section>
+          <section class="header__user-container"><img src="https://imgs.search.brave.com/CAtVOv-guW4Ksxe5xp71hwQC-tjx4VdiCT4oPycaFnQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Y29tcHV0ZXJob3Bl/LmNvbS9qYXJnb24v/Zy9ndWVzdC11c2Vy/LnBuZw" alt="" class="header__user-image"></section>
+          
+        </header>
 
+        <main class="layout__login">
+          </main>
+    
+      </div>
+    
+      <div class="layout">
+        <article>
+          <section>
+            <h1>Estás a un paso de completar tu reserva</h1>
+          </section>
+          <img src="https://imgs.search.brave.com/CAtVOv-guW4Ksxe5xp71hwQC-tjx4VdiCT4oPycaFnQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Y29tcHV0ZXJob3Bl/LmNvbS9qYXJnb24v/Zy9ndWVzdC11c2Vy/LnBuZw" alt="" class="user_img">
+          <div class="turno__info">
+            <h3>Cancha 1</h3>
+            <span> <i class='bx bx-time-five'></i> 21.00 - 22.00 hs</span>
+
+            <p><Strong>Dirección: </Strong>  Av.corrientes 2021</p>
+            <p><Strong>Reserva: </Strong> Juan Alvarez</p>
             
-        
-            <section class="login__form-group">
-                <label class="login__form-label" for="email_field">Email</label>
-                <i class='bx bx-envelope login__form-icon'></i>
-                <input placeholder="user@mail.com" title="Inpit title" name="input-name" type="text" class="login__form-input" id="email_field">
-              </section>
-
-
-              <section class="login__form-group">
-                <label class="login__form-label" for="password_field">Contraseña</label>
-                <i class='bx bx-lock-open login__form-icon'></i>
-                <input placeholder="Contraseña" title="Inpit title" name="input-name" type="password" class="login__form-input" id="password_field">
-              </section>
-                <button type="submit" class="login__form-submit">Iniciar sesión</button>   
-              
-                
-            <div class="separator">
-                <hr class="line">
-                <span>o</span>
-                <hr class="line">
-              </div>
-              
-              <button title="Sign In" type="submit" class="login__form-register">
-               
-                Crear una cuenta
-              </button>
-          </form>
-       
-          <form class="register__form">
-            <header class="register__header">
-                <p class="register__title">Registrarte</p>
-                <span class="register__subtitle">Create tu cuenta y disfrutá de poder reservar tus turnos cuando lo necesites.</span>
-              </header>
-
-              <section class="register__form-group">
-                <label class="register__form-label" for="name_field">Nombre</label>
-                <i class='bx bx-user register__form-icon'></i>
-                <input placeholder="Tu nombre" title="Inpit title" name="input-name" type="text" class="register__form-input" id="name_field">
-              </section>
-             
-              <section class="register__form-group">
-                <label class="register__form-label" for="surname_field">Apellido</label>
-                <i class='bx bx-user register__form-icon'></i>
-                <input placeholder="Tu nombre" title="Inpit title" name="input-name" type="text" class="register__form-input" id="surname_field">
-              </section>
-              <section class="register__form-group">
-                <label class="register__form-label" for="user_field">Usuario</label>
-                <i class='bx bx-user-pin register__form-icon'></i>
-                <input placeholder="Usuario#123" title="Inpit title" name="input-name" type="text" class="register__form-input" id="user_field">
-              </section>
-
-            <section class="register__form-group">
-                <label class="register__form-label" for="email_field">Email</label>
-                <i class='bx bx-envelope register__form-icon'></i>
-                <input placeholder="user@mail.com" title="Inpit title" name="input-name" type="email" class="register__form-input" id="email_field">
-              </section>
-
-              <section class="register__form-group">
-                <label class="register__form-label" for="email_field">Email</label>
-                <i class='bx bx-phone register__form-icon'></i>
-                <input placeholder="+54 11 7532-2520" title="Inpit title" name="input-name" type="tel" class="register__form-input" id="email_field">
-              </section>
-
-              <section class="register__form-group">
-                <label class="register__form-label" for="password_field">Contraseña</label>
-                <i class='bx bx-lock-open register__form-icon'></i>
-                <input placeholder="Contraseña" title="Inpit title" name="input-name" type="password" class="register__form-input" id="password_field">
-              </section>
-                <button type="submit" class="register__form-submit">Crear cuenta</button>   
-              
-               
-          </form>
-    </main>
-    
-    
-</body>
+          </div>
+          <button>Confirmar</button>
+        </article>
+      </div>
+    </body>
 </html>

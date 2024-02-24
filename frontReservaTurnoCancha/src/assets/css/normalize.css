@@ -1,7 +1,8 @@
 * {
     margin: 0;
     padding: 0;
-    vertical-align: baseline;
+
+    box-sizing: border-box;
 }
 
 *::before,
@@ -21,7 +22,6 @@ body {
 
 html {
     font-family: "Poppins";
-    overflow: hidden;
     scroll-behavior: smooth;
 }
 

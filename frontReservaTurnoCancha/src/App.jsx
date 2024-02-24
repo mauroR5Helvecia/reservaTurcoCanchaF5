@@ -2,7 +2,7 @@ import { Router } from "./router/Router";
 
 function App() {
   return (
-    <main className="Layout">
+    <main className="layout">
       <Router />
     </main>
   );
