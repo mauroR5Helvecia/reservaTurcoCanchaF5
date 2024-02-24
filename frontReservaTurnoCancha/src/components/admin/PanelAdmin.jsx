@@ -1,3 +1,3 @@
 export const PanelAdmin = () => {
-  return <div>PanelAdmin</div>;
+  return <div>PanelAdmian</div>;
 };
