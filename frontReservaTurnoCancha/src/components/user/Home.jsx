@@ -1,3 +1,4 @@
+import { CanchasSlider } from "../admin/CanchasSlider";
 import { Shifts } from "../shifts/Shifts";
 
 export const Home = () => {
@@ -23,6 +24,8 @@ export const Home = () => {
 
       <section className="home__advices">
         <h3>El martes cerrado</h3>
+
+        <CanchasSlider />
       </section>
     </div>
   );
