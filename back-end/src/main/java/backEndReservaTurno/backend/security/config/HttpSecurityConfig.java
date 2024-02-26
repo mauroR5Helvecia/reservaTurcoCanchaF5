@@ -1,7 +1,7 @@
 package backEndReservaTurno.backend.security.config;
 
+
 import backEndReservaTurno.backend.security.config.filter.JwtAuthenticationFilter;
-import backEndReservaTurno.backend.security.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,10 +40,6 @@ public class HttpSecurityConfig {
 //                    authConfig.requestMatchers("/error").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/**").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/**").permitAll();
-//                    authConfig.requestMatchers(HttpMethod.POST, "/cancha/auth/**").permitAll();
-//                    authConfig.requestMatchers(HttpMethod.POST, "/cancha/mail/sendemail").permitAll();
-//                    authConfig.requestMatchers(HttpMethod.POST, "/cancha/mail/sendverifyemail").permitAll();
-//                    authConfig.requestMatchers(HttpMethod.GET, "/cancha/verify/access").hasRole(Role.ADMINISTRADOR.name());
 
                     authConfig.anyRequest().denyAll();
 

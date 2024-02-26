@@ -1,7 +1,5 @@
 package backEndReservaTurno.backend.security.entity;
-
 import backEndReservaTurno.backend.security.util.Role;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,10 +28,6 @@ public class Usuario implements UserDetails {
     @Column(unique = true)
     private String email;
     private String phone;
-
-    @Nullable
-    private String direccion;
-
     private String password;
 
     // Agregar este campo a la entidad Usuario
@@ -60,7 +54,9 @@ public class Usuario implements UserDetails {
         // Agrega roles adicionales según sea necesario
         if (role == Role.ADMINISTRADOR) {
             authorities.add(new SimpleGrantedAuthority("ROLE_USUARIO"));
-
+            authorities.add(new SimpleGrantedAuthority("ROLE_COMERCIANTE"));
+        } if (role == Role.COMERCIANTE) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_USUARIO"));
         }
 
         return authorities;

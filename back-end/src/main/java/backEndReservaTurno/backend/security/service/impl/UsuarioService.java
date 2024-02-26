@@ -1,5 +1,4 @@
 package backEndReservaTurno.backend.security.service.impl;
-
 import backEndReservaTurno.backend.security.entity.Usuario;
 import backEndReservaTurno.backend.security.repository.UsuarioRepository;
 import backEndReservaTurno.backend.security.service.UsuarioServiceInterface;

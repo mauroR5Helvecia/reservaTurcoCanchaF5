@@ -4,5 +4,8 @@ public enum Role {
 
     USUARIO,
 
+
+    COMERCIANTE,
+
     ADMINISTRADOR,
 }

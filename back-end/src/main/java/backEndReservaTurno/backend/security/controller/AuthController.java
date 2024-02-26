@@ -1,5 +1,4 @@
 package backEndReservaTurno.backend.security.controller;
-
 import backEndReservaTurno.backend.javaMailSender.MailController;
 import backEndReservaTurno.backend.javaMailSender.emailDTO.EmailDTOVerify;
 import backEndReservaTurno.backend.javaMailSender.util.CodeVerifyService;
@@ -23,7 +22,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/cancha/auth")
+@RequestMapping("/hmas/auth")
 @CrossOrigin(origins = "*")
 public class AuthController {
 
