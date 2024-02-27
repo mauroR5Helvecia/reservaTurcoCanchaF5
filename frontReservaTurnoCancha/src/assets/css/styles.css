@@ -1,6 +1,7 @@
 .layout {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -179,6 +180,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding-left: 195px;
 
 
     .header__title {
@@ -228,73 +230,89 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-left: 195px;
 }
 
-.footer__private {
-    width: 100%;
-    height: 85px;
-
+.aside__private {
+    width: fit-content;
+    height: 100%;
+    position: fixed;
+    padding: 0 1rem;
+    top: 0;
+    left: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    background-color: rgba(167, 175, 179, 0.632);
+    transition: all 300ms ease-in-out;
 
-    .footer__button {
-        position: relative;
-        padding: 1rem 2rem;
-        padding-right: 2.8rem;
+    overflow: hidden;
+
+
+    .aside__button {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        padding: 0.5rem 1rem;
         font-size: 12px;
         text-transform: uppercase;
-        letter-spacing: 2.5px;
         font-weight: 500;
         color: #fff;
-        background-color: #4923c4;
+        background-color: #211d31;
         border: none;
-        border-radius: 10px;
+        border-radius: 2rem;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease 0s;
-        cursor: pointer;
-        outline: none;
+        transition: all 0.3s ease-in-out;
+        gap: 0.5rem;
 
-        .footer__button-icon {
-            position: absolute;
-            top: 20%;
-            right: 5%;
+        span {
+            opacity: 1;
+
+        }
+
+        .aside__button-icon {
             font-size: 1.7rem;
         }
 
-        &:nth-child(1) {
-            background-color: rgb(62, 207, 108);
-        }
 
-        &:last-child {
-            background-color: red;
-        }
     }
 
-    .footer__button:hover {
-        background-color: #4923c4;
+    .aside__button:hover {
+        background-color: #d92f68;
         box-shadow: 0px 15px 20px rgba(134, 46, 229, 0.4);
         color: #fff;
         transform: translateY(-3px);
 
-        &:nth-child(1) {
-            background-color: rgba(70, 209, 20, 0.721);
+        &:nth-child(2) {
+            background-color: #4923c4;
+        }
 
+        &:nth-child(3) {
+            background-color: rgba(70, 209, 20, 0.721);
         }
 
         &:last-child {
-            background-color: black;
+            background-color: rgb(194, 46, 46);
         }
     }
 
-    .footer__button:active {
-        transform: translateY(-1px);
+
+
+    .aside__button-active {
+        background-color: var(--back)
     }
+
+
+
 }
 
 /*LISTADO DE TURNOS*/
 
 
+.calendary__handler {
+    float: right;
+    margin-right: 1rem;
+}
 
 .list__shifts__header {
     margin: 1rem 0;
@@ -314,8 +332,6 @@
         &:focus {
             outline: none;
         }
-
-
     }
 }
 
@@ -397,8 +413,9 @@
     left: 0;
     z-index: 20;
     background-color: rgba(0, 0, 0, 0.194);
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -484,8 +501,8 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
 
     section {
@@ -495,12 +512,13 @@
     }
 
     .home__map {
+        width: 50%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 16rem;
-        border-right: 5px solid rgb(227, 226, 226);
+
+
 
         .home__map-iframe {
             border: none;
@@ -512,8 +530,23 @@
         margin-bottom: 0.5rem;
     }
 
+    .home__advices {
+        width: 35%;
+    }
+
     .home__shifts {
         padding-right: 2rem;
+        width: 65%;
+
+        .shifts__extra-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
     }
 
 }
@@ -523,13 +556,17 @@
 
 .slider {
     display: flex;
-    flex-wrap: nowrap;
-    overflow: scroll;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.5rem;
 
     img {
         flex: 1 0 auto;
-        margin: 0 50px;
-        width: 300px;
-        height: 300px;
+        margin: 0 40px;
+        border-radius: 0.2rem;
+        width: 450px;
+        height: 450px;
+
+
     }
 }

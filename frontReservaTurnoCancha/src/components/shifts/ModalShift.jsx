@@ -1,4 +1,4 @@
-export const ModalShift = ({ isOpen, closeModal }) => {
+export const ModalShift = ({ isOpen, closeModal, shift }) => {
   if (!isOpen) return null;
 
   return (
@@ -11,20 +11,20 @@ export const ModalShift = ({ isOpen, closeModal }) => {
 
         <div className="reservation__info">
           <p>
-            <i className="bx bx-football"></i> Cancha n°: 1
+            <i className="bx bx-football"></i> {shift.cancha}
           </p>
           <p>
-            <i className="bx bx-calendar"></i> Fecha: 24/02/2024
+            <i className="bx bx-calendar"></i> Fecha: {shift.fecha}
           </p>
           <p>
-            <i className="bx bxs-hourglass-top"></i> Horario : 21.00 - 22.00 hs
+            <i className="bx bxs-hourglass-top"></i> Horario : {shift.horario}
           </p>
 
           <p>
-            <i className="bx bx-map"></i> Dirección: Av.corrientes 2021
+            <i className="bx bx-map"></i> Dirección: {shift.direccion}
           </p>
           <p>
-            <i className="bx bx-user"></i> Reserva: Juan Alvarez
+            <i className="bx bx-user"></i> Reserva: {shift.usuario}
           </p>
         </div>
         <button className="reservation__submit">Confirmar</button>

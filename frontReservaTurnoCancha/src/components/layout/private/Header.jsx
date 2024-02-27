@@ -4,6 +4,7 @@ export const Header = () => {
       <section className="header__title-container">
         <h1 className="header__title">La canchita de los pibes</h1>
       </section>
+
       <section className="header__user-container">
         <h2 className="header__user-name">Pablo Romero</h2>
         <img

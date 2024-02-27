@@ -6,6 +6,8 @@ import { Register } from "../components/user/Register";
 
 import { LayoutAdmin } from "../components/admin/LayoutAdmin";
 import { Home } from "../components/user/Home";
+import { ReservedShifts } from "../components/shifts/ReservedShifts";
+import { Contact } from "../components/user/Contact";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -16,8 +18,11 @@ export const Router = () => {
           <Route path="register" element={<Register />} />
         </Route>
 
-        <Route path="/home" element={<PrivateLayout />}>
+        <Route path="/user" element={<PrivateLayout />}>
           <Route index element={<Home />} />
+          <Route path="Inicio" element={<Home />} />
+          <Route path="MisTurnos" element={<ReservedShifts />} />
+          <Route path="Contacto" element={<Contact />} />
         </Route>
 
         <Route path="/Admin" element={<LayoutAdmin />}>

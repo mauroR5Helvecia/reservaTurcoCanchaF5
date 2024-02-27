@@ -12,17 +12,14 @@ export const Shifts = () => {
 
   const [startDate, setStartDate] = useState(new Date());
 
+  const [shift, setShift] = useState({});
+
   useEffect(() => {
     setCanchas(data.canchas);
-    canchaSelection(0);
-  }, [startDate]);
-
-  const canchaSelection = (cancha) => {
-    setSelectedCancha(cancha);
-  };
+    setSelectedCancha(0);
+  }, []);
 
   let canchaSeleccionada = data.canchas[SelectedCancha];
-  console.log(startDate);
 
   let formaTime =
     startDate.getFullYear() +
@@ -31,24 +28,32 @@ export const Shifts = () => {
     "-" +
     startDate.getDate();
 
+  const activeModal = (fechaTurno, horarioTurno, idTurno) => {
+    let turnoInfo = {
+      id: idTurno,
+      cancha: canchaSeleccionada.nombre,
+      fecha: fechaTurno,
+      horario: horarioTurno,
+      direccion: canchaSeleccionada.ubicacion,
+      usuario: "Pablo Romero",
+    };
+    //Definir el turno a reservar
+    setShift(turnoInfo);
+    //Finalmente activar el modal
+    setIsModalOpen(true);
+  };
   return (
     <>
       <header className="list__shifts__header">
-        <input
-          type="date"
-          defaultValue={""}
-          min="2024-02-24"
-          max="2024-03-01"
-          className="shift__date"
-        />
-
-        <Calendario startDate={startDate} setStartDate={setStartDate} />
-        <div className="custom-select">
+        <div className="calendary__handler">
+          <Calendario startDate={startDate} setStartDate={setStartDate} />
+        </div>
+        <div className="shifts__select-container">
           <select
             name="days"
             id="days"
             className="shift__day"
-            onChange={(e) => canchaSelection(e.target.value)}
+            onChange={(e) => setSelectedCancha(e.target.value)}
           >
             {canchas.map((cancha, indexOf) => {
               return (
@@ -61,6 +66,16 @@ export const Shifts = () => {
         </div>
       </header>
       <h2 className="list__shifts-title">Turnos disponibles</h2>
+      <div className="shifts__extra-info">
+        <span>
+          Capacidad : {canchaSeleccionada.capacidad}{" "}
+          <i className="bx bx-group shifts__extra-icon"></i>
+        </span>
+        <span>
+          Precio x turno : {canchaSeleccionada.precio}
+          <i className="bx bx-dollar shifts__extra-icon"></i>
+        </span>
+      </div>
       <ul className="list__shifts">
         {canchaSeleccionada.listaTurnos.length >= 1 &&
           canchaSeleccionada.listaTurnos.map((turno) => {
@@ -68,7 +83,7 @@ export const Shifts = () => {
               turno.fechaTurno == formaTime && (
                 <li className="shifts__shift" key={turno.idTurno}>
                   <div className="shift__box-info">
-                    <h3 className="shift__info">Cancha 1</h3>
+                    <h3 className="shift__info">{canchaSeleccionada.nombre}</h3>
                     <span className="shift__schedule">
                       {" "}
                       <i className="bx bx-time-five"></i> {`${turno.horaTurno}`}
@@ -77,7 +92,7 @@ export const Shifts = () => {
                   <button
                     className="shift__submit"
                     onClick={() => {
-                      setIsModalOpen(true);
+                      activeModal(turno.fechaTurno, turno.horaTurno);
                     }}
                   >
                     Reservar
@@ -89,6 +104,7 @@ export const Shifts = () => {
       </ul>
 
       <ModalShift
+        shift={shift}
         isOpen={isModalOpen}
         closeModal={() => {
           setIsModalOpen(false);

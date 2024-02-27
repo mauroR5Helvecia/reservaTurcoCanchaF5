@@ -28,15 +28,15 @@
       "precio": 50,
       "listaTurnos": [
         {
-          "idTurno": 1,
-          "fechaTurno": "2024-2-21",
+          "idTurno":1,
+          "fechaTurno": "2024-2-28",
           "horaTurno": "08:00",
           "reservado": true,
           "idUsuario": 2
         },
         {
           "idTurno": 2,
-          "fechaTurno": "2024-2-21",
+          "fechaTurno": "2024-2-28",
           "horaTurno": "10:00",
           "reservado": false,
           "idUsuario": null
@@ -56,7 +56,28 @@
       "ubicacion": "Otra Dirección 456",
       "capacidad": 8,
       "precio": 60,
-      "listaTurnos": []
+      "listaTurnos": [
+        {
+          "idTurno":1,
+          "fechaTurno": "2024-2-28",
+          "horaTurno": "09:00",
+          "reservado": true,
+          "idUsuario": 2
+        },
+        {
+          "idTurno": 2,
+          "fechaTurno": "2024-2-28",
+          "horaTurno": "10:00",
+          "reservado": false,
+          "idUsuario": null
+        },
+        {
+          "idTurno": 3,
+          "fechaTurno": "2024-2-29",
+          "horaTurno": "12:00",
+          "reservado": true,
+          "idUsuario": 2
+        }]
     }
   ],
   "reservas": [
