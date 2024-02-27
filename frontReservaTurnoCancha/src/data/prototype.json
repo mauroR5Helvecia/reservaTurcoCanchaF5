@@ -1,0 +1,69 @@
+{
+  "usuarios": [
+    {
+      "idUsuario": 1,
+      "name": "Admin",
+      "lastName": "AdminLastName",
+      "username": "admin_user",
+      "email": "admin@example.com",
+      "phone": "123456789",
+      "direccion": null
+    },
+    {
+      "idUsuario": 2,
+      "name": "Usuario",
+      "lastName": "UsuarioLastName",
+      "username": "user1",
+      "email": "user1@example.com",
+      "phone": "987654321",
+      "direccion": "Calle Falsa 123"
+    }
+  ],
+  "canchas": [
+    {
+      "id_cancha": 1,
+      "nombre": "Cancha 1",
+      "ubicacion": "Dirección 123",
+      "capacidad": 10,
+      "precio": 50,
+      "listaTurnos": [
+        {
+          "idTurno": 1,
+          "fechaTurno": "2024-2-21",
+          "horaTurno": "08:00",
+          "reservado": true,
+          "idUsuario": 2
+        },
+        {
+          "idTurno": 2,
+          "fechaTurno": "2024-2-21",
+          "horaTurno": "10:00",
+          "reservado": false,
+          "idUsuario": null
+        },
+        {
+          "idTurno": 3,
+          "fechaTurno": "2024-2-27",
+          "horaTurno": "08:00",
+          "reservado": true,
+          "idUsuario": 2
+        }
+      ]
+    },
+    {
+      "id_cancha": 2,
+      "nombre": "Cancha 2",
+      "ubicacion": "Otra Dirección 456",
+      "capacidad": 8,
+      "precio": 60,
+      "listaTurnos": []
+    }
+  ],
+  "reservas": [
+    {
+      "idUsuario": 2,
+      "idCancha": 1,
+      "idTurno": 1
+    }
+  ]
+}

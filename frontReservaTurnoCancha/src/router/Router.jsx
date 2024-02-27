@@ -4,7 +4,7 @@ import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
 
-import { PanelAdmin } from "../components/admin/PanelAdmin";
+import { LayoutAdmin } from "../components/admin/LayoutAdmin";
 import { Home } from "../components/user/Home";
 export const Router = () => {
   return (
@@ -18,7 +18,10 @@ export const Router = () => {
 
         <Route path="/home" element={<PrivateLayout />}>
           <Route index element={<Home />} />
-          <Route path="Admin" element={<PanelAdmin />} />
+        </Route>
+
+        <Route path="/Admin" element={<LayoutAdmin />}>
+          <Route index element={<LayoutAdmin />} />
         </Route>
         <Route
           path="*"

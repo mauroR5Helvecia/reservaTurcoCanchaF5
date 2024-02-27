@@ -8,9 +8,35 @@ html {
 }
 
 .layout {
+    width: 100vw;
     height: 100vh;
+}
+
+.admin__header {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.admin__content {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+form {
+    h2 {
+        margin-bottom: 1rem;
+    }
+}
+
+.days {
+    display: flex;
+
+    label {
+        display: flex;
+        gap: 0.5rem;
+        margin-right: 1rem;
+    }
 }
