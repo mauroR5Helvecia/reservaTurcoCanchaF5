@@ -29,6 +29,4 @@ public class Court {
     private List<Shift> listShift;
 
 
-
-
 }
