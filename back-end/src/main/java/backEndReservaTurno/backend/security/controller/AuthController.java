@@ -22,7 +22,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/hmas/auth")
+@RequestMapping("/apireserva/auth")
 @CrossOrigin(origins = "*")
 public class AuthController {
 

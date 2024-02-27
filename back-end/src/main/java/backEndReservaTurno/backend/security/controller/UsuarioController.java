@@ -11,8 +11,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("hmas/usuario")
-@CrossOrigin(origins = "http://localhost:8082")
+@RequestMapping("apireserva/usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
 
