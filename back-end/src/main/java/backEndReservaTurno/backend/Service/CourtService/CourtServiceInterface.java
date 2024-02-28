@@ -10,6 +10,8 @@ public interface CourtServiceInterface {
 
     public Court saveCourt (Court court);
 
+    List<Shift> getShiftCurrent(String nameCourt);
+
     public void deleteCourt (Long id);
 
     public Optional<Court> findCourtById (Long id);

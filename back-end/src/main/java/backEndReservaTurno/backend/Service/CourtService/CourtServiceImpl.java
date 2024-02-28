@@ -80,6 +80,47 @@ public class CourtServiceImpl implements CourtServiceInterface{
 
 
     @Override
+    public List<Shift> getShiftCurrent(String nameCourt) {
+
+        // Obtener la fecha actual
+        Date currentDate = new Date();
+
+        // Crear una instancia de Calendar y establecer la fecha actual
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(currentDate);
+        calendarStart.set(Calendar.HOUR_OF_DAY, 0);
+        calendarStart.set(Calendar.MINUTE, 0);
+        calendarStart.set(Calendar.SECOND, 0);
+        calendarStart.set(Calendar.MILLISECOND, 0);
+
+        // Crear una instancia de Calendar para la medianoche del día siguiente
+        Calendar calendarEnd = (Calendar) calendarStart.clone();
+        calendarEnd.add(Calendar.DAY_OF_MONTH, 1);
+
+        // Obtener las fechas de inicio y fin
+        Date startDate = calendarStart.getTime();
+        Date endDate = calendarEnd.getTime();
+
+        // Buscar la cancha por el nombre
+        Court court = courtRepository.findByNameCourt(nameCourt);
+
+        if (court != null) {
+            // Si existe la cancha, obtener la lista de turnos
+            List<Shift> shifts = court.getListShift();
+
+            // Filtrar los turnos desde la medianoche del día actual hasta la medianoche del día siguiente
+            List<Shift> filteredShifts = shifts.stream()
+                    .filter(shift -> shift.getDateShift().after(startDate) && shift.getDateShift().before(endDate))
+                    .collect(Collectors.toList());
+
+            return filteredShifts;
+        } else {
+            // Si no se encuentra la cancha, lanzar una excepción
+            throw new IllegalArgumentException("No se encontró una cancha con el nombre especificado: " + nameCourt);
+        }
+    }
+
+    @Override
     public Optional<Court> findByReservation(String nameCourt) {
 
         //Faltaria la clase de las reservas, para implementar

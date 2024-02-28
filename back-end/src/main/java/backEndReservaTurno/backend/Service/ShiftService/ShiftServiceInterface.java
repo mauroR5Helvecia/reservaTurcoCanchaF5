@@ -8,7 +8,7 @@ public interface ShiftServiceInterface {
 
     public List<Shift> getShift ();
 
-    List<Shift> getShiftCurrent();
+
 
     public Shift saveShift (Shift shift);
 

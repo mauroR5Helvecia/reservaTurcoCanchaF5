@@ -1,6 +1,8 @@
 package backEndReservaTurno.backend.Service.ShiftService;
 
+import backEndReservaTurno.backend.Entity.Court;
 import backEndReservaTurno.backend.Entity.Shift;
+import backEndReservaTurno.backend.Repository.CourtRepository;
 import backEndReservaTurno.backend.Repository.ShiftRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,35 +21,15 @@ public class ShiftServiceImpl implements ShiftServiceInterface{
     private ShiftRepository shiftRepository;
 
 
+
+
     @Override
     public List<Shift> getShift() {
         List<Shift> listShift = shiftRepository.findAll();
         return listShift;
     }
 
-    @Override
-    public List<Shift> getShiftCurrent() {
-        // Obtener la fecha actual
-        Date currentDate = new Date();
 
-        // Crear una instancia de Calendar y establecer la fecha actual
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-        // Establecer la hora a 0:00:00 para obtener el inicio del día actual
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        Date startDate = calendar.getTime();
-
-        // Agregar 1 día a la fecha actual para obtener el día siguiente
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date endDate = calendar.getTime();
-
-        // Obtener los turnos del día actual solamente
-        List<Shift> shifts = shiftRepository.findByDateShiftBetween(startDate, endDate);
-
-        return shifts;
-    }
 
 
 

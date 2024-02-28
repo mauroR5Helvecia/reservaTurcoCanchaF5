@@ -21,6 +21,7 @@ public class Court {
     private String nameCourt;
     private String location;
     private String capacity;
+    private String phone;
     private Double price;
 
 //Una cancha va a tener una lista de turnos, si se elimina un objeto cancha, se eliminaran de

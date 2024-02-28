@@ -69,6 +69,22 @@ public class CourtController {
         }
     }
 
+    //Passing the name of the court, returns the list of turns the currentdate at 1 days posterior
+
+    @GetMapping("/shiftsdays")
+    public ResponseEntity<?> getShiftsByCourtNameDay (@RequestParam String nameCourt) {
+        try {
+            List<Shift> shifts = courtServiceInterface.getShiftCurrent(nameCourt);
+            return new ResponseEntity<>(shifts, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al obtener los turnos de la cancha: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 
     //passing the id, delete corresponded Court and Shift
 
