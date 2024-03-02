@@ -1,11 +1,15 @@
 package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.ShiftService.ShiftServiceInterface;
+import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +25,13 @@ public class ShiftController {
     @PostMapping("/save")
     public ResponseEntity<?> saveShift(@RequestBody Shift shift) {
         try {
-            Shift savedShift = shiftServiceInterface.saveShift(shift);
-            return new ResponseEntity<>(savedShift, HttpStatus.CREATED);
+                Shift savedShift = shiftServiceInterface.saveShift(shift);
+            ResponseApiCustom response = new ResponseApiCustom("success shift" + shift.getCourt().getNameCourt(), savedShift);
+            return ResponseEntity.ok(response);
+
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al guardar el turno: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ResponseApiCustom response = new ResponseApiCustom("error save shift" + shift.getCourt().getNameCourt(), e.getMessage());
+            return ResponseEntity.ok(response);
         }
     }
 
