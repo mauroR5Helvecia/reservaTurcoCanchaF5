@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Global } from "../../../helpers/Global"
 
 export const VerifyCode = () => {
   const navigate = useNavigate();
@@ -14,10 +15,15 @@ export const VerifyCode = () => {
   const manejarVerificacion = async (e) => {
     e.preventDefault();
     const emailAEnviar = localStorage.getItem("email");
+
+    const datos = {
+      emailAEnviar: emailAEnviar,
+      codigoVerificacionIngresado: codigoVerificacionIngresado
+    };
     try {
-      const response = await fetch("/reservaturno/auth/verifycode", {
+      const response = await fetch(Global.url+"auth/verifycode", {
         method: "POST",
-        body: JSON.stringify(emailAEnviar, codigoVerificacionIngresado),
+        body: JSON.stringify(datos),
         headers: {
           "Content-Type": "application/json",
         },

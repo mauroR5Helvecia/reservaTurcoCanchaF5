@@ -8,6 +8,8 @@ export const Register = () => {
   const navigate = useNavigate();
 
   const RegisterUser = async (e) => {
+
+
     e.preventDefault();
     let newUser = form;
 
@@ -26,9 +28,13 @@ export const Register = () => {
 
       let userEmail = localStorage.getItem("email");
 
+      console.log(userEmail);
+
       navigate("/verify");
-    } catch {
-      console.log("Error en registrar usuario");
+
+
+    } catch (error) {
+      console.log("Error en registrar usuario", error);
     }
   };
   return (

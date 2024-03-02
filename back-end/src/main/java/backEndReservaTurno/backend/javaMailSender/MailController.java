@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/cancha/mail")
+@RequestMapping("apireserva/cancha/mail")
 public class MailController {
 
     @Autowired

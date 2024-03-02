@@ -9,6 +9,7 @@ import backEndReservaTurno.backend.security.entity.Usuario;
 import backEndReservaTurno.backend.security.service.AuthenticationService;
 import backEndReservaTurno.backend.security.service.UsuarioServiceInterface;
 import backEndReservaTurno.backend.security.util.Role;
+import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class AuthController {
 
         if (usuarioServiceInterface.findByEmail(email).isPresent()) {
             String mensajeError = "El correo electrónico " + email + " ya está registrado.";
-            System.out.println("Está fallando la verificación de mail");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(mensajeError);
+            ResponseApiCustom response = new ResponseApiCustom("Error", mensajeError);
+            return ResponseEntity.ok(response);
         }
 
         // Generar el hash de la contraseña antes de guardar el usuario
@@ -83,14 +84,16 @@ public class AuthController {
         System.out.println("llego hasta aca 3");
       Usuario createdUsuario = usuarioServiceInterface.save(usuario);
 
-        return ResponseEntity.status(HttpStatus.OK).body("El usuario fue registrado con exito, Inicia sesion en SignIn con tu Username y password");
+
+        ResponseApiCustom response = new ResponseApiCustom("Usuario creado exitosamente: ", usuario.getName());
+        return ResponseEntity.ok(response);
     }
 
 //    Logica para verificar si los digitos ingresados son iguales a los generados
     // y para cambiar a true usuario verificado en caso de ser correcto.
 
     @PostMapping("/verifycode")
-    public ResponseEntity<String> verificarCuenta (@RequestBody VerifyEmailDTO verifyEmailDTO){
+    public ResponseEntity<?> verificarCuenta (@RequestBody VerifyEmailDTO verifyEmailDTO){
         String emailAEnviar = verifyEmailDTO.getEmailAEnviar();
         String codigoVerificacionIngresado = verifyEmailDTO.getCodigoVerificacionIngresado();
 
@@ -107,9 +110,15 @@ public class AuthController {
                 usuarioServiceInterface.save(usuario);
 
                 // Código de verificación correcto, puedes realizar acciones adicionales si es necesario
-                return ResponseEntity.ok("La cuenta ha sido verificada correctamente.");
+                ResponseApiCustom response = new ResponseApiCustom("Success verify User", usuario.isUsuarioVerificado());
+                return ResponseEntity.ok(response);
+
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Código de verificación incorrecto.");
+
+               String mensajeError = "error al verificar el usuario con los datos del email";
+                ResponseApiCustom response = new ResponseApiCustom("Error", mensajeError);
+                return ResponseEntity.ok(response);
+
             }
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró un usuario con el correo electrónico proporcionado.");

@@ -2,12 +2,16 @@ package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.Court;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.CourtService.CourtServiceInterface;
+import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -29,14 +33,20 @@ public class CourtController {
             return new ResponseEntity<>("Error al guardar la cancha: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
 //find all courts
     @GetMapping("/all")
     public ResponseEntity<?> getAllCourts() {
         try {
             List<Court> courts = courtServiceInterface.getCourts();
-            return new ResponseEntity<>(courts, HttpStatus.OK);
+            ResponseApiCustom response = new ResponseApiCustom("success", courts);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al obtener las canchas: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+            ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
+            return ResponseEntity.ok(response);
         }
     }
 
