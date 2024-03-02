@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
@@ -18,8 +20,8 @@ public class Shift {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idShift;
-    private Date dateShift;
-    private Date hourShift;
+    private LocalDate dateShift;
+    private LocalTime hourShift;
     private boolean shiftReserved;
 
 
