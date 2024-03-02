@@ -5,12 +5,12 @@ export const CourtSelector = ({ canchas, setSelectedCancha }) => {
         name="days"
         id="days"
         className="shift__day"
-        onChange={(e) => setSelectedCancha(e.target.value)}
+        onChange={(e) => setSelectedCancha(canchas[e.target.value])}
       >
         {canchas.map((cancha, indexOf) => {
           return (
-            <option key={cancha.id_cancha} value={indexOf}>
-              {cancha.nombre}
+            <option key={cancha.idCourt} value={indexOf}>
+              {cancha.nameCourt}
             </option>
           );
         })}

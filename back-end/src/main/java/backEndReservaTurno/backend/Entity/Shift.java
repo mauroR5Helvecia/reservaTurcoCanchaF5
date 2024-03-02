@@ -19,7 +19,7 @@ public class Shift {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idShift;
     private Date dateShift;
-    private Date hourShift;
+    private String hourShift;
     private boolean shiftReserved;
 
 

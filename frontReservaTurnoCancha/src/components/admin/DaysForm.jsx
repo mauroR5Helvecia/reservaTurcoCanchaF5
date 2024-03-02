@@ -1,14 +1,29 @@
 import { useState, useEffect } from "react";
-import data from "../../data/prototype.json";
+
 import { CourtSelector } from "../shifts/CourtSelector";
+import { Global } from "../../helpers/Global";
 export const DaysForm = () => {
   const [days, setDays] = useState([]);
-  const [canchas, setCanchas] = useState(data.canchas);
-  const [SelectedCancha, setSelectedCancha] = useState(0);
+  const [canchas, setCanchas] = useState([]);
+  const [SelectedCancha, setSelectedCancha] = useState();
 
   useEffect(() => {
-    console.log(canchas[SelectedCancha].id_cancha);
-  }, [SelectedCancha]);
+    getCanchas();
+  }, []);
+
+  const getCanchas = async () => {
+    const request = await fetch(Global.url + "court/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    setCanchas(data);
+    setSelectedCancha(data[0]);
+  };
   const dateOfDay = (diaSemana) => {
     diaSemana = diaSemana.toLowerCase();
 
@@ -74,17 +89,25 @@ export const DaysForm = () => {
       return console.log("Value must be more than 1 and less than 24");
     }
 
-    let Acumulador = secondValue - firstValue;
+    let Acumulador = `${secondValue - firstValue}`;
 
-    days.map((fecha) => {
+    days.map(async (fecha) => {
       let shift = {
-        fechaTurno: fecha,
-        horaTurno: firstValue,
+        dateShift: Date.UTC(fecha),
+        hourShift: firstValue,
+        court: SelectedCancha.idCourt,
       };
 
       for (let i = 0; i < Acumulador; i++) {
-        shift.horaTurno = firstValue + i;
-        console.log(shift);
+        shift.hourShift = firstValue + i;
+
+        await fetch(Global.url + "shift/save", {
+          method: "POST",
+          body: JSON.stringify(shift),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
       }
     });
   };

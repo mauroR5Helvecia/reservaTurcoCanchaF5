@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { ModalShift } from "./ModalShift";
-import data from "../../data/prototype.json";
+
 import Calendario from "./Calendario";
 import { CourtSelector } from "./CourtSelector";
+import { Global } from "../../helpers/Global";
 
 export const Shifts = () => {
   const [canchas, setCanchas] = useState([]);
@@ -15,12 +16,9 @@ export const Shifts = () => {
 
   const [shift, setShift] = useState({});
 
-  useEffect(() => {
-    setCanchas(data.canchas);
-    setSelectedCancha(0);
+  useLayoutEffect(() => {
+    getCanchas();
   }, []);
-
-  let canchaSeleccionada = data.canchas[SelectedCancha];
 
   let formaTime =
     startDate.getFullYear() +
@@ -28,6 +26,20 @@ export const Shifts = () => {
     (startDate.getMonth() + 1) +
     "-" +
     startDate.getDate();
+
+  const getCanchas = async () => {
+    const request = await fetch(Global.url + "court/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    setCanchas(data);
+    setSelectedCancha(data[0]);
+  };
 
   const activeModal = (fechaTurno, horarioTurno, idTurno) => {
     let turnoInfo = {
@@ -58,22 +70,22 @@ export const Shifts = () => {
       <h2 className="list__shifts-title">Turnos disponibles</h2>
       <div className="shifts__extra-info">
         <span>
-          Capacidad : {canchaSeleccionada.capacidad}{" "}
+          Capacidad : {SelectedCancha.capacity}{" "}
           <i className="bx bx-group shifts__extra-icon"></i>
         </span>
         <span>
-          Precio x turno : {canchaSeleccionada.precio}
+          Precio x turno : {SelectedCancha.price}
           <i className="bx bx-dollar shifts__extra-icon"></i>
         </span>
       </div>
       <ul className="list__shifts">
-        {canchaSeleccionada.listaTurnos.length >= 1 &&
-          canchaSeleccionada.listaTurnos.map((turno) => {
+        {SelectedCancha.listShift >= 1 &&
+          SelectedCancha.listShift.map((turno) => {
             return (
               turno.fechaTurno == formaTime && (
                 <li className="shifts__shift" key={turno.idTurno}>
                   <div className="shift__box-info">
-                    <h3 className="shift__info">{canchaSeleccionada.nombre}</h3>
+                    <h3 className="shift__info">{SelectedCancha.courtName}</h3>
                     <span className="shift__schedule">
                       {" "}
                       <i className="bx bx-time-five"></i> {`${turno.horaTurno}`}
