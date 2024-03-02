@@ -21,7 +21,7 @@
   ],
   "canchas": [
     {
-      "id_cancha": 1,
+      "id_cancha":2505,
       "nombre": "Cancha 1",
       "ubicacion": "Dirección 123",
       "capacidad": 10,
@@ -29,7 +29,7 @@
       "listaTurnos": [
         {
           "idTurno":1,
-          "fechaTurno": "2024-2-28",
+          "fechaTurno": "2024-3-1",
           "horaTurno": "08:00",
           "reservado": true,
           "idUsuario": 2
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "id_cancha": 2,
+      "id_cancha": 2020,
       "nombre": "Cancha 2",
       "ubicacion": "Otra Dirección 456",
       "capacidad": 8,

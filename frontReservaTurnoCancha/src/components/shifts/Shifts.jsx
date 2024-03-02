@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ModalShift } from "./ModalShift";
 import data from "../../data/prototype.json";
 import Calendario from "./Calendario";
+import { CourtSelector } from "./CourtSelector";
 
 export const Shifts = () => {
   const [canchas, setCanchas] = useState([]);
@@ -48,22 +49,11 @@ export const Shifts = () => {
         <div className="calendary__handler">
           <Calendario startDate={startDate} setStartDate={setStartDate} />
         </div>
-        <div className="shifts__select-container">
-          <select
-            name="days"
-            id="days"
-            className="shift__day"
-            onChange={(e) => setSelectedCancha(e.target.value)}
-          >
-            {canchas.map((cancha, indexOf) => {
-              return (
-                <option key={cancha.id_cancha} value={indexOf}>
-                  {cancha.nombre}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+
+        <CourtSelector
+          canchas={canchas}
+          setSelectedCancha={setSelectedCancha}
+        />
       </header>
       <h2 className="list__shifts-title">Turnos disponibles</h2>
       <div className="shifts__extra-info">

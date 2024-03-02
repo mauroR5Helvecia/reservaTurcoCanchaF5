@@ -30,7 +30,7 @@
         0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
         0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: 11px;
-    font-family: "Poppins", sans-serif;
+
 
     .login__header,
     .register__header {
@@ -245,7 +245,6 @@
     justify-content: space-around;
     background-color: rgba(167, 175, 179, 0.632);
     transition: all 300ms ease-in-out;
-
     overflow: hidden;
 
 
@@ -511,32 +510,13 @@
 
     }
 
-    .home__map {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-
-
-        .home__map-iframe {
-            border: none;
-            border-radius: 5px;
-        }
-    }
-
-    .home__map-title {
-        margin-bottom: 0.5rem;
-    }
-
-    .home__advices {
-        width: 35%;
-    }
-
     .home__shifts {
         padding-right: 2rem;
         width: 65%;
+        background-color: rgba(209, 209, 209, 0.608);
+        backdrop-filter: blur(5px);
+        padding: 2rem;
+        border-radius: 1rem;
 
         .shifts__extra-info {
             display: flex;
@@ -549,6 +529,46 @@
         }
     }
 
+}
+
+.contact__container {
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #000000aa;
+    border-radius: 1rem;
+    padding: 4rem 1rem;
+}
+
+.home__map {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    .home__map-iframe {
+        border: none;
+        border-radius: 5px;
+    }
+
+    p {
+        color: white;
+        font-size: 1.2rem;
+    }
+}
+
+.home__map-title {
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+    color: #dcdcdc;
+
+
+}
+
+.home__advices {
+    width: 35%;
 }
 
 
@@ -569,4 +589,13 @@
 
 
     }
+}
+
+
+.canchaBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }

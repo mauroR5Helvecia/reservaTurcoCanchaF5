@@ -40,6 +40,7 @@ public class HttpSecurityConfig {
 //                    authConfig.requestMatchers("/error").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/**").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/**").permitAll();
+                    authConfig.requestMatchers(HttpMethod.DELETE, "/**").permitAll();
 
                     authConfig.anyRequest().denyAll();
 

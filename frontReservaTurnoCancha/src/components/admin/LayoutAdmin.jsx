@@ -1,5 +1,6 @@
 import "../../assets/css/pruebas.css";
-import { DaysForm } from "./DaysForm";
+import { Footer } from "../admin/Footer";
+import { Outlet } from "react-router-dom";
 
 export const LayoutAdmin = () => {
   return (
@@ -8,8 +9,10 @@ export const LayoutAdmin = () => {
         <h1 className="admin__title">La cancha de los pibes</h1>
       </header>
       <main className="admin__content">
-        <DaysForm />
+        <Outlet />
       </main>
+
+      <Footer />
     </>
   );
 };

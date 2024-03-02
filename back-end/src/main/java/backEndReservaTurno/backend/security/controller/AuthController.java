@@ -53,6 +53,7 @@ public class AuthController {
 
         if (usuarioServiceInterface.findByEmail(email).isPresent()) {
             String mensajeError = "El correo electrónico " + email + " ya está registrado.";
+            System.out.println("Está fallando la verificación de mail");
             return ResponseEntity.status(HttpStatus.CONFLICT).body(mensajeError);
         }
 
@@ -69,13 +70,17 @@ public class AuthController {
         usuario.setCodigoVerificacion(codeVerify);
 
         //Enviar por email el codigo de verificacion
-
+        System.out.println("llego hasta aca 1");
         String subject = "Código de Verificación";
         String message = "Tu código de verificación es: " + codeVerify;
         EmailDTOVerify emailDTOVerify = new EmailDTOVerify(email, subject, message);
 
+        System.out.println("llego hasta aca 2");
+
         mailController.sendVerifyemail(emailDTOVerify);
 
+
+        System.out.println("llego hasta aca 3");
       Usuario createdUsuario = usuarioServiceInterface.save(usuario);
 
         return ResponseEntity.status(HttpStatus.OK).body("El usuario fue registrado con exito, Inicia sesion en SignIn con tu Username y password");
