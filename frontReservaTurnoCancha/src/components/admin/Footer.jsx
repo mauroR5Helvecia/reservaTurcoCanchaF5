@@ -23,14 +23,14 @@ export const Footer = () => {
         <span>Horarios</span>
       </NavLink>
       <NavLink
-        to={"EditarCancha"}
+        to={"Reservas"}
         className={({ isActive }) =>
           isActive ? "aside__button aside__button-active" : "aside__button"
         }
         style={{ "--back": "#23c483" }}
       >
         <i className="bx bx-cog aside__button-icon"></i>
-        <span>Editar canchas</span>
+        <span>Reservas</span>
       </NavLink>
 
       <NavLink

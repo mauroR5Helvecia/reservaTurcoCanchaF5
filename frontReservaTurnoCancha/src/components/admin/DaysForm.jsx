@@ -45,7 +45,7 @@ export const DaysForm = () => {
       let shift = {
         dateShift: fecha,
         hourShift: firstValue,
-        court:  { idCourt: SelectedCancha.idCourt }
+        court: { idCourt: SelectedCancha.idCourt },
       };
       let hourFormated = "";
       for (let i = 0; i < Acumulador; i++) {
@@ -125,7 +125,7 @@ export const DaysForm = () => {
       </div>
 
       <button title="Sign In" type="submit" className="days__form-submit">
-        Editar horarios
+        Editar
       </button>
     </form>
   );

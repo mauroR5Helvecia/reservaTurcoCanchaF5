@@ -5,12 +5,14 @@ import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
 
 import { LayoutAdmin } from "../components/admin/LayoutAdmin";
+
 import { Home } from "../components/user/Home";
 import { ReservedShifts } from "../components/shifts/ReservedShifts";
 import { Contact } from "../components/user/Contact";
 import { DaysForm } from "../components/admin/DaysForm";
 import { CanchasForm } from "../components/admin/CanchasForm";
 import { VerifyCode } from "../components/layout/private/VerifyCode";
+import { Bookings } from "../components/admin/Bookings";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -33,6 +35,7 @@ export const Router = () => {
           <Route index element={<DaysForm />} />
           <Route path="Dias" element={<DaysForm />} />
           <Route path="Canchas" element={<CanchasForm />} />
+          <Route path="Reservas" element={<Bookings />} />
         </Route>
         <Route
           path="*"

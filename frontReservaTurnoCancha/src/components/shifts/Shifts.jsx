@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useEffect, useState } from "react";
 import { ModalShift } from "./ModalShift";
 
 import Calendario from "./Calendario";
@@ -8,28 +8,34 @@ import { Global } from "../../helpers/Global";
 export const Shifts = () => {
   const [canchas, setCanchas] = useState([]);
 
-  const [SelectedCancha, setSelectedCancha] = useState(0);
+  const [SelectedCancha, setSelectedCancha] = useState({ listShift: [] });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [startDate, setStartDate] = useState(new Date());
+
+  const [shiftList, setShiftList] = useState([]);
 
   const [shift, setShift] = useState({});
 
   useLayoutEffect(() => {
     getCanchas();
   }, []);
+  useEffect(() => {
+    setShiftList(SelectedCancha.listShift);
+  }, [SelectedCancha.listShift]);
 
   let formaTime = () => {
     let day = startDate.getDate();
     if (day <= 9) day = "0" + day;
-    let month = startDate.getDate();
-    if (month <= 9) month = "0" + month;
+    let month = startDate.getMonth();
+    if (month <= 9) month = "0" + (month + 1);
     let year = startDate.getFullYear();
 
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   };
 
+  let fechaFormateada = formaTime();
   const getCanchas = async () => {
     const request = await fetch(Global.url + "court/all", {
       method: "GET",
@@ -40,8 +46,9 @@ export const Shifts = () => {
 
     const data = await request.json();
 
-    setCanchas(data);
-    setSelectedCancha(data[0]);
+    setCanchas(data.response);
+    setSelectedCancha(data.response[0]);
+    setShiftList(data.response[0].listShift);
   };
 
   const activeModal = (fechaTurno, horarioTurno, idTurno) => {
@@ -82,30 +89,33 @@ export const Shifts = () => {
         </span>
       </div>
       <ul className="list__shifts">
-        {SelectedCancha.listShift >= 1 &&
-          SelectedCancha.listShift.map((turno) => {
-            return (
-              turno.fechaTurno == formaTime && (
-                <li className="shifts__shift" key={turno.idTurno}>
-                  <div className="shift__box-info">
-                    <h3 className="shift__info">{SelectedCancha.courtName}</h3>
-                    <span className="shift__schedule">
-                      {" "}
-                      <i className="bx bx-time-five"></i> {`${turno.horaTurno}`}
-                    </span>
-                  </div>
-                  <button
-                    className="shift__submit"
-                    onClick={() => {
-                      activeModal(turno.fechaTurno, turno.horaTurno);
-                    }}
-                  >
-                    Reservar
-                  </button>
-                </li>
-              )
-            );
-          })}
+        {shiftList.length >= 1
+          ? shiftList.map((turno) => {
+              return (
+                turno.dateShift == fechaFormateada && (
+                  <li className="shifts__shift" key={turno.idShift}>
+                    <div className="shift__box-info">
+                      <h3 className="shift__info">
+                        {SelectedCancha.nameCourt}
+                      </h3>
+                      <span className="shift__schedule">
+                        {" "}
+                        <i className="bx bx-time-five"></i> {turno.hourShift}
+                      </span>
+                    </div>
+                    <button
+                      className="shift__submit"
+                      onClick={() => {
+                        activeModal(turno.dateShift, turno.hourShift);
+                      }}
+                    >
+                      Reservar
+                    </button>
+                  </li>
+                )
+              );
+            })
+          : "No hay turnos"}
       </ul>
 
       <ModalShift
