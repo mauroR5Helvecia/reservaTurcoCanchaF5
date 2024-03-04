@@ -97,6 +97,117 @@ export const CanchasForm = () => {
           Agregar cancha
         </button>
       </form>
+
+      <section className="court__list">
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+        <article className="court__article">
+          <p className="court__name">
+            Cancha 3 <i className="bx bx-football"></i>
+          </p>
+          <p className="court__info">Precio : $2500</p>
+          <p className="court__info">
+            Capacidad : <i className="bx bxs-group"></i>20
+          </p>
+          <p className="court__info">
+            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
+            Viva 123
+          </p>
+
+          <div className="court__buttons-container">
+            <button className="court__edit">Editar</button>
+            <button className="court__delete">Borrar</button>
+          </div>
+        </article>
+      </section>
     </main>
   );
 };

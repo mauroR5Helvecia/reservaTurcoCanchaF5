@@ -20,12 +20,15 @@ export const Shifts = () => {
     getCanchas();
   }, []);
 
-  let formaTime =
-    startDate.getFullYear() +
-    "-" +
-    (startDate.getMonth() + 1) +
-    "-" +
-    startDate.getDate();
+  let formaTime = () => {
+    let day = startDate.getDate();
+    if (day <= 9) day = "0" + day;
+    let month = startDate.getDate();
+    if (month <= 9) month = "0" + month;
+    let year = startDate.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
 
   const getCanchas = async () => {
     const request = await fetch(Global.url + "court/all", {

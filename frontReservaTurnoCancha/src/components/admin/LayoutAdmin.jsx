@@ -1,4 +1,3 @@
-import "../../assets/css/pruebas.css";
 import { Footer } from "../admin/Footer";
 import { Outlet } from "react-router-dom";
 
