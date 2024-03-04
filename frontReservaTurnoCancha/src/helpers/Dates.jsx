@@ -40,7 +40,7 @@ export const Dates = ({ setDays, days }) => {
 
     return {
       dayAndDate: `${diaSemana} ${nuevoDia}-${nuevoMes}-${nuevoAño}`,
-      onlyDate: `${nuevoDia}-${nuevoMes}-${nuevoAño}`,
+      onlyDate: `${nuevoAño}-${nuevoMes}-${nuevoDia}`,
     };
   };
   const dias = (e) => {

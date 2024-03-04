@@ -21,8 +21,8 @@ export const DaysForm = () => {
 
     const data = await request.json();
 
-    setCanchas(data);
-    setSelectedCancha(data[0]);
+    setCanchas(data.response);
+    setSelectedCancha(data.response[0]);
   };
 
   const shiftsCreator = (e) => {
@@ -45,7 +45,7 @@ export const DaysForm = () => {
       let shift = {
         dateShift: fecha,
         hourShift: firstValue,
-        court: 1,
+        court: SelectedCancha.idCourt,
       };
       let hourFormated = "";
       for (let i = 0; i < Acumulador; i++) {

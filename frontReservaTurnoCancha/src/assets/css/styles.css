@@ -613,6 +613,7 @@
     align-items: center;
     flex-direction: column;
     padding: 1rem;
+    padding-left: 206px;
 }
 
 .days__form {
@@ -763,8 +764,16 @@
     }
 }
 
+.court__register {
+    .register__form {
+        width: 600px;
+        gap: 2rem;
+    }
+}
+
 .court__list {
-    width: 50%;
+    width: 30%;
+    min-height: 600px;
     max-height: 600px;
     overflow-y: scroll;
 
