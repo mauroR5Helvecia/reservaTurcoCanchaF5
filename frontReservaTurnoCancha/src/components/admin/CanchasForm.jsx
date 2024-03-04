@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 export const CanchasForm = () => {
-  const [canchas, setCanchas] = useState();
+  const [canchas, setCanchas] = useState([]);
   const { form, changed } = useForm();
+  
+
 
   useEffect(() => {
     getCanchas();
