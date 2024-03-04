@@ -42,7 +42,6 @@ public class HttpSecurityConfig {
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/court/all").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/court/save").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/shift/save").permitAll();
-
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/cancha/mail/sendemail").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/cancha/mail/sendverifyemail").permitAll();
 

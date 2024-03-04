@@ -41,7 +41,9 @@ public class ShiftController {
     public ResponseEntity<?> getAllShift() {
         try {
             List<Shift> shifts = shiftServiceInterface.getShift();
-            return new ResponseEntity<>(shifts, HttpStatus.OK);
+
+            ResponseApiCustom response = new ResponseApiCustom("success shifts", shifts);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener los turnos: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

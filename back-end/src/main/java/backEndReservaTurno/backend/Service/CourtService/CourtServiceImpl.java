@@ -3,14 +3,12 @@ package backEndReservaTurno.backend.Service.CourtService;
 import backEndReservaTurno.backend.Entity.Court;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Repository.CourtRepository;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

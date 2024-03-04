@@ -1,5 +1,6 @@
 package backEndReservaTurno.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +27,9 @@ public class Court {
 
 //Una cancha va a tener una lista de turnos, si se elimina un objeto cancha, se eliminaran de
     //manera en cascada todos los turnos que le corresponden.
-    @OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
-    private List<Shift> listShift;
+@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+@JsonManagedReference
+private List<Shift> listShift;
 
 
 }

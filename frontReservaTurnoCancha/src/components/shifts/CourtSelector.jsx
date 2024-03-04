@@ -1,4 +1,8 @@
+import PropTypes from 'prop-types';
+
 export const CourtSelector = ({ canchas, setSelectedCancha }) => {
+
+
   return (
     <div className="shifts__select-container">
       <select
@@ -17,4 +21,14 @@ export const CourtSelector = ({ canchas, setSelectedCancha }) => {
       </select>
     </div>
   );
+};
+
+CourtSelector.propTypes = {
+  canchas: PropTypes.arrayOf(
+    PropTypes.shape({
+      idCourt: PropTypes.number.isRequired,
+      nameCourt: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  setSelectedCancha: PropTypes.number.isRequired
 };
