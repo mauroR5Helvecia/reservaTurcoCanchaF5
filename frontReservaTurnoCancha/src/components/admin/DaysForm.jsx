@@ -45,7 +45,7 @@ export const DaysForm = () => {
       let shift = {
         dateShift: fecha,
         hourShift: firstValue,
-        court: SelectedCancha.idCourt,
+        court:  { idCourt: SelectedCancha.idCourt }
       };
       let hourFormated = "";
       for (let i = 0; i < Acumulador; i++) {
