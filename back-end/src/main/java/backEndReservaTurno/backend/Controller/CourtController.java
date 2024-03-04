@@ -46,7 +46,7 @@ public class CourtController {
         } catch (Exception e) {
 
             ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
-            return ResponseEntity.ok(response);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

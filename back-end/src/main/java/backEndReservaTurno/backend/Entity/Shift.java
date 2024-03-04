@@ -1,5 +1,6 @@
 package backEndReservaTurno.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+
 
 @Entity
 @Getter
@@ -27,6 +28,7 @@ public class Shift {
 
     @ManyToOne
     @JoinColumn(name = "idCourt")
+    @JsonBackReference
     private Court court;
 
 }
