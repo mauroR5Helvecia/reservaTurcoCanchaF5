@@ -133,28 +133,6 @@
         cursor: pointer;
     }
 
-    .separator {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        color: #8B8E98;
-    }
-
-    .separator .line {
-        display: block;
-        width: 100%;
-        height: 1px;
-        border: 0;
-        background-color: #929292;
-    }
-
-    .note {
-        font-size: 0.75rem;
-        color: #8B8E98;
-        text-decoration: underline;
-    }
 }
 
 .register__form {
@@ -167,6 +145,28 @@
 }
 
 
+.separator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: #8B8E98;
+}
+
+.separator .line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background-color: #929292;
+}
+
+.note {
+    font-size: 0.75rem;
+    color: #8B8E98;
+    text-decoration: underline;
+}
 
 
 /*PRIVATE LAYOUT*/
@@ -748,6 +748,10 @@
     color: #ffffff;
     cursor: pointer;
     margin-top: 1rem;
+}
+
+.days__form-submit:nth-last-child(1) {
+    background: rgb(42, 157, 80);
 }
 
 .shift__day {

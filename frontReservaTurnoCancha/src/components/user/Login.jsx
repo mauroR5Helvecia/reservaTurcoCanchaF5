@@ -17,7 +17,6 @@ export const Login = () => {
           <i className="bx bx-envelope login__form-icon"></i>
           <input
             placeholder="user@mail.com"
-            title="Inpit title"
             name="input-name"
             type="text"
             className="login__form-input"
@@ -32,7 +31,6 @@ export const Login = () => {
           <i className="bx bx-lock-open login__form-icon"></i>
           <input
             placeholder="Contraseña"
-            title="Inpit title"
             name="input-name"
             type="password"
             className="login__form-input"

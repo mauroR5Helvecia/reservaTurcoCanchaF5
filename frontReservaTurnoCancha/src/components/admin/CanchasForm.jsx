@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 export const CanchasForm = () => {
-  const [canchas, setCanchas] = useState();
+  const [canchas, setCanchas] = useState([]);
   const { form, changed } = useForm();
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export const CanchasForm = () => {
 
     const data = await request.json();
 
+    console.log("hice la petición");
     setCanchas(data.response);
   };
 
@@ -123,15 +124,16 @@ export const CanchasForm = () => {
           return (
             <article className="court__article" key={cancha.idCourt}>
               <p className="court__name">
-                <i className="bx bx-football"></i>
+                {cancha.nameCourt} <i className="bx bx-football"></i>
               </p>
-              <p className="court__info">Precio : $2500</p>
+              <p className="court__info">Precio : ${cancha.price}</p>
               <p className="court__info">
-                Capacidad : <i className="bx bxs-group"></i>20
+                Capacidad : <i className="bx bxs-group"></i>
+                {cancha.capacity}
               </p>
               <p className="court__info">
-                Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
-                Viva 123
+                Ubicación : <i className="bx bx-current-location"></i>
+                {cancha.location}
               </p>
 
               <div className="court__buttons-container">
@@ -141,24 +143,6 @@ export const CanchasForm = () => {
             </article>
           );
         })}
-        <article className="court__article">
-          <p className="court__name">
-            Cancha 3 <i className="bx bx-football"></i>
-          </p>
-          <p className="court__info">Precio : $2500</p>
-          <p className="court__info">
-            Capacidad : <i className="bx bxs-group"></i>20
-          </p>
-          <p className="court__info">
-            Ubicación : <i className="bx bx-current-location"></i>Av.Siempre
-            Viva 123
-          </p>
-
-          <div className="court__buttons-container">
-            <button className="court__edit">Editar</button>
-            <button className="court__delete">Borrar</button>
-          </div>
-        </article>
       </section>
     </main>
   );

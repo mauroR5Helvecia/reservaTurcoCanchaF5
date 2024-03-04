@@ -117,6 +117,16 @@ export const DaysForm = () => {
       <button type="submit" className="days__form-submit">
         Definir dias
       </button>
+
+      <div className="separator">
+        <hr className="line" />
+        <span>o</span>
+        <hr className="line" />
+      </div>
+
+      <button title="Sign In" type="submit" className="days__form-submit">
+        Editar horarios
+      </button>
     </form>
   );
 };
