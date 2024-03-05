@@ -1,10 +1,10 @@
 package backEndReservaTurno.backend.Service.ShiftService;
-
-import backEndReservaTurno.backend.Entity.Court;
+import backEndReservaTurno.backend.Controller.ShiftController;
 import backEndReservaTurno.backend.Entity.Shift;
-import backEndReservaTurno.backend.Repository.CourtRepository;
 import backEndReservaTurno.backend.Repository.ShiftRepository;
 import jakarta.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,9 @@ import java.util.Optional;
 
 @Service
 public class ShiftServiceImpl implements ShiftServiceInterface{
+
+    private final static Logger log = LogManager.getLogger(ShiftServiceImpl.class);
+
 
     @Autowired
     private ShiftRepository shiftRepository;
@@ -45,6 +48,18 @@ public class ShiftServiceImpl implements ShiftServiceInterface{
         }
 
         // Validar otros criterios de validez, si es necesario
+
+        // Verificar si ya existe un turno para la misma fecha, hora y corte
+        Optional<Shift> existingShift = shiftRepository.findByDateShiftAndHourShiftAndCourt(shift.getDateShift(), shift.getHourShift(), shift.getCourt());
+
+        if (existingShift.isPresent()) {
+
+            String mensaje = "El turno en fecha: " + shift.getDateShift() + " a la hora: "+ shift.getHourShift()+ " que se intenta guardar, ya se encuentra en la base de datos";
+            log.error(mensaje);
+            throw new IllegalArgumentException(mensaje);
+
+
+        }
 
         if (shift.getIdShift() != null && shiftRepository.existsById(shift.getIdShift())) {
             try {

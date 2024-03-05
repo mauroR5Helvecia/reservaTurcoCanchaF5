@@ -39,11 +39,13 @@ public class ShiftController {
             Shift savedShift = shiftServiceInterface.saveShift(shift);
             ResponseApiCustom response = new ResponseApiCustom("success shift" + shift.getCourt().getNameCourt(), savedShift);
             log.info("Se agrego turno"  + " Dia: " + shift.getDateShift()+ "Hora: "+ shift.getHourShift());
+
+
             return ResponseEntity.ok(response);
 
-        } catch (Exception e) {
-            ResponseApiCustom response = new ResponseApiCustom("error save shift" + shift.getCourt().getNameCourt(), e.getMessage());
-            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            ResponseApiCustom response = new ResponseApiCustom("error save shift" , e.getMessage());
+            return ResponseEntity.badRequest().body(response);
         }
     }
 
