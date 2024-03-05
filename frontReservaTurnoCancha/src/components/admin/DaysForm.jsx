@@ -48,16 +48,16 @@ export const DaysForm = () => {
         court: { idCourt: SelectedCancha.idCourt },
       };
       let hourFormated = "";
+      firstValue = Number(hourList[0]);
       for (let i = 0; i < Acumulador; i++) {
-        if (firstValue < 9) {
-          hourFormated = `0${firstValue + i}:00`;
+        if (firstValue <= 9) {
+          hourFormated = `0${firstValue++}:00`;
         } else {
-          hourFormated = `${firstValue + i}:00`;
+          hourFormated = `${firstValue++}:00`;
         }
 
         shift.hourShift = hourFormated;
 
-        console.log(shift);
         await fetch(Global.url + "shift/save", {
           method: "POST",
           body: JSON.stringify(shift),

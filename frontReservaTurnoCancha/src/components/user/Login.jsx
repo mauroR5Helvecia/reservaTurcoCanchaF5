@@ -1,7 +1,21 @@
+import { Global } from "../../helpers/Global";
+import { useForm } from "../../hooks/useForm";
 export const Login = () => {
+  const { form, changed } = useForm();
+
+  const LoginUser = async (e) => {
+    e.preventDefault();
+
+    let UserToLogin = form;
+
+    const request = await fetch(Global.url + "/", {
+      method: "POST",
+      body: JSON.stringify(UserToLogin),
+    });
+  };
   return (
     <main className="layout__login">
-      <form className="login__form">
+      <form className="login__form" onSubmit={LoginUser}>
         <header className="login__header">
           <p className="login__title">Inicia sesión </p>
           <span className="login__subtitle">
@@ -21,6 +35,7 @@ export const Login = () => {
             type="text"
             className="login__form-input"
             id="email_field"
+            onChange={changed}
           />
         </section>
 
@@ -35,6 +50,7 @@ export const Login = () => {
             type="password"
             className="login__form-input"
             id="password_field"
+            onChange={changed}
           />
         </section>
         <button type="submit" className="login__form-submit">

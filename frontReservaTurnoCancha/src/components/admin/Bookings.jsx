@@ -2,12 +2,12 @@ import { ReservedShifts } from "../shifts/ReservedShifts";
 
 export const Bookings = () => {
   return (
-    <>
+    <div className="Bookings__container">
       <section className="Bookings__list">
         <ReservedShifts />
       </section>
       <section className="Bookings__announcement">
-        <form className="">
+        <form className="announcement__form-text">
           <h2> Haz un anuncio</h2>
           <label htmlFor="message">
             <textarea
@@ -19,10 +19,10 @@ export const Bookings = () => {
           <button type="submit">Enviar</button>
         </form>
 
-        <form className="">
+        <form className="announcement__form-photos">
           <h2>Sube tus fotos</h2>
-          <label className="custum-file-upload" htmlFor="file">
-            <div className="icon">
+          <label className="announcement__file-upload" htmlFor="file">
+            <div className="announcement__icon-container">
               <i className="bx bx-cloud-upload upload__icon"></i>
             </div>
             <div className="text">
@@ -34,6 +34,6 @@ export const Bookings = () => {
           <button type="submit">Enviar</button>
         </form>
       </section>
-    </>
+    </div>
   );
 };
