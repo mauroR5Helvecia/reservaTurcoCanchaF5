@@ -31,11 +31,14 @@ public class ShiftServiceImpl implements ShiftServiceInterface{
 
 
 
-
+//tengo que verificar que no se guarden dos turnos con el mismo horario y fechha
 
     @Override
     @Transactional
     public Shift saveShift(Shift shift) {
+
+
+
         // Validar que la fecha y la hora del turno no sean nulas
         if (shift.getDateShift() == null || shift.getHourShift() == null) {
             throw new IllegalArgumentException("La fecha y la hora del turno son obligatorias");

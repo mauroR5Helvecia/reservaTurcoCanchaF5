@@ -1,7 +1,10 @@
 package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.ShiftService.ShiftServiceInterface;
+import backEndReservaTurno.backend.security.controller.AuthController;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class ShiftController {
 
+    private final static Logger log = LogManager.getLogger(ShiftController.class);
+
     @Autowired
     private ShiftServiceInterface shiftServiceInterface;
 
@@ -25,8 +31,14 @@ public class ShiftController {
     @PostMapping("/save")
     public ResponseEntity<?> saveShift(@RequestBody Shift shift) {
         try {
-                Shift savedShift = shiftServiceInterface.saveShift(shift);
+
+            // Formateamos la hora antes de persistirla
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            String horaFormateada = LocalTime.parse(shift.getHourShift()).format(formatter);
+            shift.setHourShift(horaFormateada);
+            Shift savedShift = shiftServiceInterface.saveShift(shift);
             ResponseApiCustom response = new ResponseApiCustom("success shift" + shift.getCourt().getNameCourt(), savedShift);
+            log.info("Se agrego turno"  + " Dia: " + shift.getDateShift()+ "Hora: "+ shift.getHourShift());
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {

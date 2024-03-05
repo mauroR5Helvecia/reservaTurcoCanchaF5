@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Entity
@@ -22,7 +23,7 @@ public class Shift {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idShift;
     private LocalDate dateShift;
-    private LocalTime hourShift;
+    private String hourShift;
     private boolean shiftReserved;
 
 
@@ -30,5 +31,9 @@ public class Shift {
     @JoinColumn(name = "idCourt")
     @JsonBackReference
     private Court court;
+
+
+    // Método para formatear la hora antes de asignarla
+
 
 }
