@@ -25,7 +25,7 @@ export const DaysForm = () => {
     setSelectedCancha(data.response[0]);
   };
 
-  const shiftsCreator = (e) => {
+  const shiftsCreator = async (e) => {
     e.preventDefault();
 
     let hourList = [e.target.firstValue.value, e.target.secondValue.value].sort(
@@ -40,32 +40,32 @@ export const DaysForm = () => {
     }
 
     let Acumulador = secondValue - firstValue;
-
-    days.map(async (fecha) => {
-      let shift = {
-        dateShift: fecha,
-        hourShift: firstValue,
-        court: { idCourt: SelectedCancha.idCourt },
-      };
-      let hourFormated = "";
-      firstValue = Number(hourList[0]);
+    let timeFormated = "";
+    let ListofShifts = [];
+    days.map((fecha) => {
       for (let i = 0; i < Acumulador; i++) {
-        if (firstValue <= 9) {
-          hourFormated = `0${firstValue++}:00`;
+        if (firstValue + i <= 9) {
+          timeFormated = "0" + (firstValue + i) + ":00";
         } else {
-          hourFormated = `${firstValue++}:00`;
+          timeFormated = "" + (firstValue + i) + ":00";
         }
-
-        shift.hourShift = hourFormated;
-
-        await fetch(Global.url + "shift/save", {
-          method: "POST",
-          body: JSON.stringify(shift),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        let shift = {
+          dateShift: fecha,
+          hourShift: timeFormated,
+          court: { idCourt: SelectedCancha.idCourt },
+        };
+        ListofShifts.push(shift);
       }
+    });
+
+    ListofShifts.forEach(async (shift) => {
+      await fetch(Global.url + "shift/save", {
+        method: "POST",
+        body: JSON.stringify(shift),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     });
   };
 
