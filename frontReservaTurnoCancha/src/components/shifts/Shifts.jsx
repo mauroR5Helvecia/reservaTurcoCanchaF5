@@ -4,6 +4,7 @@ import { ModalShift } from "./ModalShift";
 import Calendario from "./Calendario";
 import { CourtSelector } from "./CourtSelector";
 import { Global } from "../../helpers/Global";
+import { FormatHour } from "../../helpers/FormatHour";
 
 export const Shifts = () => {
   const [canchas, setCanchas] = useState([]);
@@ -51,19 +52,22 @@ export const Shifts = () => {
     setShiftList(data.response[0].listShift);
   };
 
-  const activeModal = (fechaTurno, horarioTurno, idTurno) => {
+  const activeModal = (dateShift, hourShift, idShift) => {
     let turnoInfo = {
-      id: idTurno,
-      cancha: canchaSeleccionada.nombre,
-      fecha: fechaTurno,
-      horario: horarioTurno,
-      direccion: canchaSeleccionada.ubicacion,
+      nameCourt: SelectedCancha.nameCourt,
+      idShift,
+      court: { idCourt: SelectedCancha.idCourt },
+      dateShift,
+      hourShift,
+      location: SelectedCancha.location,
       usuario: "Pablo Romero",
     };
     //Definir el turno a reservar
     setShift(turnoInfo);
     //Finalmente activar el modal
     setIsModalOpen(true);
+    const navbar = document.querySelector("#navegation__bar");
+    navbar.style.display = "none";
   };
   return (
     <>
@@ -100,13 +104,18 @@ export const Shifts = () => {
                       </h3>
                       <span className="shift__schedule">
                         {" "}
-                        <i className="bx bx-time-five"></i> {turno.hourShift}
+                        <i className="bx bx-time-five"></i> {turno.hourShift}hs
+                        a {<FormatHour turno={turno} />}hs
                       </span>
                     </div>
                     <button
                       className="shift__submit"
                       onClick={() => {
-                        activeModal(turno.dateShift, turno.hourShift);
+                        activeModal(
+                          turno.dateShift,
+                          turno.hourShift,
+                          turno.idShift
+                        );
                       }}
                     >
                       Reservar
@@ -122,7 +131,9 @@ export const Shifts = () => {
         shift={shift}
         isOpen={isModalOpen}
         closeModal={() => {
+          const navbar = document.querySelector("#navegation__bar");
           setIsModalOpen(false);
+          navbar.style.display = "flex";
         }}
       />
     </>

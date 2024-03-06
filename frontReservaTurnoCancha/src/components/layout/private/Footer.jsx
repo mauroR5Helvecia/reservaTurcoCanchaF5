@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 export const Footer = () => {
   return (
-    <aside className="aside__private">
+    <aside className="aside__private" id="navegation__bar">
       <NavLink
         to="Inicio"
         className={({ isActive }) =>
@@ -29,7 +29,7 @@ export const Footer = () => {
         }
         style={{ "--back": "#23c483" }}
       >
-        <i className="bx bxl-whatsapp aside__button-icon"></i>
+        <i className="bx bxs-contact aside__button-icon"></i>
         <span>Contacto</span>
       </NavLink>
 
