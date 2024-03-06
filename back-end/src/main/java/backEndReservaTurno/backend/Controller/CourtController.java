@@ -97,23 +97,15 @@ public class CourtController {
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteCourtById(@PathVariable Long id) {
-        Optional<Court> court = courtServiceInterface.findCourtById(id);
-        if (court.isPresent()) {
-            try {
-                courtServiceInterface.deleteCourt(id);
-                ResponseApiCustom response = new ResponseApiCustom("success delete cancha", id );
-                return ResponseEntity.ok(response);
-            } catch (Exception e) {
-                ResponseApiCustom response = new ResponseApiCustom("error delete cancha", e.getMessage() );
-                return ResponseEntity.ok(response);
-            }
-        } else {
-            ResponseApiCustom response = new ResponseApiCustom("error delete cancha", "La cancha no existe en la base de datos" );
-            return ResponseEntity.ok(response);
+        try {
+            courtServiceInterface.deleteCourt(id);
+            return new ResponseEntity<>("La cancha ha sido eliminada correctamente", HttpStatus.OK);
+        } catch (EmptyResultDataAccessException e) {
+            return new ResponseEntity<>("No se encontró ninguna cancha con el ID especificado", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al eliminar la cancha: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 
 
 
