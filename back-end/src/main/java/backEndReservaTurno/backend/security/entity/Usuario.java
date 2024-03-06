@@ -1,4 +1,5 @@
 package backEndReservaTurno.backend.security.entity;
+import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.security.util.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,9 @@ public class Usuario implements UserDetails {
     private boolean usuarioVerificado;
 
 
+
+    @OneToMany(mappedBy = "idUserReserved")
+    private List<Reservation> reservations;
 
 
     @Enumerated(EnumType.STRING)

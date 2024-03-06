@@ -1,6 +1,7 @@
 package backEndReservaTurno.backend.Repository;
 
 import backEndReservaTurno.backend.Entity.Reservation;
+import backEndReservaTurno.backend.Entity.Shift;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByShiftDateBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 
+    Reservation findByidShiftReserved(Shift idShiftReserved);
 }
