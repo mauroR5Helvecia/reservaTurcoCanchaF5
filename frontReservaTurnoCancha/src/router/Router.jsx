@@ -4,8 +4,15 @@ import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
 
-import { PanelAdmin } from "../components/admin/PanelAdmin";
+import { LayoutAdmin } from "../components/admin/LayoutAdmin";
+
 import { Home } from "../components/user/Home";
+import { ReservedShifts } from "../components/shifts/ReservedShifts";
+import { Contact } from "../components/user/Contact";
+import { DaysForm } from "../components/admin/DaysForm";
+import { CanchasForm } from "../components/admin/CanchasForm";
+import { VerifyCode } from "../components/layout/private/VerifyCode";
+import { Bookings } from "../components/admin/Bookings";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -14,11 +21,21 @@ export const Router = () => {
           <Route index element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="verify" element={<VerifyCode />} />
         </Route>
 
-        <Route path="/home" element={<PrivateLayout />}>
+        <Route path="/user" element={<PrivateLayout />}>
           <Route index element={<Home />} />
-          <Route path="Admin" element={<PanelAdmin />} />
+          <Route path="Inicio" element={<Home />} />
+          <Route path="MisTurnos" element={<ReservedShifts />} />
+          <Route path="Contacto" element={<Contact />} />
+        </Route>
+
+        <Route path="/Admin" element={<LayoutAdmin />}>
+          <Route index element={<DaysForm />} />
+          <Route path="Dias" element={<DaysForm />} />
+          <Route path="Canchas" element={<CanchasForm />} />
+          <Route path="Reservas" element={<Bookings />} />
         </Route>
         <Route
           path="*"
