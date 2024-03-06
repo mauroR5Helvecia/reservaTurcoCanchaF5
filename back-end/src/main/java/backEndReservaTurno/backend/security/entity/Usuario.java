@@ -38,15 +38,15 @@ public class Usuario implements UserDetails {
 
 
 
-    @OneToMany(mappedBy = "idUserReserved")
-    private List<Reservation> reservations;
-
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
 //Implementaciones de user details
 
+
+    @OneToMany(mappedBy = "idUserReserved")
+    private List<Reservation> reservations;
 
 
 
