@@ -22,11 +22,13 @@ public class Reservation {
     private Court idCourtReserved;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "idUsuario")
     private Usuario idUserReserved;
 
     @ManyToOne
     @JoinColumn(name = "idShift")
     private Shift idShiftReserved;
+
+
 }
 

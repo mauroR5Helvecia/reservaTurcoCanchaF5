@@ -48,6 +48,7 @@ public class AuthenticationService {
 
         extraClaims.put("name", usuario.getName());
         extraClaims.put("role", usuario.getRole().name());
+        extraClaims.put("userId", usuario.getIdUsuario());
         extraClaims.put("permissions", usuario.getAuthorities());
 
         return extraClaims;

@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 @Entity
@@ -33,7 +34,8 @@ public class Shift {
     private Court court;
 
 
-    // Método para formatear la hora antes de asignarla
+    @OneToMany(mappedBy = "idShiftReserved")
+    private List<Reservation> reservations;
 
 
 }

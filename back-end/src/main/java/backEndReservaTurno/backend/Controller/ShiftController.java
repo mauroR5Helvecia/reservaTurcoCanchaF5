@@ -1,7 +1,6 @@
 package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.ShiftService.ShiftServiceInterface;
-import backEndReservaTurno.backend.security.controller.AuthController;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
