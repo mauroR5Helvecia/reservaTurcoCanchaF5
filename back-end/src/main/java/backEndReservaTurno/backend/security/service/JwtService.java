@@ -39,7 +39,7 @@ public class JwtService {
                 .subject(usuario.getUsername())
                 .issuedAt(issuesAt)
                 .expiration(expiration)
-                .claims(extraClaims)
+                .claims(extraClaims) //nombre roles y permisos
                 .signWith(generateKey(), Jwts.SIG.HS256)
                 .compact();
     }
