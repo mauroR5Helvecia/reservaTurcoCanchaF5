@@ -4,6 +4,7 @@ export const Contact = () => {
   return (
     <div className="contact__container">
       <section className="contact__advices">
+        <h1 className="advices__title">Galeria de fotos</h1>
         <CanchasSlider />
 
         <a href="whatsapp" className="contact__whatsapp">
@@ -11,6 +12,7 @@ export const Contact = () => {
         </a>
       </section>
       <section className="contact__map">
+        <h1 className="map__title">Ubicación</h1>
         <h3 className="contact__map-title">Podés encontrarnos en...</h3>
 
         <p>Francislo Portela 1637, Lomas de zamora</p>
