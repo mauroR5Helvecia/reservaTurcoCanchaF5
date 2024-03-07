@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -37,16 +39,17 @@ public class CourtController {
 //find all courts
 @GetMapping("/all")
 public ResponseEntity<?> getAllCourts() {
-    List<Court> courts = null;
+
     try {
-        courts = courtServiceInterface.getCourts();
+        List<Court> listaCourts = courtServiceInterface.getCourts();
+        ResponseApiCustom response = new ResponseApiCustom("success", listaCourts);
+        return ResponseEntity.ok(response);
     } catch (Exception e) {
         ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ResponseEntity.badRequest().body(response);
     }
 
-    ResponseApiCustom response = new ResponseApiCustom("success", courts);
-    return ResponseEntity.ok(response);
+
 }
 
 

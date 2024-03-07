@@ -22,7 +22,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idShift")
-@JsonIdentityReference(alwaysAsId = true)
 public class Shift {
 
     @Id
