@@ -26,14 +26,17 @@ export const CanchasForm = () => {
   };
 
   const deleteCourt = async (ID) => {
+    console.log(ID);
     const request = await fetch(Global.url + "court/delete/" + ID, {
       method: "DELETE",
     });
 
-    const data = await request.json();
-
-    console.log(data);
-    getCanchas();
+    if (request.status == 200) {
+      getCanchas();
+      console.log("Cancha eliminada");
+    } else {
+      console.log("No se ha podido eliminar");
+    }
   };
   return (
     <main className="layout__login">
@@ -58,7 +61,10 @@ export const CanchasForm = () => {
                 Ubicación : <i className="bx bx-current-location"></i>
                 {cancha.location}
               </p>
-
+              <p className="court__info">
+                Teléfono : <i className="bx bx-phone"></i>
+                {cancha.phone}
+              </p>
               <div className="court__buttons-container">
                 <button
                   className="court__edit"

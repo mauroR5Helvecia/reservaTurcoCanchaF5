@@ -28,7 +28,7 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
     <section className="court__register">
       <form className="register__form" onSubmit={editCourt}>
         <header className="register__header">
-          <p className="register__title">Editar cancha : {cancha.nameCourt}</p>
+          <p className="register__title">Editar cancha :{cancha.nameCourt}</p>
         </header>
 
         <section className="register__form-group">
@@ -90,7 +90,20 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
             onChange={changed}
           />
         </section>
-
+        <section className="register__form-group">
+          <label className="register__form-label" htmlFor="phone__field">
+            Teléfono
+          </label>
+          <i className="bx bx-phone register__form-icon"></i>
+          <input
+            placeholder="Nueva dirección"
+            name="phone"
+            type="tel"
+            className="register__form-input"
+            id="phone__field"
+            onChange={changed}
+          />
+        </section>
         <button type="submit" className="register__form-submit">
           Editar cancha
         </button>
