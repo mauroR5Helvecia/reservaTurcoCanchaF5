@@ -1,6 +1,9 @@
 package backEndReservaTurno.backend.security.entity;
 import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.security.util.Role;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +21,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idUsuario")
+@JsonIdentityReference(alwaysAsId = true)
 public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

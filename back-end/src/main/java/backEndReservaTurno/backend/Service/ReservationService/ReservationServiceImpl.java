@@ -1,16 +1,20 @@
 package backEndReservaTurno.backend.Service.ReservationService;
+import backEndReservaTurno.backend.Entity.Court;
+import backEndReservaTurno.backend.Entity.DTO.ReservationDTO;
 import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.Entity.Shift;
+import backEndReservaTurno.backend.Repository.CourtRepository;
 import backEndReservaTurno.backend.Repository.ReservationRepository;
+import backEndReservaTurno.backend.Repository.ShiftRepository;
+import backEndReservaTurno.backend.security.entity.Usuario;
+import backEndReservaTurno.backend.security.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ReservationServiceImpl implements ReservationServiceInterface{
@@ -18,36 +22,42 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private CourtRepository courtRepository;
+
+    @Autowired
+    private UsuarioRepository userRepository;
+
+    @Autowired
+    private ShiftRepository shiftRepository;
+
+
     @Override
     public List<Reservation> getReservations() {
         List<Reservation> listReservations= reservationRepository.findAll();
         return listReservations;
     }
 
-    @Override
-    public Reservation saveReservation(Reservation reservation) {
 
-        try {
-            // Guardar la reserva y devuelve el resultado
-            System.out.println("se guardo la reserva de turno");
+
+    @Override
+    public Reservation saveReservation(ReservationDTO reservationDTO) {
+            Court court = courtRepository.findById(reservationDTO.getIdCourtReserved())
+                    .orElseThrow(() -> new IllegalArgumentException("Court no encontrada"));
+            Usuario user = userRepository.findById(reservationDTO.getIdUserReserved())
+                    .orElseThrow(() -> new IllegalArgumentException("User not encontrado"));
+            Shift shift = shiftRepository.findById(reservationDTO.getIdShiftReserved())
+                    .orElseThrow(() -> new IllegalArgumentException("Shift no encontrado"));
+
+            Reservation reservation = new Reservation();
+            reservation.setIdCourtReserved(court);
+            reservation.setIdUserReserved(user);
+            reservation.setIdShiftReserved(shift);
+
             return reservationRepository.save(reservation);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error al guardar la reserva", e);
         }
-    }
 
-    @Override
-    public Reservation findReservationByIdShift(Shift idShiftReserved) {
-        Reservation reservation = reservationRepository.findByidShiftReserved(idShiftReserved);
-        if (reservation != null) {
-            System.out.println("ya se encontro un id de turno guardado en la reserva");
-            throw new RuntimeException("El turno ya se encuentra reservado");
 
-        }
-        return null;
-
-    }
 
 
 
@@ -74,8 +84,7 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
             reservationRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<Reservation> findReservationById(Long id) {
-        return reservationRepository.findById(Long.valueOf(id));
-    }
+
+
+
 }
