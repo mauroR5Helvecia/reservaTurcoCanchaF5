@@ -1,5 +1,6 @@
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
+import { jwtDecode } from "jwt-decode";
 export const Login = () => {
   const { form, changed } = useForm();
 
@@ -8,10 +9,19 @@ export const Login = () => {
 
     let UserToLogin = form;
 
-    const request = await fetch(Global.url + "/", {
+    const request = await fetch(Global.url + "auth/login", {
       method: "POST",
       body: JSON.stringify(UserToLogin),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+
+    const token = await request.json();
+    const decodedToken = jwtDecode(token.jwt);
+
+    localStorage.setItem("token", JSON.stringify(token.jwt));
+    localStorage.setItem("user", JSON.stringify(decodedToken));
   };
   return (
     <main className="layout__login">
@@ -25,16 +35,16 @@ export const Login = () => {
         </header>
 
         <section className="login__form-group">
-          <label className="login__form-label" htmlFor="email_field">
-            Email
+          <label className="login__form-label" htmlFor="username_field">
+            Username
           </label>
           <i className="bx bx-envelope login__form-icon"></i>
           <input
             placeholder="user@mail.com"
-            name="input-name"
+            name="username"
             type="text"
             className="login__form-input"
-            id="email_field"
+            id="username_field"
             onChange={changed}
           />
         </section>
@@ -46,7 +56,7 @@ export const Login = () => {
           <i className="bx bx-lock-open login__form-icon"></i>
           <input
             placeholder="Contraseña"
-            name="input-name"
+            name="password"
             type="password"
             className="login__form-input"
             id="password_field"

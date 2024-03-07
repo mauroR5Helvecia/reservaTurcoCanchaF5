@@ -407,13 +407,13 @@
 /*MODAL CONFIRMAR RESERVA*/
 
 .modal__reservation {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: -30%;
+    left: -70%;
     z-index: 20;
-    background-color: rgba(0, 0, 0, 0.194);
-    width: 100%;
-    height: 100%;
+    background-color: rgb(0, 0, 0);
+    width: 120vw;
+    height: 120vh;
 
     display: flex;
     justify-content: center;
@@ -531,6 +531,8 @@
 
 }
 
+
+/*HOME CONTACT STYLES*/
 .contact__container {
     width: 95%;
     display: flex;
@@ -540,7 +542,7 @@
     padding: 4rem 1rem;
 }
 
-.home__map {
+.contact__map {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -548,7 +550,7 @@
     align-items: center;
 
 
-    .home__map-iframe {
+    .contact__map-iframe {
         border: none;
         border-radius: 5px;
     }
@@ -559,7 +561,7 @@
     }
 }
 
-.home__map-title {
+.contact__map-title {
     font-size: 1.7rem;
     margin-bottom: 0.5rem;
     color: #dcdcdc;
@@ -567,10 +569,35 @@
 
 }
 
-.home__advices {
+.contact__advices {
     width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.contact__whatsapp {
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 1.3rem;
+    background-color: rgb(17, 162, 82);
+    width: fit-content;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 200ms ease-in-out;
+
+    .contact__whatsapp-icon {
+        font-size: 2rem;
+        margin-left: 0.5rem;
+    }
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
 
 /*SLIDER */
 
@@ -601,6 +628,9 @@
 }
 
 /*ADMIN STYLES*/
+.layout__admin {
+    padding-left: 207px;
+}
 
 .admin__header {
     padding: 1rem 0;
@@ -608,14 +638,17 @@
 }
 
 .admin__content {
-    padding: 1rem;
-    padding-left: 206px;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+
 }
 
 .days__form {
     background-color: white;
     border-radius: 1rem;
     padding: 2rem;
+    width: 41%;
 }
 
 
@@ -775,7 +808,7 @@
     width: 30%;
     min-height: 600px;
     max-height: 600px;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: row;
@@ -785,15 +818,14 @@
 }
 
 .court__article {
-    width: 390px;
-    height: 220px;
+    width: 95%;
+    height: 280px;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 30px;
     gap: 13px;
     position: relative;
     overflow: hidden;
@@ -803,14 +835,14 @@
 
 
 .court__name {
-    font-size: 1.2em;
+    font-size: 1.5rem;
     font-weight: 800;
     color: rgb(26, 26, 26);
 }
 
 .court__info {
     text-align: center;
-    font-size: 0.7em;
+    font-size: 1.01rem;
     font-weight: 600;
     color: rgb(99, 99, 99);
 }
@@ -818,13 +850,13 @@
 
 .court__buttons-container {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     flex-direction: row;
 }
 
 .court__edit {
-    width: 80px;
-    height: 30px;
+    width: 100px;
+    height: 40px;
     background-color: #7b57ff;
     transition-duration: .2s;
     border: none;
@@ -837,8 +869,8 @@
 }
 
 .court__delete {
-    width: 80px;
-    height: 30px;
+    width: 100px;
+    height: 40px;
     background-color: #dadada;
     transition-duration: .2s;
     color: rgb(46, 46, 46);

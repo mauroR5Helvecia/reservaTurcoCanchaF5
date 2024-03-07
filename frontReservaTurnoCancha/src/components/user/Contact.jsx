@@ -3,11 +3,15 @@ import { CanchasSlider } from "../admin/CanchasSlider";
 export const Contact = () => {
   return (
     <div className="contact__container">
-      <section className="home__advices">
+      <section className="contact__advices">
         <CanchasSlider />
+
+        <a href="whatsapp" className="contact__whatsapp">
+          Whatsapp <i className="bx bxl-whatsapp contact__whatsapp-icon"></i>
+        </a>
       </section>
-      <section className="home__map">
-        <h3 className="home__map-title">Podés encontrarnos en...</h3>
+      <section className="contact__map">
+        <h3 className="contact__map-title">Podés encontrarnos en...</h3>
 
         <p>Francislo Portela 1637, Lomas de zamora</p>
         <iframe
@@ -17,7 +21,7 @@ export const Contact = () => {
           allowfullscreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          className="home__map-iframe"
+          className="contact__map-iframe"
         ></iframe>
       </section>
     </div>
