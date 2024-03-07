@@ -32,6 +32,7 @@ public class Court {
 //Una cancha va a tener una lista de turnos, si se elimina un objeto cancha, se eliminaran de
     //manera en cascada todos los turnos que le corresponden.
 @OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+@OrderBy("dateShift ASC, hourShift ASC")
 @JsonManagedReference
 private List<Shift> listShift;
 
