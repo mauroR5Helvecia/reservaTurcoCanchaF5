@@ -34,8 +34,7 @@ public class Shift {
     private Court court;
 
 
-    @OneToMany(mappedBy = "idShiftReserved")
-    private List<Reservation> reservations;
+
 
 
 }

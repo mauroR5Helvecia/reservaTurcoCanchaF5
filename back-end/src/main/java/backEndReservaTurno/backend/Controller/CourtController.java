@@ -4,11 +4,14 @@ import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.CourtService.CourtServiceInterface;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,18 +37,20 @@ public class CourtController {
 
 
 //find all courts
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllCourts() {
-        try {
-            List<Court> courts = courtServiceInterface.getCourts();
-            ResponseApiCustom response = new ResponseApiCustom("success", courts);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-
-            ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+@GetMapping("/all")
+public ResponseEntity<?> getAllCourts() {
+    List<Court> courts = null;
+    try {
+        courts = courtServiceInterface.getCourts();
+    } catch (Exception e) {
+        ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    ResponseApiCustom response = new ResponseApiCustom("success", courts);
+    return ResponseEntity.ok(response);
+}
+
 
 // Find by Id Court
     @GetMapping("find/{id}")

@@ -29,7 +29,9 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
         try {
             // Guardar la reserva y devuelve el resultado
+            System.out.println("se guardo la reserva de turno");
             return reservationRepository.save(reservation);
+
         } catch (Exception e) {
             throw new RuntimeException("Error al guardar la reserva", e);
         }
