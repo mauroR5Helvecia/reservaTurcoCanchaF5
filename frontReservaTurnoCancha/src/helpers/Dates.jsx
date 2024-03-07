@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 export const Dates = ({ setDays, days }) => {
   const [diasSemana, setDiasSemana] = useState([
     "lunes",
@@ -9,6 +10,22 @@ export const Dates = ({ setDays, days }) => {
     "sábado",
     "domingo",
   ]);
+
+  // Definir estado para almacenar las fechas ordenadas
+  const [sortedDates, setSortedDates] = useState([]);
+
+  // useEffect para ordenar las fechas cuando cambie 'diasSemana' o 'days'
+  useEffect(() => {
+    const sorted = diasSemana
+      .map((dia) => {
+        return dateOfDay(dia);
+      })
+      .sort((a, b) => {
+        return new Date(a.onlyDate) - new Date(b.onlyDate);
+      });
+    setSortedDates(sorted);
+  }, [diasSemana, days]);
+
   const dateOfDay = (diaSemana) => {
     diaSemana = diaSemana.toLowerCase();
 
@@ -43,6 +60,7 @@ export const Dates = ({ setDays, days }) => {
       onlyDate: `${nuevoAño}-${nuevoMes}-${nuevoDia}`,
     };
   };
+
   const dias = (e) => {
     if (e.target.checked) {
       setDays([...days, e.target.value]);
@@ -54,15 +72,19 @@ export const Dates = ({ setDays, days }) => {
 
   return (
     <section className="days">
-      {diasSemana.map((Día) => {
+      {sortedDates.map((date) => {
         return (
-          <label htmlFor={Día} className="days__form-label" key={Día}>
-            {dateOfDay(Día).dayAndDate}
+          <label
+            htmlFor={date.onlyDate}
+            className="days__form-label"
+            key={date.onlyDate}
+          >
+            {date.dayAndDate}
             <input
               type="checkbox"
               className="days__form-day"
-              value={dateOfDay(Día).onlyDate}
-              id={Día}
+              value={date.onlyDate}
+              id={date.onlyDate}
               onChange={(e) => {
                 dias(e);
               }}
