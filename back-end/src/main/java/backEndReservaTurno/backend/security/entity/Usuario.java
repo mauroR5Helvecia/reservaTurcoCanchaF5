@@ -45,11 +45,6 @@ public class Usuario implements UserDetails {
 //Implementaciones de user details
 
 
-    @OneToMany(mappedBy = "idUserReserved")
-    private List<Reservation> reservations;
-
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

@@ -37,18 +37,20 @@ public class CourtController {
 
 
 //find all courts
-    @GetMapping("/all")
-    public ResponseEntity<?> getAllCourts() {
-        try {
-            List<Court> courts = courtServiceInterface.getCourts();
-            ResponseApiCustom response = new ResponseApiCustom("success", courts);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-
-            ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+@GetMapping("/all")
+public ResponseEntity<?> getAllCourts() {
+    List<Court> courts = null;
+    try {
+        courts = courtServiceInterface.getCourts();
+    } catch (Exception e) {
+        ResponseApiCustom response = new ResponseApiCustom("Fallo al traer las cancha", e.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    ResponseApiCustom response = new ResponseApiCustom("success", courts);
+    return ResponseEntity.ok(response);
+}
+
 
 // Find by Id Court
     @GetMapping("find/{id}")
