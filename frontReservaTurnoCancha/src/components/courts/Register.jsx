@@ -1,34 +1,37 @@
-import React, { useEffect } from "react";
-import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
+import { useForm } from "../../hooks/useForm";
 
-export const CourtEditor = ({ getCanchas, cancha }) => {
+export const Register = ({ getCanchas }) => {
   const { form, changed } = useForm();
 
-  useEffect(() => {}, [cancha]);
-  const editCourt = async (e, idCourt) => {
+  const registerCourt = async (e) => {
     e.preventDefault();
+    let newCourt = form;
+    try {
+      const request = await fetch(Global.url + "court/save", {
+        method: "POST",
+        body: JSON.stringify(newCourt),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    let courtEdited = form;
-
-    const request = await fetch(Global.url + "court/edit/" + idCourt, {
-      method: "UPDATE",
-      body: JSON.stringify(courtEdited),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await request.json();
-
-    getCanchas();
-    console.log(data);
+      const data = await request.json();
+      console.log(data);
+      console.log("Registed correctly");
+      getCanchas();
+    } catch {
+      console.log("No se ha podido registrar correctamente");
+    }
   };
   return (
     <section className="court__register">
-      <form className="register__form" onSubmit={editCourt}>
+      <form className="register__form" onSubmit={registerCourt}>
         <header className="register__header">
-          <p className="register__title">Editar cancha :{cancha.nameCourt}</p>
+          <p className="register__title">Registrar cancha</p>
+          <span className="register__subtitle">
+            Crea tu cancha y modificala acorde a tus necesidades!
+          </span>
         </header>
 
         <section className="register__form-group">
@@ -37,7 +40,7 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
           </label>
           <i className="bx bx-abacus register__form-icon"></i>
           <input
-            placeholder="Nuevo nombre"
+            placeholder="Cancha 1"
             name="nameCourt"
             type="text"
             className="register__form-input"
@@ -52,7 +55,8 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
           </label>
           <i className="bx bx-group register__form-icon"></i>
           <input
-            placeholder="Nueva capacidad"
+            placeholder="10"
+            title="Inpit title"
             name="capacity"
             type="number"
             className="register__form-input"
@@ -67,7 +71,7 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
           </label>
           <i className="bx bx-dollar register__form-icon"></i>
           <input
-            placeholder="Nuevo precio"
+            placeholder="4000"
             name="price"
             type="num"
             className="register__form-input"
@@ -82,7 +86,7 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
           </label>
           <i className="bx bx-current-location register__form-icon"></i>
           <input
-            placeholder="Nueva dirección"
+            placeholder="Av.San Martin 123"
             name="location"
             type="text"
             className="register__form-input"
@@ -90,22 +94,24 @@ export const CourtEditor = ({ getCanchas, cancha }) => {
             onChange={changed}
           />
         </section>
+
         <section className="register__form-group">
-          <label className="register__form-label" htmlFor="phone__field">
-            Teléfono
+          <label className="register__form-label" htmlFor="price__field">
+            Telefono
           </label>
           <i className="bx bx-phone register__form-icon"></i>
           <input
-            placeholder="Nueva dirección"
+            placeholder="1125254040"
             name="phone"
             type="tel"
             className="register__form-input"
-            id="phone__field"
+            id="price__field"
             onChange={changed}
           />
         </section>
+
         <button type="submit" className="register__form-submit">
-          Editar cancha
+          Agregar cancha
         </button>
       </form>
     </section>

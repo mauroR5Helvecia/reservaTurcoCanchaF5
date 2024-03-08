@@ -1,4 +1,4 @@
-import { ReservedShifts } from "../shifts/ReservedShifts";
+import { ReservedShifts } from "../../shifts/ReservedShifts";
 
 export const Bookings = () => {
   return (

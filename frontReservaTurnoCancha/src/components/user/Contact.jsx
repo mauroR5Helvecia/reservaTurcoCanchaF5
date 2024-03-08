@@ -1,11 +1,11 @@
-import { CanchasSlider } from "../admin/CanchasSlider";
+import { Roulette } from "../layout/admin/Roulette";
 
 export const Contact = () => {
   return (
     <div className="contact__container">
       <section className="contact__advices">
         <h1 className="advices__title">Galeria de fotos</h1>
-        <CanchasSlider />
+        <Roulette />
 
         <a href="whatsapp" className="contact__whatsapp">
           Whatsapp <i className="bx bxl-whatsapp contact__whatsapp-icon"></i>

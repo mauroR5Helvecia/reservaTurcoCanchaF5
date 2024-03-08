@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Dates } from "../../helpers/Dates";
-import { CourtSelector } from "../shifts/CourtSelector";
-import { Global } from "../../helpers/Global";
-export const DaysForm = () => {
+import { Dates } from "../../../helpers/Dates";
+import { CourtSelector } from "../../shifts/CourtSelector";
+import { Global } from "../../../helpers/Global";
+export const Schedules = () => {
   const [days, setDays] = useState([]);
   const [canchas, setCanchas] = useState([]);
   const [SelectedCancha, setSelectedCancha] = useState();
