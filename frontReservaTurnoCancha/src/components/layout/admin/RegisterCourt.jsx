@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Global } from "../../helpers/Global";
-import { CourtEditor } from "../Courts/CourtEditor";
-import { FormRegisterCourt } from "../Courts/FormRegisterCourt";
-export const CanchasForm = () => {
+import { Global } from "../../../helpers/Global";
+import { Update } from "../../courts/Update";
+import { Register } from "../../courts/Register";
+export const RegisterCourt = () => {
   const [canchas, setCanchas] = useState([]);
   const [Editing, setEditing] = useState(false);
   const [cancha, setCancha] = useState({});
@@ -41,9 +41,9 @@ export const CanchasForm = () => {
   return (
     <main className="layout__login">
       {!Editing ? (
-        <FormRegisterCourt getCanchas={getCanchas} />
+        <Register getCanchas={getCanchas} />
       ) : (
-        <CourtEditor getCanchas={getCanchas} cancha={cancha} />
+        <Update getCanchas={getCanchas} cancha={cancha} />
       )}
       <section className="court__list">
         {canchas.map((cancha) => {

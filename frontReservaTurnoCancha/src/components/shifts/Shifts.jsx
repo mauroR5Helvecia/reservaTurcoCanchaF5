@@ -129,6 +129,7 @@ export const Shifts = () => {
 
       <ModalShift
         shift={shift}
+        idCourt={SelectedCancha.idCourt}
         isOpen={isModalOpen}
         closeModal={() => {
           const navbar = document.querySelector("#navegation__bar");

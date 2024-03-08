@@ -3,16 +3,16 @@ import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
-
-import { LayoutAdmin } from "../components/admin/LayoutAdmin";
+import Background from "../assets/img/soccer-1.svg";
+import { LayoutAdmin } from "../components/layout/admin/LayoutAdmin";
 
 import { Home } from "../components/user/Home";
 import { ReservedShifts } from "../components/shifts/ReservedShifts";
 import { Contact } from "../components/user/Contact";
-import { DaysForm } from "../components/admin/DaysForm";
-import { CanchasForm } from "../components/admin/CanchasForm";
-import { VerifyCode } from "../components/layout/private/VerifyCode";
-import { Bookings } from "../components/admin/Bookings";
+import { Schedules } from "../components/layout/admin/Schedules";
+import { RegisterCourt } from "../components/layout/admin/RegisterCourt";
+import { VerifyCode } from "../components/layout/public/VerifyCode";
+import { Bookings } from "../components/layout/admin/Bookings";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -32,19 +32,23 @@ export const Router = () => {
         </Route>
 
         <Route path="/Admin" element={<LayoutAdmin />}>
-          <Route index element={<DaysForm />} />
-          <Route path="Dias" element={<DaysForm />} />
-          <Route path="Canchas" element={<CanchasForm />} />
+          <Route index element={<Schedules />} />
+          <Route path="Dias" element={<Schedules />} />
+          <Route path="Canchas" element={<RegisterCourt />} />
           <Route path="Reservas" element={<Bookings />} />
         </Route>
         <Route
           path="*"
           element={
             <>
-              <p>
-                <h1>Error 404</h1>
-                <Link to="/">Go home boy</Link>
-              </p>
+              <div className="error__container">
+                <img src={Background} alt="" className="error__background" />
+                <div>
+                  <h2>Error 404</h2>
+                  <h3>Ésta página no existe</h3>
+                  <Link to="/">Volver al inicio</Link>
+                </div>
+              </div>
             </>
           }
         />

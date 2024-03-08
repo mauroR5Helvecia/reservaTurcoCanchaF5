@@ -38,9 +38,9 @@ export const Login = () => {
           <label className="login__form-label" htmlFor="username_field">
             Username
           </label>
-          <i className="bx bx-envelope login__form-icon"></i>
+          <i className="bx bx-user-pin login__form-icon"></i>
           <input
-            placeholder="user@mail.com"
+            placeholder="user2121"
             name="username"
             type="text"
             className="login__form-input"

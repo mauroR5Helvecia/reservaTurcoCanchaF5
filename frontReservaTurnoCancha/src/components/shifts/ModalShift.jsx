@@ -1,6 +1,30 @@
-export const ModalShift = ({ isOpen, closeModal, shift }) => {
+import { Global } from "../../helpers/Global";
+
+export const ModalShift = ({ isOpen, closeModal, shift, idCourt }) => {
   if (!isOpen) return null;
 
+  const ReserveShift = async () => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let token = JSON.parse(localStorage.getItem("token"));
+    let Booking = {
+      idCourtReserved: idCourt,
+      idUserReserved: user.idUser,
+      idShiftReserved: shift.idShift,
+    };
+
+    const request = await fetch(Global.url + "reservation/save", {
+      method: "POST",
+      body: JSON.stringify(Booking),
+      headers: {
+        Authorization: token.jwt,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    console.log(data);
+  };
   return (
     <div className="modal__reservation">
       <article className="reservation__container">
@@ -27,7 +51,9 @@ export const ModalShift = ({ isOpen, closeModal, shift }) => {
             <i className="bx bx-user"></i> Reserva: {shift.usuario}
           </p>
         </div>
-        <button className="reservation__submit">Confirmar</button>
+        <button className="reservation__submit" onClick={ReserveShift}>
+          Confirmar
+        </button>
       </article>
     </div>
   );
