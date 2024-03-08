@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 
@@ -16,12 +17,12 @@ export const Register = ({ getCanchas }) => {
         },
       });
 
-      const data = await request.json();
-      console.log(data);
-      console.log("Registed correctly");
+      if (request.status == 201)
+        toast.success("Cancha registrada correctamente");
+
       getCanchas();
     } catch {
-      console.log("No se ha podido registrar correctamente");
+      toast.error("No se ha podido registrar correctamente");
     }
   };
   return (
@@ -43,6 +44,7 @@ export const Register = ({ getCanchas }) => {
             placeholder="Cancha 1"
             name="nameCourt"
             type="text"
+            required
             className="register__form-input"
             id="name_field"
             onChange={changed}
@@ -58,6 +60,7 @@ export const Register = ({ getCanchas }) => {
             placeholder="10"
             title="Inpit title"
             name="capacity"
+            required
             type="number"
             className="register__form-input"
             id="capacity__field"
@@ -73,6 +76,7 @@ export const Register = ({ getCanchas }) => {
           <input
             placeholder="4000"
             name="price"
+            required
             type="num"
             className="register__form-input"
             id="price__field"
@@ -88,6 +92,7 @@ export const Register = ({ getCanchas }) => {
           <input
             placeholder="Av.San Martin 123"
             name="location"
+            required
             type="text"
             className="register__form-input"
             id="location__field"
@@ -103,6 +108,9 @@ export const Register = ({ getCanchas }) => {
           <input
             placeholder="1125254040"
             name="phone"
+            required
+            maxLength={10}
+            minLength={10}
             type="tel"
             className="register__form-input"
             id="price__field"

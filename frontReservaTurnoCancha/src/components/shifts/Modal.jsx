@@ -1,6 +1,7 @@
+import { toast } from "sonner";
 import { Global } from "../../helpers/Global";
 
-export const ModalShift = ({ isOpen, closeModal, shift, idCourt }) => {
+export const Modal = ({ isOpen, closeModal, shift, idCourt }) => {
   if (!isOpen) return null;
 
   const ReserveShift = async () => {
@@ -23,7 +24,8 @@ export const ModalShift = ({ isOpen, closeModal, shift, idCourt }) => {
 
     const data = await request.json();
 
-    console.log(data);
+    if (data.status == "success") toast.success("Reservado correctamente");
+    else toast.error("No se ha podido reservar el turno");
   };
   return (
     <div className="modal__reservation">

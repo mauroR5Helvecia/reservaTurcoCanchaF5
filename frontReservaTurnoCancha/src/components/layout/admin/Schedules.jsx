@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Dates } from "../../../helpers/Dates";
 import { CourtSelector } from "../../shifts/CourtSelector";
 import { Global } from "../../../helpers/Global";
+import { toast } from "sonner";
+import { Link, NavLink } from "react-router-dom";
 export const Schedules = () => {
   const [days, setDays] = useState([]);
   const [canchas, setCanchas] = useState([]);
@@ -58,26 +60,33 @@ export const Schedules = () => {
       }
     });
 
-    ListofShifts.forEach(async (shift) => {
-      await fetch(Global.url + "shift/save", {
-        method: "POST",
-        body: JSON.stringify(shift),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    });
-  };
+    console.log(ListofShifts);
+    for (const shift of ListofShifts) {
+      try {
+        const request = await fetch(Global.url + "shift/save", {
+          method: "POST",
+          body: JSON.stringify(shift),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-  const handleChange = (e) => {
-    let value = e.target.value;
-
-    if (value > 24 || value < 1) {
-      e.target.style.border = "1px solid red";
-    } else {
-      e.target.style.border = "1px solid green";
+        if (request.status === 200) {
+          toast.success(
+            `Turno creado correctamente: ${shift.dateShift} a las ${shift.hourShift}`
+          );
+        } else {
+          toast.warning(
+            `El turno ${shift.dateShift} a las ${shift.hourShift} ya existe`
+          );
+        }
+      } catch (error) {
+        console.error("Error al procesar el turno:", error);
+        toast.error("Ocurrió un error al procesar los turnos");
+      }
     }
   };
+
   return (
     <form onSubmit={shiftsCreator} className="days__form">
       <h2>Definir días y horarios disponibles</h2>
@@ -93,7 +102,6 @@ export const Schedules = () => {
           type="num"
           id="primerHora"
           required
-          onChange={handleChange}
           name="firstValue"
           className="days__form-input"
         />
@@ -108,7 +116,6 @@ export const Schedules = () => {
           type="num"
           id="segundaHora"
           required
-          onChange={handleChange}
           name="secondValue"
           className="days__form-input"
         />
@@ -124,9 +131,9 @@ export const Schedules = () => {
         <hr className="line" />
       </div>
 
-      <button title="Sign In" type="submit" className="days__form-submit">
-        Editar
-      </button>
+      <Link to="Edit" className="days__form-submit days__form-edit">
+        Modificar horarios
+      </Link>
     </form>
   );
 };

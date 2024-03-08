@@ -1,7 +1,10 @@
+import { toast } from "sonner";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 import { jwtDecode } from "jwt-decode";
+import { NavLink, useNavigate } from "react-router-dom";
 export const Login = () => {
+  const navigate = useNavigate();
   const { form, changed } = useForm();
 
   const LoginUser = async (e) => {
@@ -17,11 +20,21 @@ export const Login = () => {
       },
     });
 
-    const token = await request.json();
-    const decodedToken = jwtDecode(token.jwt);
+    console.log(request);
+    if (request.status == 200) {
+      const token = await request.json();
+      const decodedToken = jwtDecode(token.jwt);
 
-    localStorage.setItem("token", JSON.stringify(token.jwt));
-    localStorage.setItem("user", JSON.stringify(decodedToken));
+      localStorage.setItem("token", JSON.stringify(token.jwt));
+      localStorage.setItem("user", JSON.stringify(decodedToken));
+
+      toast.success("Logeado correctamente");
+      setTimeout(() => {
+        navigate("/user/Inicio");
+      }, 2000);
+    } else {
+      toast.error("Usuario o contraseña incorrecta");
+    }
   };
   return (
     <main className="layout__login">
@@ -73,9 +86,9 @@ export const Login = () => {
           <hr className="line" />
         </div>
 
-        <button title="Sign In" type="submit" className="login__form-register">
+        <NavLink to="/Register" type="submit" className="login__form-register">
           Crear una cuenta
-        </button>
+        </NavLink>
       </form>
     </main>
   );

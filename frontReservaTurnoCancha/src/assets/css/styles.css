@@ -151,6 +151,24 @@
     .register__form-submit {
         background-color: rgb(36, 118, 36);
     }
+
+    .register__fullname {
+        display: flex;
+        gap: 10px;
+    }
+
+    .register__form-group {
+
+
+        .register__form-input:valid:not(:placeholder-shown) {
+            box-shadow: 0 0 5px -1px green;
+
+        }
+
+        .register__form-input:invalid:not(:placeholder-shown) {
+            box-shadow: 0 0 5px -1px red;
+        }
+    }
 }
 
 
@@ -853,6 +871,11 @@
     margin-top: 1rem;
 }
 
+.days__form-edit {
+    text-align: center;
+    line-height: 40px;
+}
+
 .days__form-submit:nth-last-child(1) {
     background: rgb(42, 157, 80);
 }
@@ -1172,7 +1195,6 @@
             padding: 0.5rem 1rem;
             background-color: #115DFC;
             border-radius: 5px;
-
         }
     }
 

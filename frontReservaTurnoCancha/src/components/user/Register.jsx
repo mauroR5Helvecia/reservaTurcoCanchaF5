@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
+import { useState } from "react";
 
 export const Register = () => {
   const { form, changed } = useForm();
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const RegisterUser = async (e) => {
-
-
     e.preventDefault();
     let newUser = form;
 
@@ -31,11 +31,25 @@ export const Register = () => {
       console.log(userEmail);
 
       navigate("/verify");
-
-
     } catch (error) {
       console.log("Error en registrar usuario", error);
     }
+  };
+
+  const verifyPassword = (e) => {
+    let newPassword = e.target.value;
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!passwordRegex.test(newPassword)) {
+      e.target.setCustomValidity(
+        "La contraseña debe contener al menos una letra mayúscula, un número y tener una longitud mínima de 8 caracteres."
+      );
+    } else {
+      e.target.setCustomValidity("");
+    }
+
+    setPassword(newPassword);
   };
   return (
     <main className="layout__login">
@@ -47,36 +61,39 @@ export const Register = () => {
             necesites.
           </span>
         </header>
+        <div className="register__fullname">
+          <section className="register__form-group">
+            <label className="register__form-label" htmlFor="name_field">
+              Nombre
+            </label>
+            <i className="bx bx-user register__form-icon"></i>
+            <input
+              placeholder="Tu nombre"
+              name="name"
+              type="text"
+              required
+              className="register__form-input"
+              id="name_field"
+              onChange={changed}
+            />
+          </section>
 
-        <section className="register__form-group">
-          <label className="register__form-label" htmlFor="name_field">
-            Nombre
-          </label>
-          <i className="bx bx-user register__form-icon"></i>
-          <input
-            placeholder="Tu nombre"
-            name="name"
-            type="text"
-            className="register__form-input"
-            id="name_field"
-            onChange={changed}
-          />
-        </section>
-
-        <section className="register__form-group">
-          <label className="register__form-label" htmlFor="surname_field">
-            Apellido
-          </label>
-          <i className="bx bx-user register__form-icon"></i>
-          <input
-            placeholder="Tu apellido"
-            name="lastName"
-            type="text"
-            className="register__form-input"
-            id="surname_field"
-            onChange={changed}
-          />
-        </section>
+          <section className="register__form-group">
+            <label className="register__form-label" htmlFor="surname_field">
+              Apellido
+            </label>
+            <i className="bx bx-user register__form-icon"></i>
+            <input
+              placeholder="Tu apellido"
+              name="lastName"
+              type="text"
+              required
+              className="register__form-input"
+              id="surname_field"
+              onChange={changed}
+            />
+          </section>
+        </div>
         <section className="register__form-group">
           <label className="register__form-label" htmlFor="user_field">
             Usuario
@@ -86,6 +103,7 @@ export const Register = () => {
             placeholder="Usuario#123"
             name="username"
             type="text"
+            required
             className="register__form-input"
             id="user_field"
             onChange={changed}
@@ -98,9 +116,10 @@ export const Register = () => {
           </label>
           <i className="bx bx-envelope register__form-icon"></i>
           <input
-            placeholder="user@mail.com"
+            placeholder="user@hotmail.com"
             name="email"
             type="email"
+            required
             className="register__form-input"
             id="email_field"
             onChange={changed}
@@ -113,9 +132,12 @@ export const Register = () => {
           </label>
           <i className="bx bx-phone register__form-icon"></i>
           <input
-            placeholder="+54 11 7532-2520"
+            placeholder="1175322520"
             name="phone"
             type="tel"
+            required
+            maxLength={10}
+            minLength={10}
             className="register__form-input"
             id="email_field"
             onChange={changed}
@@ -131,9 +153,14 @@ export const Register = () => {
             placeholder="Contraseña"
             name="password"
             type="password"
+            required
+            value={password}
             className="register__form-input"
             id="password_field"
-            onChange={changed}
+            onChange={(e) => {
+              changed(e);
+              verifyPassword(e);
+            }}
           />
         </section>
         <button type="submit" className="register__form-submit">

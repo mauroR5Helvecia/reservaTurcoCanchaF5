@@ -13,6 +13,8 @@ import { Schedules } from "../components/layout/admin/Schedules";
 import { RegisterCourt } from "../components/layout/admin/RegisterCourt";
 import { VerifyCode } from "../components/layout/public/VerifyCode";
 import { Bookings } from "../components/layout/admin/Bookings";
+import { Logout } from "../components/user/Logout";
+import { Edit } from "../components/shifts/Edit";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -29,6 +31,7 @@ export const Router = () => {
           <Route path="Inicio" element={<Home />} />
           <Route path="MisTurnos" element={<ReservedShifts />} />
           <Route path="Contacto" element={<Contact />} />
+          <Route path="logout" element={<Logout />} />
         </Route>
 
         <Route path="/Admin" element={<LayoutAdmin />}>
@@ -36,6 +39,7 @@ export const Router = () => {
           <Route path="Dias" element={<Schedules />} />
           <Route path="Canchas" element={<RegisterCourt />} />
           <Route path="Reservas" element={<Bookings />} />
+          <Route path="Edit" element={<Edit />} />
         </Route>
         <Route
           path="*"

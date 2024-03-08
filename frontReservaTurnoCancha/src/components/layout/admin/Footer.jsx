@@ -34,7 +34,7 @@ export const Footer = () => {
       </NavLink>
 
       <NavLink
-        to={"EditarDias"}
+        to={"Edit"}
         className={({ isActive }) =>
           isActive ? "aside__button aside__button-active" : "aside__button"
         }

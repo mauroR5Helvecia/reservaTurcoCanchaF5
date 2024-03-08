@@ -1,5 +1,5 @@
 import { useLayoutEffect, useEffect, useState } from "react";
-import { ModalShift } from "./ModalShift";
+import { Modal } from "./Modal";
 
 import Calendario from "./Calendario";
 import { CourtSelector } from "./CourtSelector";
@@ -127,7 +127,7 @@ export const Shifts = () => {
           : "No hay turnos"}
       </ul>
 
-      <ModalShift
+      <Modal
         shift={shift}
         idCourt={SelectedCancha.idCourt}
         isOpen={isModalOpen}
