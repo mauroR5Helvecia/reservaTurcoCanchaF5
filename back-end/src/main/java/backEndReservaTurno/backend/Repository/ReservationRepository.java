@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -17,6 +18,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("SELECT r FROM Reservation r WHERE r.idShiftReserved.dateShift BETWEEN :startDate AND :endDate")
     List<Reservation> findByShiftDateBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
+
+  List<Reservation>findByidShiftReserved(Shift idShiftReserved);
 
 
 }

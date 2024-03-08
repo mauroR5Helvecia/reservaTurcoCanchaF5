@@ -8,6 +8,7 @@ import backEndReservaTurno.backend.Repository.ReservationRepository;
 import backEndReservaTurno.backend.Repository.ShiftRepository;
 import backEndReservaTurno.backend.security.entity.Usuario;
 import backEndReservaTurno.backend.security.repository.UsuarioRepository;
+import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,22 +42,39 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
 
     @Override
-    public Reservation saveReservation(ReservationDTO reservationDTO) {
-            Court court = courtRepository.findById(reservationDTO.getIdCourtReserved())
-                    .orElseThrow(() -> new IllegalArgumentException("Court no encontrada"));
-            Usuario user = userRepository.findById(reservationDTO.getIdUserReserved())
-                    .orElseThrow(() -> new IllegalArgumentException("User not encontrado"));
-            Shift shift = shiftRepository.findById(reservationDTO.getIdShiftReserved())
-                    .orElseThrow(() -> new IllegalArgumentException("Shift no encontrado"));
+    public void saveReservation(ReservationDTO reservationDTO) {
+        Court court = courtRepository.findById(reservationDTO.getIdCourtReserved())
+                .orElseThrow(() -> new IllegalArgumentException("Court no encontrada"));
+        Usuario user = userRepository.findById(reservationDTO.getIdUserReserved())
+                .orElseThrow(() -> new IllegalArgumentException("User not encontrado"));
+        Shift shift = shiftRepository.findById(reservationDTO.getIdShiftReserved())
+                .orElseThrow(() -> new IllegalArgumentException("Shift no encontrado"));
 
-            Reservation reservation = new Reservation();
-            reservation.setIdCourtReserved(court);
-            reservation.setIdUserReserved(user);
-            reservation.setIdShiftReserved(shift);
 
-            return reservationRepository.save(reservation);
+        //en caso de que el turno no se encuentre asociado a una reserva, se continua el proceso de persistencia
+        //se instancia una Reserva
+        Reservation reservation = new Reservation();
+        reservation.setIdCourtReserved(court);
+        reservation.setIdUserReserved(user);
+        reservation.setIdShiftReserved(shift);
+
+        List<Reservation> reservaShift = findReservationByIdShift(reservation.getIdShiftReserved());
+
+        if (reservaShift.isEmpty()) {
+            shift.setShiftReserved(true);
+            reservationRepository.save(reservation);
+            String mensaje = "se guardo la reserva";
+            ResponseApiCustom response = new ResponseApiCustom("success", mensaje);
+
+        } else {
+            String mensaje = "Ya se encontro un turno asociado a una reserva";
+            System.out.println("El Turno, ya esta asociado a una reserva");
+            throw new IllegalArgumentException(mensaje);
+
+
         }
 
+    }
 
 
 
@@ -83,6 +101,15 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
     public void deleteReservation(Long id) {
             reservationRepository.deleteById(id);
     }
+
+    @Override
+    public List<Reservation> findReservationByIdShift(Shift idShiftReserved) {
+        List<Reservation> reservation = reservationRepository.findByidShiftReserved(idShiftReserved);
+        return reservation;
+
+    }
+
+
 
 
 
