@@ -105,12 +105,45 @@ public ResponseEntity<?> getAllCourts() {
     public ResponseEntity<?> deleteCourtById(@PathVariable Long id) {
         try {
             courtServiceInterface.deleteCourt(id);
-            return new ResponseEntity<>("La cancha ha sido eliminada correctamente", HttpStatus.OK);
+            ResponseApiCustom response = new ResponseApiCustom("success delete id: ", id);
+            return ResponseEntity.ok(response);
         } catch (EmptyResultDataAccessException e) {
-            return new ResponseEntity<>("No se encontró ninguna cancha con el ID especificado", HttpStatus.NOT_FOUND);
+            String mensaje = "No se encontro cancha con el id correspondiente";
+            ResponseApiCustom response = new ResponseApiCustom("Error: ", mensaje);
+            return ResponseEntity.badRequest().body(response);
+
         } catch (Exception e) {
-            return new ResponseEntity<>("Error al eliminar la cancha: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ResponseApiCustom response = new ResponseApiCustom("Error: ", e.getMessage());
+            return ResponseEntity.internalServerError().body(response);
         }
+    }
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateCourt(@PathVariable Long id, @RequestBody Court updatedCourt) {
+        //Busco la cancha
+
+        Court existingCourt = courtServiceInterface.findCourtById(id).orElse(null);
+        if (existingCourt != null) {
+            // Si existe, actualizo los atributos con los nuevos valores
+            existingCourt.setNameCourt(updatedCourt.getNameCourt());
+            existingCourt.setLocation(updatedCourt.getLocation());
+            existingCourt.setCapacity(updatedCourt.getCapacity());
+            existingCourt.setPhone(updatedCourt.getPhone());
+            existingCourt.setPrice(updatedCourt.getPrice());
+
+            // Guardar los cambios en la base de datos
+            courtServiceInterface.saveCourt(existingCourt);
+            String mensaje = "Los datos de cancha id: "+ id + " fueron modificados exitosamente";
+            ResponseApiCustom response = new ResponseApiCustom("Success: ", mensaje);
+            return ResponseEntity.ok(response);
+        } else {
+            String mensaje = "El id: "+ id + " de la cancha, no existe";
+            ResponseApiCustom response = new ResponseApiCustom("Error: ", mensaje);
+            return ResponseEntity.badRequest().body(response);
+                }
+
+
     }
 
 
