@@ -4,6 +4,7 @@ import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.CourtService.CourtServiceInterface;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,7 +113,13 @@ public ResponseEntity<?> getAllCourts() {
             ResponseApiCustom response = new ResponseApiCustom("Error: ", mensaje);
             return ResponseEntity.badRequest().body(response);
 
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
+            String mensaje = "No se puede eliminar la cancha porque tiene reservas asociadas";
+
+            ResponseApiCustom response = new ResponseApiCustom("Error: ", mensaje);
+
+            return ResponseEntity.badRequest().body(response);
+        }catch (Exception e) {
             ResponseApiCustom response = new ResponseApiCustom("Error: ", e.getMessage());
             return ResponseEntity.internalServerError().body(response);
         }

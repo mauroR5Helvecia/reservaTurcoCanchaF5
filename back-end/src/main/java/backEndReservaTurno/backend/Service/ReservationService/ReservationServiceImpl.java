@@ -12,9 +12,15 @@ import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -99,8 +105,47 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
     @Override
     public void deleteReservation(Long id) {
-            reservationRepository.deleteById(id);
+        Optional<Reservation> optionalReservation = reservationRepository.findById(id);
+        if (optionalReservation.isPresent()) {
+            Reservation reservation = optionalReservation.get();
+
+            // Obtener la hora de la reserva que se quiere eliminar
+            LocalDateTime reservationStartDateTime = reservation.getIdShiftReserved().getDateShift().atTime(LocalTime.parse(reservation.getIdShiftReserved().getHourShift()));
+
+            //pasarla a zona horaria argentina
+            ZonedDateTime startDateTimeInBuenosAires = reservationStartDateTime.atZone(ZoneId.of("America/Argentina/Buenos_Aires"));
+
+            //imprimo para verificar que llega
+            System.out.println("Hora actual de la reserva es : " + startDateTimeInBuenosAires);
+
+
+            // Veo la hora local en que se quiere eliminar
+            ZonedDateTime currentDateTime = ZonedDateTime.now(ZoneId.of("America/Argentina/Buenos_Aires"));
+            System.out.println("Hora que se quiere eliminar: " + currentDateTime);
+
+
+            // Calcular la diferencia absoluta en horas entre startDateTimeInBuenosAires y currentDateTime
+            long hoursUntilReservationStarts = Math.abs(ChronoUnit.HOURS.between(currentDateTime, startDateTimeInBuenosAires));
+            System.out.println("Esta es la diferencia entre horas: "+ hoursUntilReservationStarts);
+
+            if (hoursUntilReservationStarts < 2) {
+                throw new RuntimeException("No se puede eliminar la reserva con menos de dos horas de anticipación.");
+            } else {
+                // Cambiar el atributo shiftReserved del turno asociado a la reserva a false
+                Shift shift = reservation.getIdShiftReserved();
+                shift.setShiftReserved(false);
+
+                // Guardar el turno actualizado en la base de datos
+                shiftRepository.save(shift);
+
+                // Eliminar la reserva
+                reservationRepository.deleteById(id);
+            }
+        } else {
+            throw new RuntimeException("Reserva no encontrada con el ID: " + id);
+        }
     }
+
 
     @Override
     public List<Reservation> findReservationByIdShift(Shift idShiftReserved) {
