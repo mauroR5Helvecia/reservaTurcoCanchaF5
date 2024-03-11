@@ -38,6 +38,7 @@ public class HttpSecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests( authConfig ->{
 //                    authConfig.requestMatchers("/error").permitAll();
+                    authConfig.requestMatchers(HttpMethod.POST, "/apireserva/photogalery/save").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/reservation/save").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/all").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/alldays").permitAll();

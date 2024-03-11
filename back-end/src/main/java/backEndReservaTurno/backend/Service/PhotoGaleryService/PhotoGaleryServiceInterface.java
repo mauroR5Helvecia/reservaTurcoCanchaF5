@@ -8,7 +8,7 @@ public interface PhotoGaleryServiceInterface {
     public List<PhotoGalery> getPhotoGalery();
 
 
-    public void savePhotoGalery (PhotoGalery photoGalery);
+    public String savePhotoGalery (PhotoGalery photoGalery);
 
 
     public void deletePhotoGalery (Long id);
