@@ -37,7 +37,7 @@ public class UploadFilesServiceImpl implements IUploadFilesService {
 
             String newFileName = fileName + fileExtension;
 
-            File folder = new File("./src/main/resources/galeryPhoto");
+            File folder = new File("../frontReservaTurnoCancha/public/galeryPhoto");
 
 
             if(!folder.exists()){

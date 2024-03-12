@@ -21,13 +21,15 @@ public class Reservation {
     @JoinColumn(name = "idCourt")
     private Court idCourtReserved;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUsuario")
     private Usuario idUserReserved;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idShift")
     private Shift idShiftReserved;
+
+
 
 
 }
