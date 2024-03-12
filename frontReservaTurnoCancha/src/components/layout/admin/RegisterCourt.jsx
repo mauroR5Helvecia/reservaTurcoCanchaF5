@@ -27,7 +27,7 @@ export const RegisterCourt = () => {
   };
 
   return (
-    <main className="layout__login">
+    <main className="register__court">
       {!Editing ? (
         <Register getCanchas={getCanchas} />
       ) : (

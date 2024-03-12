@@ -1,5 +1,5 @@
 import { Router } from "./router/Router";
-import canchaBackground from "../src/assets/img/backgroundcancha.jpg";
+import canchaBackground from "../src/assets/img/backgro.jpg";
 function App() {
   return (
     <main className="layout">

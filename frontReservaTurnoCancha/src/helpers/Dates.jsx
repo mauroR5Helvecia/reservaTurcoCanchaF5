@@ -45,7 +45,7 @@ export const Dates = ({ setDays, days }) => {
     // Crear la nueva fecha sumando los días faltantes
     let nuevaFecha = new Date(fechaActual);
     nuevaFecha.setDate(diaActual + diasFaltantes);
-    let nuevoDia = nuevaFecha.getDate();
+    let nuevoDia = nuevaFecha.getDate() + 1;
     if (nuevoDia <= 9) {
       nuevoDia = `0${nuevoDia}`;
     }
