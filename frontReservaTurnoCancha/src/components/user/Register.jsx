@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const Register = () => {
   const { form, changed } = useForm();
@@ -22,17 +23,12 @@ export const Register = () => {
         },
       });
 
-      const data = await request.json();
-
+      toast.info("Se ha enviado un código de verificación a tu email");
       localStorage.setItem("email", newUser.email);
-
-      let userEmail = localStorage.getItem("email");
-
-      console.log(userEmail);
 
       navigate("/verify");
     } catch (error) {
-      console.log("Error en registrar usuario", error);
+      toast.error("Error en registrar usuario", error);
     }
   };
 

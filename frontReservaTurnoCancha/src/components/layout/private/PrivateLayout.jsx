@@ -9,11 +9,11 @@ export const PrivateLayout = () => {
   return (
     <>
       <Header />
+      <Footer />
       <main className="content__private">
         <Toaster richColors expand={true} />
         {token ? <Outlet /> : <Navigate to="/" />}
       </main>
-      <Footer />
     </>
   );
 };

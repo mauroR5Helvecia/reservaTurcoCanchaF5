@@ -5,6 +5,15 @@
     overflow: hidden;
 }
 
+.layout__admin {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .layout__public {
     width: 100%;
     height: 100vh;
@@ -207,7 +216,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding-left: 195px;
+
 
 
     .header__title {
@@ -257,39 +266,31 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-left: 195px;
+
 }
 
 .aside__private {
-    width: fit-content;
-    height: 100%;
-    position: fixed;
-    padding: 0 1rem;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: 55px;
+    position: relative;
+    margin: 1rem 0;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background: rgb(57, 134, 187);
-    background: linear-gradient(38deg, rgba(57, 134, 187, 1) 0%, rgba(75, 134, 177, 1) 100%);
-
-
+    justify-content: space-evenly;
     transition: all 300ms ease-in-out;
-    overflow: hidden;
-
 
     .aside__button {
         display: flex;
-        width: 100%;
+        height: 100%;
         align-items: center;
-        padding: 0.5rem 1rem;
-        font-size: 12px;
+        padding: 0.7rem 1rem;
+        font-size: 13px;
+        border-radius: 0.3rem;
         text-transform: uppercase;
         font-weight: 500;
         color: #fff;
         background-color: #211d31;
+
         border: none;
-        border-radius: 2rem;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease-in-out;
         gap: 0.5rem;
@@ -335,6 +336,15 @@
 
 }
 
+.register__court {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    justify-content: space-evenly;
+}
+
 /*LISTADO DE TURNOS*/
 
 
@@ -365,6 +375,8 @@
 }
 
 .list__shifts-title {
+    font-size: 2rem;
+
     color: rgb(210, 210, 210);
 }
 
@@ -439,87 +451,85 @@
 .modal__reservation {
     position: fixed;
     top: -30%;
-    left: -70%;
+    left: -40%;
     z-index: 20;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(98, 96, 96);
     width: 120vw;
     height: 120vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(500px);
+}
 
-    .reservation__container {
-        position: relative;
-        width: 400px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-around;
-        padding: 1rem 2rem;
-        background-color: lightblue;
-        border-radius: 0.5rem;
+.reservation__container {
+    position: relative;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem 2rem;
+    background-color: lightblue;
+    border-radius: 0.5rem;
 
-        .reservation__closeModal {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 2rem;
-            color: red;
-        }
+    .reservation__closeModal {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 2rem;
+        color: red;
+    }
 
-        .reservation__title {
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-
+    .reservation__title {
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
 
 
-        .reservation__info {
-            width: 100%;
-            padding: 0 1rem;
-            margin-right: 3rem;
 
-            p {
-                margin-bottom: 0.5rem;
-                font-size: 1rem;
-                color: #434343;
-            }
-        }
 
-        .reservation__submit {
-            padding: 1.3em 3em;
-            font-size: 10px;
+    .reservation__info {
+        width: 100%;
+        padding: 0 1rem;
+        margin-right: 3rem;
 
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-weight: 500;
-            color: #000;
-            background-color: #fff;
-            border: none;
-            border-radius: 45px;
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease 0s;
-            cursor: pointer;
-            outline: none;
-            margin: 1rem 0;
-
-        }
-
-        .reservation__submit:hover {
-            background-color: #23c483;
-            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-            color: #fff;
-            transform: translateY(-3px);
-        }
-
-        .reservation__submit:active {
-            transform: translateY(-1px);
+        p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #434343;
         }
     }
 
+    .reservation__submit {
+        padding: 1.3em 3em;
+        font-size: 10px;
+
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        margin: 1rem 0;
+
+    }
+
+    .reservation__submit:hover {
+        background-color: #23c483;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    .reservation__submit:active {
+        transform: translateY(-1px);
+    }
 }
 
 
@@ -527,10 +537,15 @@
 /*HOME STYLES*/
 
 .home {
-    width: 100%;
-    height: 100%;
+    width: 99%;
+    height: 80vh;
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.276);
+    backdrop-filter: blur(25px);
+    border-radius: 0.5rem;
+
 
     section {
         width: 100%;
@@ -541,10 +556,11 @@
     .home__shifts {
         padding-right: 2rem;
         width: 65%;
-        background-color: rgb(64, 63, 61);
+        background-color: rgb(62, 61, 63);
         backdrop-filter: blur(5px);
         padding: 2rem;
-        border-radius: 1rem;
+        border-radius: 0.5rem;
+
 
         .shifts__extra-info {
             display: flex;
@@ -562,11 +578,11 @@
         width: 35%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        background-color: rgb(64, 63, 61);
-        margin-right: 1rem;
-        border-radius: 1rem;
+        background-color: rgb(37, 35, 40);
+        padding-top: 1rem;
+        border-radius: 0.4rem;
+        border-bottom-left-radius: 0.7rem;
         text-align: start;
 
         .announcement__title {
@@ -580,6 +596,7 @@
         margin-top: 1.5rem;
         margin-left: 2rem;
         list-style: circle;
+
 
     }
 
@@ -600,17 +617,23 @@
 
 /*HOME CONTACT STYLES*/
 .contact__container {
-    width: 95%;
+    width: 99%;
+    height: 80vh;
     display: flex;
     justify-content: space-around;
-    background-color: #000000aa;
-    border-radius: 1rem;
-    padding: 4rem 1rem;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.276);
+    backdrop-filter: blur(25px);
+    border-radius: 0.5rem;
 }
 
 .contact__map {
-    width: 50%;
+    width: 100%;
+    height: 100%;
     display: flex;
+    background-color: #00000093;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -636,10 +659,14 @@
 }
 
 .contact__advices {
-    width: 35%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
+    background-color: #101b22;
+    padding-top: 1.2rem;
 }
 
 .advices__title,
@@ -647,7 +674,6 @@
 .announcement__title {
     position: relative;
     font-size: 2.7rem;
-    margin-top: -2rem;
     margin-bottom: 2rem;
     color: lightgoldenrodyellow;
 
@@ -694,17 +720,19 @@
 /*SLIDER */
 
 .slider {
+    width: 95%;
     display: flex;
     overflow-x: auto;
     white-space: nowrap;
     padding-bottom: 0.5rem;
 
+
     img {
         flex: 1 0 auto;
         margin: 0 40px;
         border-radius: 0.2rem;
-        width: 450px;
-        height: 450px;
+        width: 400px;
+        height: 400px;
 
 
     }
@@ -720,9 +748,7 @@
 }
 
 /*ADMIN STYLES*/
-.layout__admin {
-    padding-left: 207px;
-}
+
 
 .admin__header {
     padding: 1rem 0;
@@ -730,10 +756,12 @@
 }
 
 .admin__content {
-    padding: 1rem 0;
-    display: flex;
-    justify-content: center;
-
+    width: 99%;
+    height: 81vh;
+    padding: 2rem 2rem;
+    background-color: rgba(0, 0, 0, 0.46);
+    backdrop-filter: blur(25px);
+    border-radius: 0.5rem;
 }
 
 .days__form {
@@ -895,16 +923,20 @@
 }
 
 .court__register {
+    height: 100%;
+    box-sizing: content-box;
+
     .register__form {
         width: 600px;
-        gap: 2rem;
+        gap: 2.1rem;
+        height: fit-content;
     }
 }
 
 .court__list {
     width: 30%;
     min-height: 600px;
-    max-height: 600px;
+    max-height: 700px;
     overflow-y: auto;
 
     display: flex;
@@ -992,10 +1024,64 @@
 }
 
 /*ADMIN BOOKINGS*/
+.reserved-shifts__container {
+    width: 99%;
+    height: 80vh;
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.276);
+    backdrop-filter: blur(25px);
+    border-radius: 0.5rem;
+
+    overflow-x: auto;
+
+    .reservation__container {
+        min-width: 400px;
+        font-size: 2rem;
+
+        .reservation__info {
+            padding: 0;
+            text-align: start;
+            margin-right: 0;
+
+            p {
+                font-size: 1.6rem;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
+    ;
+}
+
 .Bookings__container {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    gap: 2rem;
+    padding: 1rem;
+
+    .reserved-shifts__container {
+        height: 100%;
+        background: none;
+        backdrop-filter: none;
+        flex-wrap: wrap;
+        overflow-y: auto;
+
+        .reservation__container {
+            font-size: 1.2rem;
+            height: 350px;
+
+            .reservation__info {
+                p {
+                    margin-bottom: 0.3rem;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
 }
 
 .Bookings__list {

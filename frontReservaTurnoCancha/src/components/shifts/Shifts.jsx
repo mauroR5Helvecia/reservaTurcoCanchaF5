@@ -67,7 +67,9 @@ export const Shifts = () => {
     //Finalmente activar el modal
     setIsModalOpen(true);
     const navbar = document.querySelector("#navegation__bar");
+    const title = document.querySelector(".announcement__title");
     navbar.style.display = "none";
+    title.style.display = "none";
   };
   return (
     <>
@@ -133,8 +135,10 @@ export const Shifts = () => {
         isOpen={isModalOpen}
         closeModal={() => {
           const navbar = document.querySelector("#navegation__bar");
+          const title = document.querySelector(".announcement__title");
           setIsModalOpen(false);
           navbar.style.display = "flex";
+          title.style.display = "block";
         }}
       />
     </>

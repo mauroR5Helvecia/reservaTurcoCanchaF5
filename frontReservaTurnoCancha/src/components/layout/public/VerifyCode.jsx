@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Global } from "../../../helpers/Global";
+import { toast } from "sonner";
 
 export const VerifyCode = () => {
   const navigate = useNavigate();
@@ -34,16 +35,21 @@ export const VerifyCode = () => {
           "Content-Type": "application/json",
         },
       });
-      const verificado = response.data;
-      console.log(verificado);
+
+      if (response.status == 404) {
+        toast.error("Código incorrecto");
+        throw new Error();
+      }
+
+      toast.success("Se ha verificado correctamente");
       setTimeout(() => {
         setVerificadoCorrectamente(true);
       }, 4500);
       navigate("/");
     } catch (error) {
-      console.error("Error en el servidor:", error.response.data);
+      toast.error("Error en el servidor:", error.response.data);
       // Si el error es un BAD Request, establecer codigoIncorrecto a true
-      if (error.response && error.response.status === 400) {
+      if (error) {
         setCodigoIncorrecto(true);
       }
 
