@@ -11,6 +11,8 @@ public interface ReservationServiceInterface {
     public List<Reservation> getReservations();
 
 
+    List<Reservation> getReservationsAtShift();
+
     public void saveReservation (ReservationDTO reservationDTO);
 
     List<Reservation> getReservationCurrent();

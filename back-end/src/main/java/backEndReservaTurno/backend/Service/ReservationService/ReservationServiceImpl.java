@@ -6,6 +6,7 @@ import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Repository.CourtRepository;
 import backEndReservaTurno.backend.Repository.ReservationRepository;
 import backEndReservaTurno.backend.Repository.ShiftRepository;
+import backEndReservaTurno.backend.Service.ShiftService.ShiftServiceInterface;
 import backEndReservaTurno.backend.security.entity.Usuario;
 import backEndReservaTurno.backend.security.repository.UsuarioRepository;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
@@ -38,12 +39,41 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
     @Autowired
     private ShiftRepository shiftRepository;
 
+    @Autowired
+    private ShiftServiceInterface shiftServiceInterface;
+
 
     @Override
     public List<Reservation> getReservations() {
         List<Reservation> listReservations= reservationRepository.findAll();
         return listReservations;
     }
+
+    @Override
+    public List<Reservation> getReservationsAtShift() {
+        // Obtener todas las reservas
+        List<Reservation> listReservations = reservationRepository.findAll();
+
+        // Recorrer la lista de reservas
+        for (Reservation reservation : listReservations) {
+            // Obtener el id del turno reservado
+            Long idShiftReserved = reservation.getIdShiftReserved().getIdShift();
+
+            // Busco el turno utilizando el id obtenido
+            Optional<Shift> optionalShift = shiftServiceInterface.findShiftById(idShiftReserved);
+
+            // Se obtiene el turno
+            Shift shift = optionalShift.get();
+
+            // Asignar el turno a la reserva
+          reservation.setIdShiftReserved(shift);
+        }
+
+        return listReservations;
+        }
+
+
+
 
 
 

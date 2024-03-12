@@ -4,9 +4,13 @@ import backEndReservaTurno.backend.Service.PhotoGaleryService.PhotoGaleryService
 import backEndReservaTurno.backend.subidaArchivos.IUploadFilesService;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("apireserva/photogalery")
@@ -43,5 +47,39 @@ public class PhotoGaleryController {
 
 
     }
+
+
+    @GetMapping("/latestfive")
+    public ResponseEntity<?> getLatestPhotos() {
+        try {
+            List<PhotoGalery> latestPhotos = photoGaleryServiceInterface.getPhotoGalery();
+            if (!latestPhotos.isEmpty()) {
+                ResponseApiCustom response = new ResponseApiCustom("success", latestPhotos);
+                return ResponseEntity.ok(response);
+            } else {
+                String mensaje = "La lista de fotografias esta vacia";
+                ResponseApiCustom response = new ResponseApiCustom("success", mensaje);
+                return ResponseEntity.ok(response);
+            }
+        } catch (Exception e) {
+            ResponseApiCustom response = new ResponseApiCustom("error", e.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> deletePhoto(@PathVariable Long id) {
+        try {
+            photoGaleryServiceInterface.deletePhotoGalery(id);
+            return new ResponseEntity<>("La imagen ah sido eliminada", HttpStatus.OK);
+        } catch (EmptyResultDataAccessException e) {
+            return new ResponseEntity<>("No se encontró imagen con el ID especificado", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al eliminar la imagen: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 }

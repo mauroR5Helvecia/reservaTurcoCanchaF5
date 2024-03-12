@@ -33,6 +33,9 @@ public class Shift {
     @JsonBackReference
     private Court court;
 
+    @OneToOne(mappedBy = "idShiftReserved")
+    private Reservation reservation;
+
 
 
 

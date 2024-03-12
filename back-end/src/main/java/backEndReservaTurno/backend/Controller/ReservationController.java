@@ -113,7 +113,7 @@ public class ReservationController {
             LocalDate today = LocalDate.now();
 
             // Obtener todas las reservas
-            List<Reservation> reservations = reservationServiceInterface.getReservations();
+            List<Reservation> reservations = reservationServiceInterface.getReservationsAtShift();
 
             // Filtrar las reservas desde el día actual en adelante para el usuario específico
             List<Reservation> filteredReservations = reservations.stream()
