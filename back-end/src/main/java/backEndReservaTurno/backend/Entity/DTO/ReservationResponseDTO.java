@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReservationResponseDTO {
 
+    private Long idReservation;
     private String nameCourt;
     private LocalDate dateShift;
     private String hourShift;

@@ -20,10 +20,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -190,8 +187,9 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
     }
 
     @Override
-    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved) {
+    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved, Long idReservation) {
         try{
+
             Court court = courtRepository.findById(idCourtReserved)
                     .orElseThrow(()-> new IllegalArgumentException("La cancha no fue encontrada"));
             Shift shift = shiftRepository.findById(idShiftReserved)
@@ -201,6 +199,7 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
             ReservationResponseDTO reservationResponseDTO = new ReservationResponseDTO();
 
+            reservationResponseDTO.setIdReservation(idReservation);
             reservationResponseDTO.setNameCourt(court.getNameCourt());
             reservationResponseDTO.setDateShift(shift.getDateShift());
             reservationResponseDTO.setHourShift(shift.getHourShift());
@@ -216,6 +215,33 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
         }
 
     }
+
+    @Override
+    public List<ReservationResponseDTO> getListReservation(List<Reservation> lista) {
+        List<Reservation> listReservations = lista;
+        List<ReservationResponseDTO> listReservationDTO = new ArrayList<>();
+
+        try {
+            for (Reservation reservation : listReservations) {
+                Long idReservation = reservation.getIdReservation().longValue();
+                Long idCourtReserved = reservation.getIdCourtReserved().getIdCourt();
+                Long idUserReserved = reservation.getIdUserReserved().getIdUsuario();
+                Long idShiftReserved = reservation.getIdShiftReserved().getIdShift();
+
+                // Llamar a la función para obtener los detalles de la reserva
+                ReservationResponseDTO reservationDetails = getDetailsReservation(idShiftReserved, idUserReserved, idCourtReserved, idReservation);
+
+                // Agregar los detalles de la reserva a la lista
+                listReservationDTO.add(reservationDetails);
+            }
+        } catch (Exception e) {
+            // Manejar la excepción aquí
+            e.printStackTrace(); // Opcional: imprimir la traza de la excepción
+        }
+
+        return listReservationDTO;
+    }
+
 
 
 }

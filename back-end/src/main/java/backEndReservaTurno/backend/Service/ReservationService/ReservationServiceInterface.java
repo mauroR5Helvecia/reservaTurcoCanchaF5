@@ -26,9 +26,9 @@ public interface ReservationServiceInterface {
 
 
 
-    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved);
+    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved, Long idReservation);
 
-
+        public List<ReservationResponseDTO> getListReservation(List<Reservation> lista);
 
 
 

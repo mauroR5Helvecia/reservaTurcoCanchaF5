@@ -53,7 +53,9 @@ public class ReservationController {
         try {
             List<Reservation> reservations = reservationServiceInterface.getReservations();
 
-            ResponseApiCustom response = new ResponseApiCustom("success reservations", reservations);
+            List<ReservationResponseDTO> listModelReserved = reservationServiceInterface.getListReservation(reservations);
+            ResponseApiCustom response = new ResponseApiCustom("success reservations", listModelReserved);
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener las reservas: : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,12 +75,16 @@ public class ReservationController {
             // Obtener todas las reservas
             List<Reservation> reservations = reservationServiceInterface.getReservations();
 
+
+
             // Filtrar las reservas desde el día actual en adelante
             List<Reservation> filteredReservations = reservations.stream()
                     .filter(reservation -> reservation.getIdShiftReserved().getDateShift().isAfter(today.minusDays(1))) // Considerando desde hoy en adelante
                     .collect(Collectors.toList());
 
-            ResponseApiCustom response = new ResponseApiCustom("success reservations", filteredReservations);
+            List<ReservationResponseDTO> listModelReserved = reservationServiceInterface.getListReservation(filteredReservations);
+            ResponseApiCustom response = new ResponseApiCustom("success reservations", listModelReserved);
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener las reservas: : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,7 +106,9 @@ public class ReservationController {
                     .filter(reservation -> reservation.getIdShiftReserved().getDateShift().isAfter(today.minusDays(1))) // Considerando desde hoy en adelante
                     .collect(Collectors.toList());
 
-            ResponseApiCustom response = new ResponseApiCustom("success reservations", filteredReservations);
+            List<ReservationResponseDTO> listModelReserved = reservationServiceInterface.getListReservation(filteredReservations);
+            ResponseApiCustom response = new ResponseApiCustom("success reservations", listModelReserved);
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener las reservas: : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -122,7 +130,10 @@ public class ReservationController {
                     .filter(reservation -> reservation.getIdShiftReserved().getDateShift().isAfter(today.minusDays(1))) // Considerando desde hoy en adelante
                     .collect(Collectors.toList());
 
-            ResponseApiCustom response = new ResponseApiCustom("success reservations", filteredReservations);
+
+            List<ReservationResponseDTO> listModelReserved = reservationServiceInterface.getListReservation(filteredReservations);
+            ResponseApiCustom response = new ResponseApiCustom("success reservations", listModelReserved);
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener las reservas: : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -131,19 +142,19 @@ public class ReservationController {
 
     //Para traer detalles de una reserva, pasando el idUserReserved e idShiftReserved
 
-    @GetMapping("/detail/{idShiftReserved}/{idUserReserved}/{idCourtReserved}")
-    public ResponseEntity<?> getDetailReserved (@PathVariable(name = "idShiftReserved") String idShiftReserved, @PathVariable(name = "idUserReserved") String idUserReserved,  @PathVariable(name = "idCourtReserved") String idCourtReserved){
-
-        try{
-            ReservationResponseDTO detailsReservation = reservationServiceInterface.getDetailsReservation(Long.parseLong(idShiftReserved), Long.parseLong(idUserReserved), Long.parseLong(idCourtReserved));
-            ResponseApiCustom response = new ResponseApiCustom("success", detailsReservation);
-            return ResponseEntity.ok(response);
-        }catch (Exception e){
-            ResponseApiCustom response = new ResponseApiCustom("error", e.getMessage());
-            return ResponseEntity.badRequest().body(response);
-        }
-
-    }
+//    @GetMapping("/detail/{idShiftReserved}/{idUserReserved}/{idCourtReserved}/{idReservation}")
+//    public ResponseEntity<?> getDetailReserved (@PathVariable(name = "idShiftReserved") String idShiftReserved, @PathVariable(name = "idUserReserved") String idUserReserved,  @PathVariable(name = "idCourtReserved") String idCourtReserved, @PathVariable(name = "idReservation") String idReservation){
+//
+//        try{
+//            ReservationResponseDTO detailsReservation = reservationServiceInterface.getDetailsReservation(Long.parseLong(idShiftReserved), Long.parseLong(idUserReserved), Long.parseLong(idCourtReserved), Long.parseLong(idReservation));
+//            ResponseApiCustom response = new ResponseApiCustom("success", detailsReservation);
+//            return ResponseEntity.ok(response);
+//        }catch (Exception e){
+//            ResponseApiCustom response = new ResponseApiCustom("error", e.getMessage());
+//            return ResponseEntity.badRequest().body(response);
+//        }
+//
+//    }
 
     //eliminar reserva
 
