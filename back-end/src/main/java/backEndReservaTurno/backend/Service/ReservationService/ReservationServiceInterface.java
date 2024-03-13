@@ -1,5 +1,6 @@
 package backEndReservaTurno.backend.Service.ReservationService;
 import backEndReservaTurno.backend.Entity.DTO.ReservationDTO;
+import backEndReservaTurno.backend.Entity.DTO.ReservationResponseDTO;
 import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.Entity.Shift;
 
@@ -22,6 +23,10 @@ public interface ReservationServiceInterface {
 
 
     List<Reservation> findReservationByIdShift(Shift idShiftReserved);
+
+
+
+    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved);
 
 
 

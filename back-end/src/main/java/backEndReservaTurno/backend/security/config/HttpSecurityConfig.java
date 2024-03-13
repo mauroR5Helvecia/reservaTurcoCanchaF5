@@ -45,6 +45,7 @@ public class HttpSecurityConfig {
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/all").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/alldays").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/alldayscourt/**").permitAll();
+                    authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/detail/**").permitAll();
                     authConfig.requestMatchers(HttpMethod.GET, "/apireserva/reservation/alldaysuser/**").permitAll();
                     authConfig.requestMatchers(HttpMethod.DELETE, "/apireserva/reservation/delete/**").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST, "/apireserva/auth/**").permitAll();

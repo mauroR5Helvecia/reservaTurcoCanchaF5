@@ -1,5 +1,6 @@
 package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.DTO.ReservationDTO;
+import backEndReservaTurno.backend.Entity.DTO.ReservationResponseDTO;
 import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.ReservationService.ReservationServiceInterface;
@@ -126,6 +127,22 @@ public class ReservationController {
         } catch (Exception e) {
             return new ResponseEntity<>("Error al obtener las reservas: : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    //Para traer detalles de una reserva, pasando el idUserReserved e idShiftReserved
+
+    @GetMapping("/detail/{idShiftReserved}/{idUserReserved}/{idCourtReserved}")
+    public ResponseEntity<?> getDetailReserved (@PathVariable(name = "idShiftReserved") String idShiftReserved, @PathVariable(name = "idUserReserved") String idUserReserved,  @PathVariable(name = "idCourtReserved") String idCourtReserved){
+
+        try{
+            ReservationResponseDTO detailsReservation = reservationServiceInterface.getDetailsReservation(Long.parseLong(idShiftReserved), Long.parseLong(idUserReserved), Long.parseLong(idCourtReserved));
+            ResponseApiCustom response = new ResponseApiCustom("success", detailsReservation);
+            return ResponseEntity.ok(response);
+        }catch (Exception e){
+            ResponseApiCustom response = new ResponseApiCustom("error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+
     }
 
     //eliminar reserva

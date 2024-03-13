@@ -37,7 +37,15 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public Optional<Usuario> findUsuario(Long id) {
-        return usuarioRepository.findById(Long.valueOf(id));
+        try {
+            return usuarioRepository.findById(id);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+
+            return Optional.empty();
+        }
     }
 
     @Override

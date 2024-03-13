@@ -1,6 +1,7 @@
 package backEndReservaTurno.backend.Service.ReservationService;
 import backEndReservaTurno.backend.Entity.Court;
 import backEndReservaTurno.backend.Entity.DTO.ReservationDTO;
+import backEndReservaTurno.backend.Entity.DTO.ReservationResponseDTO;
 import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Repository.CourtRepository;
@@ -9,6 +10,7 @@ import backEndReservaTurno.backend.Repository.ShiftRepository;
 import backEndReservaTurno.backend.Service.ShiftService.ShiftServiceInterface;
 import backEndReservaTurno.backend.security.entity.Usuario;
 import backEndReservaTurno.backend.security.repository.UsuarioRepository;
+import backEndReservaTurno.backend.security.service.UsuarioServiceInterface;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,9 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
     @Autowired
     private UsuarioRepository userRepository;
+
+    @Autowired
+    private UsuarioServiceInterface usuarioServiceInterface;
 
     @Autowired
     private ShiftRepository shiftRepository;
@@ -184,9 +189,33 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
     }
 
+    @Override
+    public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved) {
+        try{
+            Court court = courtRepository.findById(idCourtReserved)
+                    .orElseThrow(()-> new IllegalArgumentException("La cancha no fue encontrada"));
+            Shift shift = shiftRepository.findById(idShiftReserved)
+                    .orElseThrow(()-> new IllegalArgumentException("El turno no fue encontrado"));
+            Usuario usuario = userRepository.findById(idUserReserved)
+                    .orElseThrow(()-> new IllegalArgumentException("El usuario no fue encontrado"));
 
+            ReservationResponseDTO reservationResponseDTO = new ReservationResponseDTO();
 
+            reservationResponseDTO.setNameCourt(court.getNameCourt());
+            reservationResponseDTO.setDateShift(shift.getDateShift());
+            reservationResponseDTO.setHourShift(shift.getHourShift());
+            reservationResponseDTO.setName(usuario.getName());
+            reservationResponseDTO.setLastName(usuario.getLastName());
+            reservationResponseDTO.setEmail(usuario.getEmail());
+            reservationResponseDTO.setUsername(usuario.getUsername());
+            reservationResponseDTO.setPhone(usuario.getPhone());
+            return reservationResponseDTO;
+        }catch (Exception e){
+            throw new RuntimeException("Ocurrió un error al obtener los detalles de la reserva", e);
 
+        }
+
+    }
 
 
 }
