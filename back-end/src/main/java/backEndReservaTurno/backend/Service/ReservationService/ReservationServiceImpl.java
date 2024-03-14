@@ -235,8 +235,8 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
                 listReservationDTO.add(reservationDetails);
             }
         } catch (Exception e) {
-            // Manejar la excepción aquí
-            e.printStackTrace(); // Opcional: imprimir la traza de la excepción
+
+            e.printStackTrace();
         }
 
         return listReservationDTO;
