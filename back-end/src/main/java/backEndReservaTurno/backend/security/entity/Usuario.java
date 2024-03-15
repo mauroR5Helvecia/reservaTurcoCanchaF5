@@ -39,6 +39,10 @@ public class Usuario implements UserDetails {
     // Agregar este campo a la entidad Usuario
     private String codigoVerificacion;
 
+    private String codigoSetPassword;
+
+    private boolean habilitadoCambiarPassword;
+
     private boolean usuarioVerificado;
 
 

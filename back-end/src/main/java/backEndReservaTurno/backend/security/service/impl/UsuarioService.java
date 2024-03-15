@@ -55,9 +55,10 @@ public class UsuarioService implements UsuarioServiceInterface {
 
     @Override
     public Optional<Usuario> findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+      try { return usuarioRepository.findByEmail(email);
+      }catch (Exception e){throw new RuntimeException(e.getMessage());
     }
-
+}
 
 
 }
