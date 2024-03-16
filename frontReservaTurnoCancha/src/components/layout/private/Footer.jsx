@@ -25,23 +25,12 @@ export const Footer = () => {
       <NavLink
         to={"Contacto"}
         className={({ isActive }) =>
-          isActive ? "aside__button aside__button-active" : "aside__button"
+          isActive ? "aside__button aside__button-active" : "aside__button "
         }
         style={{ "--back": "#23c483" }}
       >
         <i className="bx bxs-contact aside__button-icon"></i>
         <span>Contacto</span>
-      </NavLink>
-
-      <NavLink
-        to={"logout"}
-        className={({ isActive }) =>
-          isActive ? "aside__button aside__button-active" : "aside__button"
-        }
-        style={{ "--back": "blue" }}
-      >
-        <i className="bx bx-exit aside__button-icon"></i>
-        <span> Cerrar sesión</span>
       </NavLink>
     </aside>
   );

@@ -24,8 +24,12 @@ export const Modal = ({ isOpen, closeModal, shift, idCourt }) => {
 
     const data = await request.json();
 
-    if (data.status == "success") toast.success("Reservado correctamente");
-    else toast.error("No se ha podido reservar el turno");
+    if (data.status == "success") {
+      toast.success("Reservado correctamente");
+      closeModal();
+    } else {
+      toast.error("No se ha podido reservar el turno");
+    }
   };
   return (
     <div className="modal__reservation">

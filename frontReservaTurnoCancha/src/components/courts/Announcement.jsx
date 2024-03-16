@@ -2,13 +2,17 @@ import { Global } from "../../helpers/Global";
 
 export const Announcement = () => {
   const uploadAnnouncement = async (e) => {
+    e.preventDefault();
+
     let publication = e.target.announce.value;
 
-    const request = await fetch(Global.url + "photoGalery", {
+    const token = localStorage.getItem("token");
+    const request = await fetch(Global.url + "advertisement/save", {
       method: "POST",
       body: JSON.stringify(publication),
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
     });
 

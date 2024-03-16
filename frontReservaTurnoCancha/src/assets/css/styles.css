@@ -213,7 +213,7 @@
     right: 0;
     top: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
 
@@ -232,9 +232,7 @@
     }
 
     .header__user-container {
-        position: absolute;
-        top: 0;
-        right: 0;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -244,6 +242,7 @@
         border-bottom-left-radius: 1rem;
         background-color: rgb(50, 50, 72);
         box-shadow: -3px 5px 30px 0 rgb(108, 107, 107);
+        cursor: pointer;
     }
 
     .header__user-name {
@@ -257,6 +256,48 @@
         height: 70px;
     }
 
+    .aside__button-logout {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        height: fit-content;
+        align-items: center;
+        padding: 0.7rem 1rem;
+        font-size: 13px;
+        border-radius: 0.3rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: #fff;
+        background-color: rgb(50, 50, 72);
+        border: none;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.1s ease-in-out;
+        gap: 0.5rem;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+
+
+
+        span {
+            opacity: 1;
+
+        }
+
+        .aside__button-icon {
+            font-size: 1.7rem;
+        }
+    }
+
+    .aside__button-logout-active {
+        position: absolute;
+        bottom: -35px;
+        left: 0;
+        display: flex;
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
 .content__private {
@@ -307,6 +348,7 @@
 
     }
 
+
     .aside__button:hover {
         background-color: #d92f68;
         box-shadow: 0px 15px 20px rgba(134, 46, 229, 0.4);
@@ -341,7 +383,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: baseline;
+
     justify-content: space-evenly;
 }
 
@@ -758,7 +800,7 @@
 .admin__content {
     width: 99%;
     height: 81vh;
-    padding: 2rem 2rem;
+    padding: 2rem;
     background-color: rgba(0, 0, 0, 0.46);
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
@@ -922,16 +964,14 @@
     }
 }
 
-.court__register {
-    height: 100%;
-    box-sizing: content-box;
 
-    .register__form {
-        width: 600px;
-        gap: 2.1rem;
-        height: fit-content;
-    }
+.register__form {
+    width: 600px;
+    gap: 1.5rem;
+    height: fit-content;
+    margin-top: 0;
 }
+
 
 .court__list {
     width: 30%;
@@ -1026,19 +1066,22 @@
 /*ADMIN BOOKINGS*/
 .reserved-shifts__container {
     width: 99%;
-    height: 80vh;
+    height: 78vh;
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.276);
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
 
-    overflow-x: auto;
+    overflow: auto;
 
     .reservation__container {
-        min-width: 400px;
-        font-size: 2rem;
+        width: 32%;
+        height: 48%;
+        font-size: 1.7rem;
+        margin-right: 0.8rem;
 
         .reservation__info {
             padding: 0;
@@ -1046,8 +1089,8 @@
             margin-right: 0;
 
             p {
-                font-size: 1.6rem;
-                margin-bottom: 2rem;
+                font-size: 1.3rem;
+                margin-bottom: 0.5rem;
             }
         }
     }
@@ -1073,6 +1116,7 @@
         .reservation__container {
             font-size: 1.2rem;
             height: 350px;
+            margin-right: 0;
 
             .reservation__info {
                 p {

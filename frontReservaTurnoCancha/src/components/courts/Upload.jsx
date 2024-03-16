@@ -1,22 +1,24 @@
 import { Global } from "../../helpers/Global";
-
+import { toast } from "sonner";
 export const Upload = () => {
-  const UploadImage = async () => {
+  const UploadImage = async (e) => {
+    e.preventDefault();
     const fileInput = document.querySelector("#file");
 
     const formData = new FormData();
-    formData.append("file0", fileInput.files[0]);
+    formData.append("photo", fileInput.files[0]);
 
-    const fileRequest = await fetch(Global.url + "court/upload/", {
+    const fileRequest = await fetch(Global.url + "photogalery/save", {
       method: "POST",
       body: formData,
-      headers: {
-        "Content-Type": "form-data",
-      },
     });
     const imageData = await fileRequest.json();
 
-    console.log(imageData);
+    if (imageData.status == "success") {
+      toast.success("Imagen publicada correctamente");
+    } else {
+      toast.error("Hubo un error al subir la imagen");
+    }
   };
 
   return (

@@ -97,34 +97,35 @@ export const Shifts = () => {
       <ul className="list__shifts">
         {shiftList.length >= 1
           ? shiftList.map((turno) => {
-              return (
-                turno.dateShift == fechaFormateada && (
-                  <li className="shifts__shift" key={turno.idShift}>
-                    <div className="shift__box-info">
-                      <h3 className="shift__info">
-                        {SelectedCancha.nameCourt}
-                      </h3>
-                      <span className="shift__schedule">
-                        {" "}
-                        <i className="bx bx-time-five"></i> {turno.hourShift}hs
-                        a {<FormatHour turno={turno} />}hs
-                      </span>
-                    </div>
-                    <button
-                      className="shift__submit"
-                      onClick={() => {
-                        activeModal(
-                          turno.dateShift,
-                          turno.hourShift,
-                          turno.idShift
-                        );
-                      }}
-                    >
-                      Reservar
-                    </button>
-                  </li>
-                )
-              );
+              if (!turno.shiftReserved)
+                return (
+                  turno.dateShift == fechaFormateada && (
+                    <li className="shifts__shift" key={turno.idShift}>
+                      <div className="shift__box-info">
+                        <h3 className="shift__info">
+                          {SelectedCancha.nameCourt}
+                        </h3>
+                        <span className="shift__schedule">
+                          {" "}
+                          <i className="bx bx-time-five"></i> {turno.hourShift}
+                          hs a {<FormatHour turno={turno} />}hs
+                        </span>
+                      </div>
+                      <button
+                        className="shift__submit"
+                        onClick={() => {
+                          activeModal(
+                            turno.dateShift,
+                            turno.hourShift,
+                            turno.idShift
+                          );
+                        }}
+                      >
+                        Reservar
+                      </button>
+                    </li>
+                  )
+                );
             })
           : "No hay turnos"}
       </ul>
@@ -137,6 +138,7 @@ export const Shifts = () => {
           const navbar = document.querySelector("#navegation__bar");
           const title = document.querySelector(".announcement__title");
           setIsModalOpen(false);
+          getCanchas();
           navbar.style.display = "flex";
           title.style.display = "block";
         }}
