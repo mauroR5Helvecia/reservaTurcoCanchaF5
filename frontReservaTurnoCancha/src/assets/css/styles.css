@@ -153,6 +153,7 @@
 
 }
 
+
 .register__form {
     padding: 2.5rem 2rem;
     padding-top: 1.5rem;
@@ -762,6 +763,7 @@
     background-color: rgba(0, 0, 0, 0.46);
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
+    overflow: auto;
 }
 
 .days__form {

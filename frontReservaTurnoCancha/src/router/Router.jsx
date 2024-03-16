@@ -15,6 +15,7 @@ import { VerifyCode } from "../components/layout/public/VerifyCode";
 import { Bookings } from "../components/layout/admin/Bookings";
 import { Logout } from "../components/user/Logout";
 import { Edit } from "../components/shifts/Edit";
+import { SetPassword } from "../components/user/SetPassword";
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ export const Router = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="verify" element={<VerifyCode />} />
+          <Route path="setpass1" element={<SetPassword/>} />
         </Route>
 
         <Route path="/user" element={<PrivateLayout />}>

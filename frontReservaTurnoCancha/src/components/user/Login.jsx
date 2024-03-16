@@ -76,6 +76,12 @@ export const Login = () => {
             onChange={changed}
           />
         </section>
+        <span className="login__set-password">
+        <NavLink to="/setpass1" >
+          Olvidé mi contraseña
+        </NavLink>
+        </span>
+       
         <button type="submit" className="login__form-submit">
           Iniciar sesión
         </button>
@@ -89,7 +95,9 @@ export const Login = () => {
         <NavLink to="/Register" type="submit" className="login__form-register">
           Crear una cuenta
         </NavLink>
+       
       </form>
+    
     </main>
   );
 };
