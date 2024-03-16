@@ -201,8 +201,10 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
             reservationResponseDTO.setIdReservation(idReservation);
             reservationResponseDTO.setNameCourt(court.getNameCourt());
+            reservationResponseDTO.setLocation(court.getLocation());
             reservationResponseDTO.setDateShift(shift.getDateShift());
             reservationResponseDTO.setHourShift(shift.getHourShift());
+            reservationResponseDTO.setLocation(court.getLocation());
             reservationResponseDTO.setName(usuario.getName());
             reservationResponseDTO.setLastName(usuario.getLastName());
             reservationResponseDTO.setEmail(usuario.getEmail());

@@ -16,6 +16,7 @@ public class ReservationResponseDTO {
 
     private Long idReservation;
     private String nameCourt;
+    private String location;
     private LocalDate dateShift;
     private String hourShift;
     private String name;
