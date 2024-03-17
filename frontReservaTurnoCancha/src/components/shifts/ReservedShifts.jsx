@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Global } from "../../helpers/Global";
 import { toast } from "sonner";
+import { FormatHour } from "../../helpers/FormatHour";
 
 export const ReservedShifts = ({ endpoint = "alldaysuser" }) => {
   const [shifts, setShifts] = useState([]);
@@ -71,7 +72,7 @@ export const ReservedShifts = ({ endpoint = "alldaysuser" }) => {
               </p>
               <p>
                 <i className="bx bxs-hourglass-top"></i> Horario :{" "}
-                {shift.hourShift}
+                {shift.hourShift}hs a {<FormatHour turno={shift} />}hs
               </p>
 
               <p>
@@ -88,7 +89,7 @@ export const ReservedShifts = ({ endpoint = "alldaysuser" }) => {
                 deleteShift(shift.idReservation);
               }}
             >
-              Eliminar
+              Cancelar
             </button>
           </article>
         );

@@ -69,9 +69,10 @@ export const Edit = () => {
           <i className="bx bx-dollar shifts__extra-icon"></i>
         </span>
       </div>
-      <div className="list__shifts">
+      <div className="admin__list-shifts">
         {shiftList.length >= 1
           ? shiftList.map((turno) => {
+              console.log(turno);
               return (
                 turno.dateShift == fechaFormateada && (
                   <div className="shifts__shift" key={turno.idShift}>
@@ -83,7 +84,8 @@ export const Edit = () => {
                     </span>
 
                     <p>
-                      <strong>Estado</strong>: No reservado
+                      <strong>Estado</strong>:{" "}
+                      {turno.shiftReserved ? "No reservado" : "Reservado"}
                     </p>
                     <button className="shift__submit">Eliminar</button>
                   </div>
