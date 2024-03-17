@@ -2,14 +2,14 @@ import { Global } from "../../helpers/Global";
 
 export const Announcement = () => {
   const uploadAnnouncement = async (e) => {
-    e.preventDefault();
+    const advertisement = {
+      advertisement: e.target.announce.value,
+    };
 
-    let publication = e.target.announce.value;
-
-    const token = localStorage.getItem("token");
+    console.log("se envia este anuncio" + advertisement);
     const request = await fetch(Global.url + "advertisement/save", {
       method: "POST",
-      body: JSON.stringify(publication),
+      body: JSON.stringify(advertisement),
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
