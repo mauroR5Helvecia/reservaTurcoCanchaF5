@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
-
-export const Update = ({ getCanchas, cancha }) => {
+import { NavLink } from "react-router-dom";
+export const Update = ({ getCanchas, cancha, setEditing }) => {
   const { form, changed } = useForm();
 
   useEffect(() => {}, [cancha]);
@@ -106,6 +106,21 @@ export const Update = ({ getCanchas, cancha }) => {
         </section>
         <button type="submit" className="register__form-submit">
           Editar cancha
+        </button>
+
+        <div className="separator">
+          <hr className="line" />
+          <span>o</span>
+          <hr className="line" />
+        </div>
+
+        <button
+          className="login__form-register"
+          onClick={() => {
+            setEditing(false);
+          }}
+        >
+          Crear una cancha
         </button>
       </form>
     </section>

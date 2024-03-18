@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { toast } from "sonner";
 import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 import { jwtDecode } from "jwt-decode";
 import { NavLink, useNavigate } from "react-router-dom";
+import imgOpen from "../../assets/img/eye-open.svg";
+import imgClosed from "../../assets/img/eye-closed.svg";
 export const Login = () => {
   const navigate = useNavigate();
   const { form, changed } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const LoginUser = async (e) => {
     e.preventDefault();
@@ -21,7 +29,7 @@ export const Login = () => {
     });
 
     console.log(request);
-    if (request.status == 200) {
+    if (request.status === 200) {
       const token = await request.json();
       const decodedToken = jwtDecode(token.jwt);
 
@@ -36,6 +44,7 @@ export const Login = () => {
       toast.error("Usuario o contraseña incorrecta");
     }
   };
+
   return (
     <main className="layout__login">
       <form className="login__form" onSubmit={LoginUser}>
@@ -70,18 +79,23 @@ export const Login = () => {
           <input
             placeholder="Contraseña"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             className="login__form-input"
             id="password_field"
             onChange={changed}
           />
+          <span
+            className="show-password-toggle"
+            onClick={togglePasswordVisibility}
+          >
+            <img src={showPassword ? imgOpen : imgClosed} />
+          </span>
         </section>
+
         <span className="login__set-password">
-        <NavLink to="/setpass1" >
-          Olvidé mi contraseña
-        </NavLink>
+          <NavLink to="/setpass1">Olvidé mi contraseña</NavLink>
         </span>
-       
+
         <button type="submit" className="login__form-submit">
           Iniciar sesión
         </button>
@@ -95,9 +109,7 @@ export const Login = () => {
         <NavLink to="/Register" type="submit" className="login__form-register">
           Crear una cuenta
         </NavLink>
-       
       </form>
-    
     </main>
   );
 };

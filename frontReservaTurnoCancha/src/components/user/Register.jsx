@@ -3,11 +3,17 @@ import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
 import { toast } from "sonner";
+import imgOpen from "../../assets/img/eye-open.svg";
+import imgClosed from "../../assets/img/eye-closed.svg";
 
 export const Register = () => {
   const { form, changed } = useForm();
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const navigate = useNavigate();
 
   const RegisterUser = async (e) => {
@@ -148,7 +154,7 @@ export const Register = () => {
           <input
             placeholder="Contraseña"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             required
             value={password}
             className="register__form-input"
@@ -158,6 +164,12 @@ export const Register = () => {
               verifyPassword(e);
             }}
           />
+          <span
+            className="show-password-toggle"
+            onClick={togglePasswordVisibility}
+          >
+            <img src={showPassword ? imgOpen : imgClosed} />
+          </span>
         </section>
         <button type="submit" className="register__form-submit">
           Crear cuenta

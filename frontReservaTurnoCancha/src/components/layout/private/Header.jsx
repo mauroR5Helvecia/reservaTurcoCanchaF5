@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import logo from "../../../assets/img/futbol.svg";
 export const Header = () => {
   const [logout, setLogout] = useState(false);
   return (
     <header className="user__header">
       <section className="header__title-container">
-        <h1 className="header__title">La canchita de los pibes</h1>
+        <img src={logo} alt="logo" />
       </section>
 
       <section

@@ -50,6 +50,8 @@
     border-radius: 11px;
 
 
+
+
     .login__header,
     .register__header {
         display: flex;
@@ -153,6 +155,27 @@
 
 }
 
+.login__set-password {
+    width: 100%;
+    opacity: 0.9;
+}
+
+.show-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+}
 
 .register__form {
     padding: 2.5rem 2rem;
@@ -298,6 +321,20 @@
         display: flex;
         opacity: 1;
         pointer-events: all;
+    }
+}
+
+.header__title-container {
+    width: fit-content;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+
+
+    img {
+        width: 90px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 15px;
     }
 }
 
@@ -626,7 +663,7 @@
 
 .home {
     width: 99%;
-    height: 80vh;
+    height: 78vh;
     display: flex;
     gap: 2rem;
     padding: 1rem;
@@ -682,8 +719,11 @@
 
     .announcement__list {
         margin-top: 1.5rem;
-        margin-left: 2rem;
-        list-style: circle;
+        display: flex;
+        flex-direction: column;
+
+        align-items: center;
+
 
 
     }
@@ -691,8 +731,10 @@
     .announcement__item {
         width: fit-content;
         margin-bottom: 2rem;
-        list-style: circle;
-
+        width: 90%;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid rgb(154, 152, 152);
+        text-wrap: pretty;
     }
 
     .announcement__subtitle {
@@ -718,7 +760,8 @@
 }
 
 .contact__map {
-    width: 100%;
+    width: 50%;
+
     height: 100%;
     display: flex;
     background-color: #00000093;
@@ -747,7 +790,8 @@
 }
 
 .contact__advices {
-    width: 100%;
+    width: 50%;
+    min-width: 50%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -838,9 +882,20 @@
 /*ADMIN STYLES*/
 
 
+
+
 .admin__header {
-    padding: 1rem 0;
-    text-align: center;
+    width: 100%;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+
+
+    img {
+        width: 90px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
 }
 
 .admin__content {
@@ -850,7 +905,8 @@
     background-color: rgba(0, 0, 0, 0.46);
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
-    overflow: auto;
+
+    overflow: hidden;
 }
 
 .admin__list {
@@ -1021,7 +1077,7 @@
 
 .register__form {
     width: 600px;
-    gap: 1.5rem;
+    gap: 1rem;
     height: fit-content;
     margin-top: 0;
 }

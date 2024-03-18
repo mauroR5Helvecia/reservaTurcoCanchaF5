@@ -31,7 +31,11 @@ export const RegisterCourt = () => {
       {!Editing ? (
         <Register getCanchas={getCanchas} />
       ) : (
-        <Update getCanchas={getCanchas} cancha={cancha} />
+        <Update
+          getCanchas={getCanchas}
+          cancha={cancha}
+          setEditing={setEditing}
+        />
       )}
       <section className="court__list">
         <CourtList
