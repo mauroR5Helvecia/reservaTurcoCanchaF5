@@ -436,6 +436,22 @@
     padding: 1.5rem;
     border-radius: 0.5rem;
 
+    .shift__status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background-color: white;
+        border-radius: 0.4rem;
+        padding: 0.5rem;
+
+        .shift__submit {
+            background-color: rgb(35, 42, 40);
+            border-radius: 0.4rem;
+            color: rgb(255, 255, 255);
+        }
+    }
+
     .shifts__extra-info {
         color: white;
         margin-bottom: 1rem;
@@ -457,6 +473,8 @@
     }
 }
 
+
+
 .shifts__shift {
     width: 100%;
     display: flex;
@@ -471,6 +489,8 @@
         padding: 1rem 2rem;
         border-radius: 0.5rem;
         margin-right: 3rem;
+
+
 
         .shift__info {
             margin-top: -0.5rem;
@@ -519,7 +539,7 @@
 .modal__reservation {
     position: fixed;
     top: -30%;
-    left: -40%;
+    left: -20%;
     z-index: 20;
     background-color: rgb(98, 96, 96);
     width: 120vw;
@@ -844,6 +864,7 @@
     border-radius: 1rem;
     padding: 2rem;
     width: 41%;
+    margin: 0 auto;
 }
 
 
@@ -1102,6 +1123,7 @@
     height: 78vh;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
     gap: 1rem;
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.276);
@@ -1111,7 +1133,7 @@
     overflow: auto;
 
     .reservation__container {
-        width: 32%;
+        width: 25%;
         height: 48%;
         font-size: 1.7rem;
         margin-right: 0.8rem;

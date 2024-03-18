@@ -50,7 +50,7 @@ export const ReservedShifts = ({ endpoint = "alldaysuser" }) => {
     const data = await request.json();
 
     if (data.status == "success delete") {
-      toast.error("Turno cancelado correctamente");
+      toast.success("Turno cancelado correctamente");
       getShiftsReserved();
     } else {
       toast.warning("No se ha podido cancelar el turno");

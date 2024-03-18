@@ -1,12 +1,14 @@
 import { Global } from "../../helpers/Global";
-
+import { toast } from "sonner";
 export const Announcement = () => {
   const uploadAnnouncement = async (e) => {
+    e.preventDefault();
     const advertisement = {
       advertisement: e.target.announce.value,
     };
 
-    console.log("se envia este anuncio" + advertisement);
+    const token = JSON.parse(localStorage.getItem("token"));
+
     const request = await fetch(Global.url + "advertisement/save", {
       method: "POST",
       body: JSON.stringify(advertisement),
@@ -16,7 +18,8 @@ export const Announcement = () => {
       },
     });
 
-    console.log(request);
+    if (request.status == 200) toast.success("Mensaje publicado correctamente");
+    else toast.error("Error al publicar mensaje");
   };
   return (
     <form className="announcement__form-text" onSubmit={uploadAnnouncement}>

@@ -3,6 +3,7 @@ import Calendario from "./Calendario";
 import { CourtSelector } from "./CourtSelector";
 import { Global } from "../../helpers/Global";
 import { FormatHour } from "../../helpers/FormatHour";
+import { toast } from "sonner";
 
 export const Edit = () => {
   const [canchas, setCanchas] = useState([]);
@@ -46,6 +47,37 @@ export const Edit = () => {
     setShiftList(data.response[0].listShift);
   };
 
+  const cancelShift = async (idShift) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const request = await fetch(Global.url + "reservation/delete/" + idShift, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    const data = await request.json();
+
+    if (data.status == "success delete") {
+      toast.error("Turno cancelado correctamente");
+    } else {
+      toast.warning("No se ha podido cancelar el turno");
+    }
+  };
+
+  const deleteShift = async (idShift) => {
+    const request = await fetch(Global.url + "shift/delete/" + idShift, {
+      method: "DELETE",
+    });
+
+    if (request.status == 200) {
+      toast.success("Turno eliminado correctamente");
+    } else if (request.status == 500) {
+      toast.warning("Primero debe cancelar la reserva activa");
+    } else {
+      toast.error("No se ha podido eliminar el turno");
+    }
+  };
   return (
     <main className="edit__container">
       <header className="list__shifts__header">
@@ -72,7 +104,6 @@ export const Edit = () => {
       <div className="admin__list-shifts">
         {shiftList.length >= 1
           ? shiftList.map((turno) => {
-              console.log(turno);
               return (
                 turno.dateShift == fechaFormateada && (
                   <div className="shifts__shift" key={turno.idShift}>
@@ -83,11 +114,32 @@ export const Edit = () => {
                       {<FormatHour turno={turno} />}hs
                     </span>
 
-                    <p>
-                      <strong>Estado</strong>:{" "}
-                      {turno.shiftReserved ? "No reservado" : "Reservado"}
-                    </p>
-                    <button className="shift__submit">Eliminar</button>
+                    <div className="shift__status">
+                      <p>
+                        <strong>Estado</strong>:{" "}
+                        {!turno.shiftReserved ? "No reservado" : "Reservado"}
+                      </p>
+                      {turno.shiftReserved ? (
+                        <button
+                          className="shift__submit"
+                          onClick={() => {
+                            cancelShift(turno.reservation.idReservation);
+                          }}
+                        >
+                          Cancelar
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <button
+                      className="shift__submit"
+                      onClick={() => {
+                        deleteShift(turno.idShift);
+                      }}
+                    >
+                      Eliminar
+                    </button>
                   </div>
                 )
               );
