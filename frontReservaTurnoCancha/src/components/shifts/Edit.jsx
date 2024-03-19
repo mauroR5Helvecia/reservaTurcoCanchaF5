@@ -14,9 +14,17 @@ export const Edit = () => {
 
   const [shiftList, setShiftList] = useState([]);
 
+  //Para sub menu, editar turnos y editar anuncios y galeria.
+
+  const [editAnnoucement, setEditAnoucement] = useState(false);
+  const [editGallery, setEditGallery] = useState(false);
+  const [editShifts, setEditShifts] = useState(false);
+
   useLayoutEffect(() => {
-    getCanchas();
-  }, []);
+    if (editShifts) {
+      getCanchas();
+    }
+  }, [editShifts]);
   useEffect(() => {
     setShiftList(SelectedCancha.listShift);
   }, [SelectedCancha.listShift]);
@@ -60,6 +68,7 @@ export const Edit = () => {
 
     if (data.status == "success delete") {
       toast.error("Turno cancelado correctamente");
+      getCanchas();
     } else {
       toast.warning("No se ha podido cancelar el turno");
     }
@@ -72,80 +81,290 @@ export const Edit = () => {
 
     if (request.status == 200) {
       toast.success("Turno eliminado correctamente");
+      getCanchas();
     } else if (request.status == 500) {
       toast.warning("Primero debe cancelar la reserva activa");
     } else {
       toast.error("No se ha podido eliminar el turno");
     }
   };
+
+  //para activar la edicion de turnos
+  const handleEditShift = () => {
+    setEditShifts(true);
+    setEditAnoucement(false);
+  };
+  //----------------------------------------------------------------------------------
+  // Logica edicion de anuncios
+
+  const [listAnnoucement, setListAnnoucement] = useState([]);
+
+  useEffect(() => {
+    if (editAnnoucement) {
+      getAnnoucement();
+    }
+  }, [editAnnoucement]);
+
+  const getAnnoucement = async () => {
+    const request = await fetch(Global.url + "advertisement/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    setListAnnoucement(data.response);
+  };
+
+  const deleteAnnoucement = async (idAdvertisement) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const request = await fetch(
+      Global.url + "advertisement/delete/" + idAdvertisement,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    const data = await request.json();
+
+    if (data.status == "success") {
+      getAnnoucement();
+      toast.error("Anuncio eliminado correctamente");
+    } else {
+      toast.warning("No se ha podido eliminar el turno");
+    }
+  };
+
+  //para activar la edicion de anuncios
+
+  const handleEditAnnoucement = () => {
+    setEditShifts(false);
+    setEditAnoucement(true);
+    setEditGallery(false);
+  };
+
+  //Logica para edicion de fotografias de la galeria
+
+  //----------------------------------------------------------------------------------
+  // Logica edicion de anuncios
+
+  const [listPhoto, setListPhoto] = useState([]);
+
+  useEffect(() => {
+    if (editGallery) {
+      getPhotos();
+    }
+  }, [editGallery]);
+
+  const getPhotos = async () => {
+    const request = await fetch(Global.url + "photogalery/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await request.json();
+
+    setListPhoto(data.response);
+  };
+
+  const deletePhoto = async (idPhotoGalery) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const request = await fetch(
+      Global.url + "photogalery/delete/"+idPhotoGalery,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    const data = await request.json();
+
+    if (data.status == "success") {
+      getPhotos();
+      toast.error("Imagen eliminada correctamente");
+    } else {
+      toast.warning("No se ha podido eliminar la fotografia");
+    }
+  };
+
+
+  const handleEditPhotoGalery = () => {
+    setEditShifts(false);
+    setEditAnoucement(false);
+    setEditGallery(true);
+  };
+
+
   return (
-    <main className="edit__container">
-      <header className="list__shifts__header">
-        <div className="calendary__handler">
-          <Calendario startDate={startDate} setStartDate={setStartDate} />
-        </div>
-
-        <CourtSelector
-          canchas={canchas}
-          setSelectedCancha={setSelectedCancha}
-        />
-      </header>
-      <h2 className="list__shifts-title">Turnos definidos</h2>
-      <div className="shifts__extra-info">
-        <span>
-          Capacidad : {SelectedCancha.capacity}{" "}
-          <i className="bx bx-group shifts__extra-icon"></i>
+    <>
+      <div className="list__container__edit__sub__menu">
+        <span
+          onClick={handleEditShift} // Agrego el evento onClick
+          className={`edit__button__selected__admin${
+            editShifts ? " edit__button__selected__admin-active" : ""
+          }`}
+        >
+          <span>EDITAR TURNOS</span>
         </span>
-        <span>
-          Precio x turno : {SelectedCancha.price}
-          <i className="bx bx-dollar shifts__extra-icon"></i>
+        <span
+          onClick={handleEditAnnoucement} // Agrego el evento onClick
+          className={`edit__button__selected__admin${
+            editAnnoucement ? " edit__button__selected__admin-active" : ""
+          }`}
+        >
+          <span>EDITAR ANUNCIOS</span>
         </span>
-      </div>
-      <div className="admin__list-shifts">
-        {shiftList.length >= 1
-          ? shiftList.map((turno) => {
-              return (
-                turno.dateShift == fechaFormateada && (
-                  <div className="shifts__shift" key={turno.idShift}>
-                    <h3 className="shift__info">{SelectedCancha.nameCourt}</h3>
-                    <span className="shift__schedule">
-                      {" "}
-                      <i className="bx bx-time-five"></i> {turno.hourShift}hs a{" "}
-                      {<FormatHour turno={turno} />}hs
-                    </span>
 
-                    <div className="shift__status">
-                      <p>
-                        <strong>Estado</strong>:{" "}
-                        {!turno.shiftReserved ? "No reservado" : "Reservado"}
-                      </p>
-                      {turno.shiftReserved ? (
-                        <button
-                          className="shift__submit"
-                          onClick={() => {
-                            cancelShift(turno.reservation.idReservation);
-                          }}
-                        >
-                          Cancelar
-                        </button>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                    <button
-                      className="shift__submit"
-                      onClick={() => {
-                        deleteShift(turno.idShift);
-                      }}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                )
-              );
-            })
-          : "No hay turnos"}
+        <span
+          onClick={handleEditPhotoGalery} // Agrego el evento onClick
+          className={`edit__button__selected__admin${
+            editGallery ? " edit__button__selected__admin-active" : ""
+          }`}
+        >
+          <span>EDITAR GALERIA</span>
+        </span>
+
+        {/* El main segun la eleccion */}
+        {/* Edicion de turnos */}
+        {editShifts ? (
+          <main className="edit__container">
+            <header className="list__shifts__header">
+              <div className="calendary__handler">
+                <Calendario startDate={startDate} setStartDate={setStartDate} />
+              </div>
+
+              <CourtSelector
+                canchas={canchas}
+                setSelectedCancha={setSelectedCancha}
+              />
+            </header>
+            <h2 className="list__shifts-title">Turnos definidos</h2>
+            <div className="shifts__extra-info">
+              <span>
+                Capacidad : {SelectedCancha.capacity}{" "}
+                <i className="bx bx-group shifts__extra-icon"></i>
+              </span>
+              <span>
+                Precio x turno : {SelectedCancha.price}
+                <i className="bx bx-dollar shifts__extra-icon"></i>
+              </span>
+            </div>
+            <div className="admin__list-shifts">
+              {shiftList.length >= 1
+                ? shiftList.map((turno) => {
+                    return (
+                      turno.dateShift == fechaFormateada && (
+                        <div className="shifts__shift" key={turno.idShift}>
+                          <h3 className="shift__info">
+                            {SelectedCancha.nameCourt}
+                          </h3>
+                          <span className="shift__schedule">
+                            {" "}
+                            <i className="bx bx-time-five"></i>{" "}
+                            {turno.hourShift}hs a {<FormatHour turno={turno} />}
+                            hs
+                          </span>
+
+                          <div className="shift__status">
+                            <p>
+                              <strong>Estado</strong>:{" "}
+                              {!turno.shiftReserved
+                                ? "No reservado"
+                                : "Reservado"}
+                            </p>
+                            {turno.shiftReserved ? (
+                              <button
+                                className="shift__submit"
+                                onClick={() => {
+                                  cancelShift(turno.reservation.idReservation);
+                                }}
+                              >
+                                Cancelar
+                              </button>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                          <button
+                            className="shift__submit"
+                            onClick={() => {
+                              deleteShift(turno.idShift);
+                            }}
+                          >
+                            Eliminar
+                          </button>
+                        </div>
+                      )
+                    );
+                  })
+                : "No hay turnos"}
+            </div>
+          </main>
+        ) : null}
+
+        {/* Edicion anuncios*/}
+        {editAnnoucement ? ( 
+          <div className="conteiner__edit__announcement">
+            {listAnnoucement ? (
+              listAnnoucement.map((anuncio) => (
+                <div className="shifts__shift"    style={{ marginTop: "30px" }} key={anuncio.idAdvertisement}>
+                  <p
+                    className="shift__info"
+                    style={{ flex: "80%", color: "white", textAlign: "center", textTransform: 'uppercase'}}
+                  >
+                    {anuncio.advertisement}
+                  </p>
+                  <button
+                    className="shift__submit"
+                    style={{ flex: "20%" }}
+                    onClick={() => {
+                      deleteAnnoucement(anuncio.idAdvertisement);
+                    }}
+                  >
+                    ELIMINAR
+                  </button>
+                </div>
+              ))
+            ) : (
+              <p>No hay anuncios disponibles</p>
+            )}
+          </div>
+        ) : null}
+
+        {/* eDICION DE GALERIA */}
+
+        {editGallery ? (
+  <div className="conteiner__edit__announcement">
+    {Array.isArray(listPhoto) && listPhoto.map(imagen => (
+      <div className="shifts__shift" style={{ marginTop: "30px" }} key={imagen.idPhotoGalery}>
+        
+        <p className="shift__info" style={{ flex: "80%", color: "white", textAlign: "center", textTransform: 'uppercase' }}>
+          {imagen.photo}
+        </p>
+        <button
+          className="shift__submit"
+          style={{ flex: "20%" }}
+          onClick={() => {
+            deletePhoto(imagen.idPhotoGalery); // Corregido para usar imagen.idPhotoGalery
+          }}
+        >
+          ELIMINAR
+        </button>
       </div>
-    </main>
+    ))}
+  </div>
+) : null}
+
+      </div>
+    </>
   );
 };

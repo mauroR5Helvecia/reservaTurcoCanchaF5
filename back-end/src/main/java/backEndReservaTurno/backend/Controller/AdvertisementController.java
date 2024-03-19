@@ -56,6 +56,22 @@ public class AdvertisementController {
     }
 
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllAdvert() {
+        try {
+            List<Advertisement> list = adverticementServiceInterface.getAdvertisement();
+            ResponseApiCustom response = new ResponseApiCustom("success", list);
+            return ResponseEntity.ok(response);
+        }catch (EmptyResultDataAccessException e) {
+            ResponseApiCustom response = new ResponseApiCustom("Error", e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        } catch (Exception e) {
+            ResponseApiCustom response = new ResponseApiCustom("Error", e.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteShiftById(@PathVariable String id) {
         try {
