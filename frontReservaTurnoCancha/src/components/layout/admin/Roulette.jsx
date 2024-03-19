@@ -35,7 +35,7 @@ export const Roulette = () => {
       {images.map((gallery) => (
         <img
           key={gallery.idPhotoGalery}
-          src={"../../../../public/galeryPhoto/" + gallery.photo}
+          src={"../../../../public/galeryPhoto/"+gallery.photo}
           alt={gallery.photo}
         />
       ))}

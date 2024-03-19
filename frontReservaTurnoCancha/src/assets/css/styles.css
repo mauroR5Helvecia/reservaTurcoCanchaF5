@@ -468,10 +468,31 @@
     overflow-y: scroll;
 }
 
+.edit__button__selected__admin {
+    background-color: #0000FF;
+    width: 15%;
+    color: white;
+    padding: 10px 20px;
+    margin: 15px 3px 20px 3px; 
+    border-radius: 5px;
+    cursor: pointer;
+    /* Otros estilos según tus necesidades */
+  
+    &:hover {
+      background-color: #4949fb; /* Cambia el color de fondo al pasar el cursor */
+    }
+  
+    &.edit__button__selected__admin-active {
+      background-color: #707172; /* Cambia el color de fondo cuando está activo */
+    }
+  }
+  
+
 .edit__container {
     background-color: rgb(62, 61, 63);
     padding: 1.5rem;
     border-radius: 0.5rem;
+    margin: 9px 0px 0px 0px;
 
     .shift__status {
         display: flex;
@@ -534,6 +555,19 @@
             font-weight: 500;
             font-size: 1.1rem;
             margin-bottom: 1rem;
+
+        }
+
+        .annoucement__info{
+            margin-top: -0.5rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            width: 60%;
+        }
+
+        .conteiner__edit__announcement{
+            margin-top: 20px;
         }
 
         .shift__schedule {
