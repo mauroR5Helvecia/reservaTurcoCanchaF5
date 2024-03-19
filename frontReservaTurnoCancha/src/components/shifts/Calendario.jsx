@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Calendario = ({ startDate, setStartDate }) => {
+const Calendario = ({ startDate, setStartDate, limit = 7 }) => {
   // Calcula qué día es hoy
   const today = new Date();
 
@@ -11,7 +11,7 @@ const Calendario = ({ startDate, setStartDate }) => {
 
   // Calcula la fecha máxima permitida (1 semana en adelante)
   const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7); // Una semana en adelante
+  maxDate.setDate(today.getDate() + limit); // Una semana en adelante
 
   return (
     <div>
