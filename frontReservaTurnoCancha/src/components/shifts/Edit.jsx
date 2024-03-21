@@ -177,7 +177,7 @@ export const Edit = () => {
   const deletePhoto = async (idPhotoGalery) => {
     const token = JSON.parse(localStorage.getItem("token"));
     const request = await fetch(
-      Global.url + "photogalery/delete/"+idPhotoGalery,
+      Global.url + "photogalery/delete/" + idPhotoGalery,
       {
         method: "DELETE",
         headers: {
@@ -196,13 +196,11 @@ export const Edit = () => {
     }
   };
 
-
   const handleEditPhotoGalery = () => {
     setEditShifts(false);
     setEditAnoucement(false);
     setEditGallery(true);
   };
-
 
   return (
     <>
@@ -239,7 +237,11 @@ export const Edit = () => {
           <main className="edit__container">
             <header className="list__shifts__header">
               <div className="calendary__handler">
-                <Calendario startDate={startDate} setStartDate={setStartDate} />
+                <Calendario
+                  startDate={startDate}
+                  setStartDate={setStartDate}
+                  limit={35}
+                />
               </div>
 
               <CourtSelector
@@ -312,14 +314,23 @@ export const Edit = () => {
         ) : null}
 
         {/* Edicion anuncios*/}
-        {editAnnoucement ? ( 
+        {editAnnoucement ? (
           <div className="conteiner__edit__announcement">
             {listAnnoucement ? (
               listAnnoucement.map((anuncio) => (
-                <div className="shifts__shift"    style={{ marginTop: "30px" }} key={anuncio.idAdvertisement}>
+                <div
+                  className="shifts__shift"
+                  style={{ marginTop: "30px" }}
+                  key={anuncio.idAdvertisement}
+                >
                   <p
                     className="shift__info"
-                    style={{ flex: "80%", color: "white", textAlign: "center", textTransform: 'uppercase'}}
+                    style={{
+                      flex: "80%",
+                      color: "white",
+                      textAlign: "center",
+                      textTransform: "uppercase",
+                    }}
                   >
                     {anuncio.advertisement}
                   </p>
@@ -343,27 +354,38 @@ export const Edit = () => {
         {/* eDICION DE GALERIA */}
 
         {editGallery ? (
-  <div className="conteiner__edit__announcement">
-    {Array.isArray(listPhoto) && listPhoto.map(imagen => (
-      <div className="shifts__shift" style={{ marginTop: "30px" }} key={imagen.idPhotoGalery}>
-        
-        <p className="shift__info" style={{ flex: "80%", color: "white", textAlign: "center", textTransform: 'uppercase' }}>
-          {imagen.photo}
-        </p>
-        <button
-          className="shift__submit"
-          style={{ flex: "20%" }}
-          onClick={() => {
-            deletePhoto(imagen.idPhotoGalery); // Corregido para usar imagen.idPhotoGalery
-          }}
-        >
-          ELIMINAR
-        </button>
-      </div>
-    ))}
-  </div>
-) : null}
-
+          <div className="conteiner__edit__announcement">
+            {Array.isArray(listPhoto) &&
+              listPhoto.map((imagen) => (
+                <div
+                  className="shifts__shift"
+                  style={{ marginTop: "30px" }}
+                  key={imagen.idPhotoGalery}
+                >
+                  <p
+                    className="shift__info"
+                    style={{
+                      flex: "80%",
+                      color: "white",
+                      textAlign: "center",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {imagen.photo}
+                  </p>
+                  <button
+                    className="shift__submit"
+                    style={{ flex: "20%" }}
+                    onClick={() => {
+                      deletePhoto(imagen.idPhotoGalery); // Corregido para usar imagen.idPhotoGalery
+                    }}
+                  >
+                    ELIMINAR
+                  </button>
+                </div>
+              ))}
+          </div>
+        ) : null}
       </div>
     </>
   );

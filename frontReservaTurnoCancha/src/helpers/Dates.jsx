@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const Dates = ({ setDays, days }) => {
+export const Dates = ({ setDays, days, additionalDays }) => {
   const [diasSemana, setDiasSemana] = useState([
     "lunes",
     "martes",
@@ -11,49 +11,55 @@ export const Dates = ({ setDays, days }) => {
     "domingo",
   ]);
 
-  // Definir estado para almacenar las fechas ordenadas
   const [sortedDates, setSortedDates] = useState([]);
 
-  // useEffect para ordenar las fechas cuando cambie 'diasSemana' o 'days'
   useEffect(() => {
     const sorted = diasSemana
       .map((dia) => {
-        return dateOfDay(dia);
+        return dateOfDay(dia, additionalDays);
       })
       .sort((a, b) => {
         return new Date(a.onlyDate) - new Date(b.onlyDate);
       });
     setSortedDates(sorted);
-  }, [diasSemana, days]);
+  }, [diasSemana, days, additionalDays]);
 
-  const dateOfDay = (diaSemana) => {
+  const dateOfDay = (diaSemana, additionalDays) => {
     diaSemana = diaSemana.toLowerCase();
-
     let fechaActual = new Date();
-    let diaActual = fechaActual.getDate();
+    let diaActual = fechaActual.getDate() + 1;
 
-    // Encontrar el índice del día de la semana dado en el arreglo de días de la semana
     let indiceDia = diasSemana.indexOf(diaSemana);
 
     if (indiceDia === -1) {
       return "Día de la semana inválido";
     }
 
-    // Calcular cuántos días faltan hasta el próximo día de la semana especificado
     let diasFaltantes = (indiceDia - fechaActual.getDay() + 7) % 7;
 
-    // Crear la nueva fecha sumando los días faltantes
+    let diasExtra = additionalDays % 7;
+    let semanasExtra = Math.floor(additionalDays / 7);
+
+    diasFaltantes += diasExtra;
+
+    if (diasFaltantes >= 7) {
+      diasFaltantes -= 7;
+      semanasExtra++;
+    }
+
     let nuevaFecha = new Date(fechaActual);
-    nuevaFecha.setDate(diaActual + diasFaltantes);
-    let nuevoDia = nuevaFecha.getDate() + 1;
+    nuevaFecha.setDate(diaActual + diasFaltantes + semanasExtra * 7);
+
+    let nuevoDia = nuevaFecha.getDate();
+    let nuevoMes = nuevaFecha.getMonth() + 1;
+    let nuevoAño = nuevaFecha.getFullYear();
+
     if (nuevoDia <= 9) {
       nuevoDia = `0${nuevoDia}`;
     }
-    let nuevoMes = nuevaFecha.getMonth() + 1;
     if (nuevoMes <= 9) {
       nuevoMes = `0${nuevoMes}`;
     }
-    let nuevoAño = nuevaFecha.getFullYear();
 
     return {
       dayAndDate: `${diaSemana} ${nuevoDia}-${nuevoMes}-${nuevoAño}`,
@@ -70,6 +76,7 @@ export const Dates = ({ setDays, days }) => {
     }
   };
 
+  console.log(sortedDates);
   return (
     <section className="days">
       {sortedDates.map((date) => {
