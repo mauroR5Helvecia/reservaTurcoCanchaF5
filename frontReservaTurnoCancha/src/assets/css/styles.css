@@ -940,7 +940,7 @@
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
 
-    overflow: hidden;
+    overflow: auto;
 }
 
 .admin__list {
