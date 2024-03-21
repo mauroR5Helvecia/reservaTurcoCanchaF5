@@ -1,19 +1,20 @@
-import { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Global } from "../../helpers/Global";
-import { NavLink } from "react-router-dom";
+
 export const Update = ({ getCanchas, cancha, setEditing }) => {
   const { form, changed } = useForm();
 
-  useEffect(() => {}, [cancha]);
   const editCourt = async (e, idCourt) => {
     e.preventDefault();
 
-    let courtEdited = form;
+    const courtUpdated = {
+      ...cancha,
+      ...form,
+    };
 
-    const request = await fetch(Global.url + "court/edit/" + idCourt, {
-      method: "UPDATE",
-      body: JSON.stringify(courtEdited),
+    const request = await fetch(Global.url + "court/update/" + idCourt, {
+      method: "PUT",
+      body: JSON.stringify(courtUpdated),
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,7 +27,12 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
   };
   return (
     <section className="court__register">
-      <form className="register__form" onSubmit={editCourt}>
+      <form
+        className="register__form"
+        onSubmit={(e) => {
+          editCourt(e, cancha.idCourt);
+        }}
+      >
         <header className="register__header">
           <p className="register__title">Editar cancha :{cancha.nameCourt}</p>
         </header>
@@ -37,8 +43,8 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           </label>
           <i className="bx bx-abacus register__form-icon"></i>
           <input
-            placeholder="Nuevo nombre"
             name="nameCourt"
+            placeholder={cancha.nameCourt}
             type="text"
             className="register__form-input"
             id="name_field"
@@ -52,8 +58,8 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           </label>
           <i className="bx bx-group register__form-icon"></i>
           <input
-            placeholder="Nueva capacidad"
             name="capacity"
+            placeholder={cancha.capacity}
             type="number"
             className="register__form-input"
             id="capacity__field"
@@ -67,8 +73,8 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           </label>
           <i className="bx bx-dollar register__form-icon"></i>
           <input
-            placeholder="Nuevo precio"
             name="price"
+            placeholder={cancha.price}
             type="num"
             className="register__form-input"
             id="price__field"
@@ -82,8 +88,8 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           </label>
           <i className="bx bx-current-location register__form-icon"></i>
           <input
-            placeholder="Nueva dirección"
             name="location"
+            placeholder={cancha.location}
             type="text"
             className="register__form-input"
             id="location__field"
@@ -96,8 +102,8 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           </label>
           <i className="bx bx-phone register__form-icon"></i>
           <input
-            placeholder="Nueva dirección"
             name="phone"
+            placeholder={cancha.phone}
             type="tel"
             className="register__form-input"
             id="phone__field"
@@ -105,7 +111,7 @@ export const Update = ({ getCanchas, cancha, setEditing }) => {
           />
         </section>
         <button type="submit" className="register__form-submit">
-          Editar cancha
+          Actualizar cancha
         </button>
 
         <div className="separator">
