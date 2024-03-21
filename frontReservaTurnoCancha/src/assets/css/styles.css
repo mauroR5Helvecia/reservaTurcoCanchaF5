@@ -949,16 +949,11 @@
     }
 }
 
-.Schedules__container {
-    display: flex;
-    justify-content: space-around;
-}
-
 .days__form {
     background-color: white;
     border-radius: 1rem;
     padding: 2rem;
-    width: 80%;
+    width: 41%;
     margin: 0 auto;
 }
 
@@ -1097,97 +1092,6 @@
 
 .days__form-submit:nth-last-child(1) {
     background: rgb(42, 157, 80);
-}
-
-.days__dates-and-days {
-    display: flex;
-    justify-content: space-around;
-}
-
-.Schedules__options {
-    text-align: center;
-
-    h3 {
-        margin-top: -4rem;
-        opacity: 0.7;
-    }
-
-    .Schedules__options-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-
-
-    .dates__more-days-label {
-        width: 40%;
-        display: flex;
-        align-items: center;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
-        background-color: #fff;
-        border: 1px solid #e5e5e5;
-        border-radius: 4px;
-        transition: background-color 0.2s, border-color 0.2s;
-    }
-
-    .dates__more-days-label-principal {
-        width: 91%;
-    }
-
-    .dates__more-days-label:hover {
-        background-color: #e6e6e6;
-    }
-
-    .dates__more-days {
-        position: absolute;
-        opacity: 0;
-    }
-
-    .dates__more-days:checked+.dates__more-days-label {
-        background-color: #30d0d009;
-        border-color: #30cfd0;
-    }
-
-    .dates__more-days:focus+.dates__more-days-label {
-        outline: 2px solid #30cfd0;
-    }
-
-    .radio-inner-circle {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid #888;
-        border-radius: 50%;
-        margin-right: 0.5em;
-        transition: border-color 0.2s;
-        position: relative;
-    }
-
-    .dates__more-days-label:hover .radio-inner-circle {
-        border-color: #555;
-    }
-
-    .dates__more-days:checked+.dates__more-days-label .radio-inner-circle {
-        border-color: #30cfd0;
-    }
-
-    .dates__more-days:checked+.dates__more-days-label .radio-inner-circle::after {
-        content: '';
-        display: block;
-        width: 0.5em;
-        height: 0.5em;
-        background-color: #30cfd0;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
 }
 
 .shift__day {
@@ -1580,13 +1484,3 @@
     object-fit: cover;
 
 }
-
-
-
-
-
-
-
-
-
-/*RADIO */

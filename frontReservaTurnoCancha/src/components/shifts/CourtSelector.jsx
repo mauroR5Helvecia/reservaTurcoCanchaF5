@@ -1,13 +1,20 @@
 import PropTypes from "prop-types";
 
-export const CourtSelector = ({ canchas, setSelectedCancha }) => {
+export const CourtSelector = ({ canchas, setSelectedCancha, setLastCourtSelector }) => {
+
+  const handleSelectionChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedCancha(canchas[selectedValue]);
+    setLastCourtSelector(selectedValue);
+  };
+
   return (
     <div className="shifts__select-container">
       <select
         name="days"
         id="days"
         className="shift__day"
-        onChange={(e) => setSelectedCancha(canchas[e.target.value])}
+        onChange={handleSelectionChange}
       >
         {canchas.map((cancha, indexOf) => {
           return (
@@ -29,4 +36,5 @@ CourtSelector.propTypes = {
     })
   ).isRequired,
   setSelectedCancha: PropTypes.number.isRequired,
+  setLastCourtSelector: PropTypes.number
 };

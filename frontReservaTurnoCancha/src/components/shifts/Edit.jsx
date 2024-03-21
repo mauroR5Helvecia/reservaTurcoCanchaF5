@@ -24,6 +24,7 @@ export const Edit = () => {
     if (editShifts) {
       getCanchas();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editShifts]);
   useEffect(() => {
     setShiftList(SelectedCancha.listShift);
@@ -40,6 +41,11 @@ export const Edit = () => {
   };
 
   let fechaFormateada = formaTime();
+
+
+
+  const [lastCourtSelector, setLastCourtSelector] = useState(1)
+
   const getCanchas = async () => {
     const request = await fetch(Global.url + "court/all", {
       method: "GET",
@@ -51,8 +57,10 @@ export const Edit = () => {
     const data = await request.json();
 
     setCanchas(data.response);
-    setSelectedCancha(data.response[0]);
-    setShiftList(data.response[0].listShift);
+
+    // Aca deberia pasarle la ultima seleccionada
+    setSelectedCancha(data.response[lastCourtSelector]);
+    setShiftList(data.response[lastCourtSelector].listShift);
   };
 
   const cancelShift = async (idShift) => {
@@ -247,7 +255,9 @@ export const Edit = () => {
               <CourtSelector
                 canchas={canchas}
                 setSelectedCancha={setSelectedCancha}
+                setLastCourtSelector={setLastCourtSelector}
               />
+            
             </header>
             <h2 className="list__shifts-title">Turnos definidos</h2>
             <div className="shifts__extra-info">
