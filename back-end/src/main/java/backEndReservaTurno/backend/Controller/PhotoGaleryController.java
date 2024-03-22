@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -100,21 +101,43 @@ public class PhotoGaleryController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deletePhoto(@PathVariable Long id) {
         try {
+            // Obtener el nombre del archivo desde la base de datos utilizando el id
+            PhotoGalery photoGalery = photoGaleryServiceInterface.getPhotoGaleryById(id);
+            String fileName = photoGalery.getPhoto();
+
+            // Eliminar la entrada de la base de datos
             photoGaleryServiceInterface.deletePhotoGalery(id);
-            String mensaje = "La imagen fue eliminada de manera correcta";
-            ResponseApiCustom response = new ResponseApiCustom("success", mensaje);
-            return ResponseEntity.ok(response);
+
+            // Eliminar el archivo físico
+            File folder = new File("../frontReservaTurnoCancha/public/galeryPhoto");
+            File fileToDelete = new File(folder, fileName);
+
+            if (fileToDelete.exists()) {
+                if (fileToDelete.delete()) {
+                    String mensaje = "La imagen y el registro fueron eliminados correctamente";
+                    ResponseApiCustom response = new ResponseApiCustom("success", mensaje);
+                    return ResponseEntity.ok(response);
+                } else {
+                    // Si la eliminación del archivo físico falla por alguna razón desconocida
+                    String mensaje = "Error al eliminar el archivo físico";
+                    ResponseApiCustom response = new ResponseApiCustom("error", mensaje);
+                    return ResponseEntity.internalServerError().body(response);
+                }
+            } else {
+                // Si el archivo físico no existe pero el registro en la base de datos fue eliminado correctamente
+                String mensaje = "El registro en la base de datos fue eliminado, pero la imagen no se encontró en el sistema de archivos";
+                ResponseApiCustom response = new ResponseApiCustom("success", mensaje);
+                return ResponseEntity.ok(response);
+            }
         } catch (EmptyResultDataAccessException e) {
-            String mensaje = "No se encontro la imagen";
+            String mensaje = "No se encontró la imagen en la base de datos";
             ResponseApiCustom response = new ResponseApiCustom("error", mensaje);
             return ResponseEntity.badRequest().body(response);
         } catch (Exception e) {
-
             ResponseApiCustom response = new ResponseApiCustom("error", e.getMessage());
             return ResponseEntity.internalServerError().body(response);
         }
     }
-
 
 
 }

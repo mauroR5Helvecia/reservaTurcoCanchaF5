@@ -45,10 +45,10 @@ public class PhotoGaleryServiceImplement implements PhotoGaleryServiceInterface{
         }
     }
 
-
-
-
-
+    @Override
+    public PhotoGalery getPhotoGaleryById(Long id) {
+        return photoGaleryRepository.findById(id).orElse(null);
+    }
 
 
 }

@@ -13,4 +13,5 @@ public interface PhotoGaleryServiceInterface {
 
     public void deletePhotoGalery (Long id);
 
+    PhotoGalery getPhotoGaleryById(Long id);
 }
