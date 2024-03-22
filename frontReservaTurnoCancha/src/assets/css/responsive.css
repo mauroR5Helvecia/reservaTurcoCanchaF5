@@ -1,0 +1,30 @@
+@media (width <=1170px) {
+    .contact__container {
+        flex-direction: column;
+
+        .contact__advices,
+        .contact__map {
+            width: 100%;
+        }
+    }
+
+}
+
+@media (width <=872px) {
+    .home {
+        flex-direction: column;
+
+
+        .home__announcement,
+        .home__shifts {
+            width: 100%;
+        }
+    }
+
+    .aside__private {
+        .aside__button {
+            font-size: 11px;
+            padding: 0.3rem 0.7rem;
+        }
+    }
+}

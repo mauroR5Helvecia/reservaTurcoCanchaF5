@@ -6,18 +6,22 @@
     --secondary-text-color: #ADD8E6;
 
 
+    --nav-Active-background-color: #4923c4;
+
+
 }
 
 .layout {
     width: 100%;
-    min-height: 100vh;
     height: 100%;
-    overflow: hidden;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
 }
 
 .layout__admin {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -242,6 +246,7 @@
 /*PRIVATE LAYOUT*/
 
 .user__header {
+    flex: 1;
     position: relative;
     width: 100%;
     right: 0;
@@ -350,7 +355,7 @@
 
 .content__private {
     width: 100vw;
-    min-height: 80vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -359,6 +364,7 @@
 }
 
 .aside__private {
+    flex: 1;
     width: 100%;
     height: 55px;
     position: relative;
@@ -398,28 +404,18 @@
 
 
     .aside__button:hover {
-        background-color: #d92f68;
+        background-color: var(--nav-Active-background-color);
         box-shadow: 0px 15px 20px rgba(134, 46, 229, 0.4);
         color: #fff;
         transform: translateY(-3px);
 
-        &:nth-child(2) {
-            background-color: #4923c4;
-        }
 
-        &:nth-child(3) {
-            background-color: rgba(70, 209, 20, 0.721);
-        }
-
-        &:last-child {
-            background-color: rgb(194, 46, 46);
-        }
     }
 
 
 
     .aside__button-active {
-        background-color: var(--back)
+        background-color: var(--nav-Active-background-color)
     }
 
 
@@ -466,7 +462,7 @@
 
 .list__shifts-title {
     font-size: 2rem;
-    color: rgb(210, 210, 210);
+    color: var(--primary-text-color);
 }
 
 
@@ -474,34 +470,36 @@
 .list__shifts {
     list-style: none;
     width: 100%;
-    height: 470px;
+    max-height: 470px;
     overflow-y: scroll;
 }
 
 .edit__button__selected__admin {
-    background-color: #0000FF;
+    background-color: #9d9db5;
     width: 15%;
     color: white;
     padding: 10px 20px;
     margin: 15px 3px 20px 3px;
+    transition: all 250ms ease-in-out;
     border-radius: 5px;
     cursor: pointer;
     /* Otros estilos según tus necesidades */
 
     &:hover {
-        background-color: #4949fb;
-        /* Cambia el color de fondo al pasar el cursor */
+        background-color: var(--nav-Active-background-color)
+            /* Cambia el color de fondo al pasar el cursor */
     }
 
     &.edit__button__selected__admin-active {
-        background-color: #707172;
-        /* Cambia el color de fondo cuando está activo */
+
+        background-color: var(--nav-Active-background-color)
+            /* Cambia el color de fondo cuando está activo */
     }
 }
 
 
 .edit__container {
-    background-color: rgb(62, 61, 63);
+    background-color: var(--primary-color);
     padding: 1.5rem;
     border-radius: 0.5rem;
     margin: 9px 0px 0px 0px;
@@ -555,7 +553,7 @@
 
     .shift__box-info {
         width: 100%;
-        background-color: lightblue;
+        background-color: var(--secondary-text-color);
         padding: 1rem 2rem;
         border-radius: 0.5rem;
         margin-right: 3rem;
@@ -709,7 +707,7 @@
 
 .home {
     width: 99%;
-    height: 78vh;
+    height: 95%;
     display: flex;
     gap: 2rem;
     padding: 1rem;
@@ -718,16 +716,12 @@
     border-radius: 0.5rem;
 
 
-    section {
-        width: 100%;
-        height: 100%;
 
-    }
 
     .home__shifts {
         padding-right: 2rem;
         width: 65%;
-        background-color: rgb(62, 61, 63);
+        background-color: var(--primary-color);
         backdrop-filter: blur(5px);
         padding: 2rem;
         border-radius: 0.5rem;
@@ -741,7 +735,7 @@
             font-size: 1.1rem;
             opacity: 0.9;
             margin-top: 0.5rem;
-            color: rgb(146, 227, 253);
+            color: var(--secondary-text-color)
         }
     }
 
@@ -750,7 +744,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: rgb(37, 35, 40);
+        background-color: var(--primary-color);
         padding-top: 1rem;
         border-radius: 0.4rem;
         border-bottom-left-radius: 0.7rem;
@@ -812,11 +806,12 @@
     display: flex;
     background-color: #00000093;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding-top: 1.2rem;
 
 
     .contact__map-iframe {
+        margin-top: 1rem;
         border: none;
         border-radius: 5px;
     }
@@ -853,7 +848,7 @@
     position: relative;
     font-size: 2.7rem;
     margin-bottom: 2rem;
-    color: lightgoldenrodyellow;
+    color: var(--primary-text-color);
 
     &::after {
         content: "";
@@ -862,15 +857,13 @@
         position: absolute;
         bottom: 15%;
         right: 0%;
-        background-color: rgb(208, 208, 136);
+        background-color: var(--primary-text-color);
         ;
 
     }
 }
 
-.map__title {
-    margin-top: -7rem;
-}
+
 
 .contact__whatsapp {
     padding: 0.5rem 1rem;

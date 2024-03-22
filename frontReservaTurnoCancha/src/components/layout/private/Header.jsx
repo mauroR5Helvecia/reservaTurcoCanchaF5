@@ -28,7 +28,6 @@ export const Header = () => {
               ? "aside__button-logout aside__button-logout-active"
               : "aside__button-logout"
           }
-          style={{ "--back": "blue" }}
         >
           <i className="bx bx-exit aside__button-icon"></i>
           <span> Cerrar sesión</span>

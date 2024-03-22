@@ -18,7 +18,7 @@ export const Edit = () => {
 
   const [editAnnoucement, setEditAnoucement] = useState(false);
   const [editGallery, setEditGallery] = useState(false);
-  const [editShifts, setEditShifts] = useState(false);
+  const [editShifts, setEditShifts] = useState(true);
 
   useLayoutEffect(() => {
     if (editShifts) {
@@ -42,9 +42,7 @@ export const Edit = () => {
 
   let fechaFormateada = formaTime();
 
-
-
-  const [lastCourtSelector, setLastCourtSelector] = useState(1)
+  const [lastCourtSelector, setLastCourtSelector] = useState(1);
 
   const getCanchas = async () => {
     const request = await fetch(Global.url + "court/all", {
@@ -101,6 +99,7 @@ export const Edit = () => {
   const handleEditShift = () => {
     setEditShifts(true);
     setEditAnoucement(false);
+    setEditGallery(false);
   };
   //----------------------------------------------------------------------------------
   // Logica edicion de anuncios
@@ -257,7 +256,6 @@ export const Edit = () => {
                 setSelectedCancha={setSelectedCancha}
                 setLastCourtSelector={setLastCourtSelector}
               />
-            
             </header>
             <h2 className="list__shifts-title">Turnos definidos</h2>
             <div className="shifts__extra-info">
