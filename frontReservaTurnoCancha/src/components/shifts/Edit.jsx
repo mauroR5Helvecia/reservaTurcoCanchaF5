@@ -212,6 +212,7 @@ export const Edit = () => {
   return (
     <>
       <div className="list__container__edit__sub__menu">
+        <div className="conteiner__sub__menu">
         <span
           onClick={handleEditShift} // Agrego el evento onClick
           className={`edit__button__selected__admin${
@@ -237,7 +238,7 @@ export const Edit = () => {
         >
           <span>EDITAR GALERIA</span>
         </span>
-
+        </div>
         {/* El main segun la eleccion */}
         {/* Edicion de turnos */}
         {editShifts ? (
@@ -250,12 +251,14 @@ export const Edit = () => {
                   limit={35}
                 />
               </div>
-
+              <div>
               <CourtSelector
                 canchas={canchas}
                 setSelectedCancha={setSelectedCancha}
                 setLastCourtSelector={setLastCourtSelector}
               />
+              </div>
+              
             </header>
             <h2 className="list__shifts-title">Turnos definidos</h2>
             <div className="shifts__extra-info">

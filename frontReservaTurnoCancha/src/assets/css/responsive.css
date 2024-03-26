@@ -18,6 +18,45 @@
         }
     }
 
+    .register__court{
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+
+      
+           
+        .court__list{
+            width: 50%;
+            text-align: center;
+            padding-top: 60px;
+           
+        }
+    
+
+    }
+
+    .register__form{
+        width: 80%;
+    }
+
+
+    .days__dates-and-days{
+        flex-wrap: wrap;
+        margin-bottom: 60px;
+      
+
+        .Schedules__options{
+            margin-top: 60px;
+        }
+    }
+    .days{
+        width: 80%;
+    }
+
+    /* Admin bookins */
+
+    .Bookings__container{
+        flex-wrap: wrap;
+    }
 }
 
 @media (width <=872px) {
@@ -43,6 +82,14 @@
             min-height: 250px;
         }
     }
+    .shifts__shift{
+        font-size: 10px;
+    }
+
+    .shift__submit {
+        margin-left: 3px;
+        font-size: 11px;
+    }
 
     .aside__private {
         .aside__button {
@@ -67,6 +114,8 @@
 }
 
 @media (width <=628px) {
+
+
     .user__header {
         .header__title-container {
             padding-left: 0.5rem;
@@ -89,7 +138,26 @@
             }
         }
 
+        .court__name{
+            margin-top: 30px;
+        }
+
     }
+
+    /* Sub menu edit */
+    .conteiner__sub__menu {
+        display: flex;
+        flex-wrap: wrap; 
+      }
+      
+      .conteiner__sub__menu > span {
+        flex: 1 0 33.33%; 
+        max-width: calc(33.33% - 10px);
+        margin: 5px; 
+        text-align: center;
+        font-size: 8px; 
+      }
+      
 
     .shifts__shift {
         text-align: start;
@@ -97,6 +165,10 @@
 
         .shift__box-info {
             margin-right: 2rem;
+        }
+
+        .shift__submit {
+            margin-top: 1rem;
         }
 
 
@@ -107,11 +179,31 @@
             width: 400px;
         }
     }
+
+    .court__buttons-container{
+        display: flex ;
+        flex-wrap: wrap;
+        width: 100%;
+        font-size: 12px;
+        justify-content: space-around;
+        margin-bottom: 30px;
+
+    
+        
+    }
+
+ 
+
+    .court__delete{
+        margin-bottom: 16px;
+    }
+
+  
 }
 
 @media(width <=500px) {
     html {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .shifts__shift {
@@ -127,24 +219,86 @@
         font-size: 2.1rem;
     }
 
-    .aside__private {
-        .aside__button {
-            font-size: 9px;
-            padding: 0.3rem 0.7rem;
-
-            .aside__button-icon {
-                font-size: 1.4rem;
-            }
-        }
-
-
+    .shift__submit {
+        width: 60%;
+        height: 30px;
+        font-size: 8px;
     }
+ 
+
+    
 
     .contact__map {
         .contact__map-iframe {
             width: 350px;
             height: 250px;
         }
+
+        /* componente edit selector de canchas */
+       
+
+          .list__shifts__header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+          }
+
+      
     }
 
+
+
+    .aside__button {
+        font-size: 8px;
+        padding: 0.1rem 0.3rem;
+        margin: 0.2rem; /* Margen entre los elementos */
+        width: calc(25% - 0.3rem); 
+      }
+      
+      .aside__button-icon {
+        font-size: 0.7rem;
+      }
+      
+      .aside__button__text {
+        display: block;
+        text-align: center;
+      }
+      
+ 
+
+
+}
+
+@media(width <=440px) {
+    html {
+        font-size: 9px;
+    }
+
+    .aside__button {
+        padding: 0.1rem ;
+         /* Margen entre los elementos */
+        width: calc(25% - 0.1rem); /* Ancho de los elementos para cuatro columnas */
+      }
+      
+      .aside__button-icon {
+        font-size: 0.3rem;
+      }
+      
+      .aside__button__text {
+        display: block;
+        text-align: center;
+        font-size: 6px;
+      }
+
+  
+
+        /* Reserved shift admin */
+        .reservation__container{
+            .reservation__info{
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+          }
+      
 }
