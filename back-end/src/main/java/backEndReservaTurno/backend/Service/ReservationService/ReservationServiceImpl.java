@@ -15,6 +15,7 @@ import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.NameNotFoundException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -136,7 +137,7 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
     }
 
     @Override
-    public void deleteReservation(Long id) {
+    public String deleteReservation(Long id) {
         Optional<Reservation> optionalReservation = reservationRepository.findById(id);
         if (optionalReservation.isPresent()) {
             Reservation reservation = optionalReservation.get();
@@ -172,6 +173,8 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
 
                 // Eliminar la reserva
                 reservationRepository.deleteById(id);
+
+                return "Success delete reservation";
             }
         } else {
             throw new RuntimeException("Reserva no encontrada con el ID: " + id);
@@ -185,6 +188,17 @@ public class ReservationServiceImpl implements ReservationServiceInterface{
         return reservation;
 
     }
+
+    @Override
+    public Optional<Reservation> findReservationById(Long idReservation) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(idReservation);
+        if (optionalReservation.isPresent()) {
+            return optionalReservation;
+        } else {
+            throw new RuntimeException("Reservation not found with ID: " + idReservation);
+        }
+    }
+
 
     @Override
     public ReservationResponseDTO getDetailsReservation(Long idShiftReserved, Long idUserReserved, Long idCourtReserved, Long idReservation) {

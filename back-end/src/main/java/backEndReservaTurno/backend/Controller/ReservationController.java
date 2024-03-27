@@ -2,8 +2,9 @@ package backEndReservaTurno.backend.Controller;
 import backEndReservaTurno.backend.Entity.DTO.ReservationDTO;
 import backEndReservaTurno.backend.Entity.DTO.ReservationResponseDTO;
 import backEndReservaTurno.backend.Entity.Reservation;
-import backEndReservaTurno.backend.Entity.Shift;
 import backEndReservaTurno.backend.Service.ReservationService.ReservationServiceInterface;
+import backEndReservaTurno.backend.javaMailSender.MailController;
+import backEndReservaTurno.backend.javaMailSender.emailDTO.EmailDTOVerify;
 import backEndReservaTurno.backend.util.ResponseApiCustom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -27,6 +29,9 @@ public class ReservationController {
 
     @Autowired
     private ReservationServiceInterface reservationServiceInterface;
+
+    @Autowired
+    private MailController mailController;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveReservation(@RequestBody ReservationDTO reservationDTO) {
@@ -161,7 +166,22 @@ public class ReservationController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteReservation(@PathVariable Long id) {
         try {
-            reservationServiceInterface.deleteReservation(id);
+            //find reservation by id
+
+            Optional<Reservation> reservation = reservationServiceInterface.findReservationById(id);
+
+            //delete reservation
+            String responseDelete = reservationServiceInterface.deleteReservation(id);
+
+            if (responseDelete.equals("Success delete reservation") && reservation.isPresent()){
+                ReservationResponseDTO dtoReserva = reservationServiceInterface.getDetailsReservation(reservation.get().getIdShiftReserved().getIdShift(), reservation.get().getIdUserReserved().getIdUsuario(), reservation.get().getIdCourtReserved().getIdCourt(), reservation.get().getIdReservation());
+                String subject = "La reserva en Cancha "+ dtoReserva.getNameCourt() +" a sido cancelada";
+                String message = dtoReserva.getName()+" "+dtoReserva.getLastName()+ " le informamos que la reserva en fecha " + dtoReserva.getDateShift()+ " en horario "+ dtoReserva.getHourShift() + " Horas a sido cancelada, visite nuestro sitio para ver los horarios disponibles. Gracias";
+                EmailDTOVerify emailDTOVerify = new EmailDTOVerify(dtoReserva.getEmail(), subject, message);
+                mailController.sendVerifyemail(emailDTOVerify);
+
+            }
+
             String mensaje = "La reserva fue eliminada de manera correcta";
             ResponseApiCustom response = new ResponseApiCustom("success delete", mensaje);
             return ResponseEntity.ok(response);
