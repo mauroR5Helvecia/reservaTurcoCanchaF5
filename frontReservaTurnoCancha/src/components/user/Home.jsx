@@ -20,6 +20,8 @@ export const Home = () => {
 
     if (data.status == "success") setAdvertisements(data.response);
     console.log(data);
+
+   
   };
   return (
     <div className="home">
