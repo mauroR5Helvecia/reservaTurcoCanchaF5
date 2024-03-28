@@ -212,32 +212,33 @@ export const Edit = () => {
   return (
     <>
       <div className="list__container__edit__sub__menu">
-        <span
-          onClick={handleEditShift} // Agrego el evento onClick
-          className={`edit__button__selected__admin${
-            editShifts ? " edit__button__selected__admin-active" : ""
-          }`}
-        >
-          <span>EDITAR TURNOS</span>
-        </span>
-        <span
-          onClick={handleEditAnnoucement} // Agrego el evento onClick
-          className={`edit__button__selected__admin${
-            editAnnoucement ? " edit__button__selected__admin-active" : ""
-          }`}
-        >
-          <span>EDITAR ANUNCIOS</span>
-        </span>
+        <section className="list__container__submenu">
+          <span
+            onClick={handleEditShift} // Agrego el evento onClick
+            className={`edit__button__selected__admin${
+              editShifts ? " edit__button__selected__admin-active" : ""
+            }`}
+          >
+            <span>EDITAR TURNOS</span>
+          </span>
+          <span
+            onClick={handleEditAnnoucement} // Agrego el evento onClick
+            className={`edit__button__selected__admin${
+              editAnnoucement ? " edit__button__selected__admin-active" : ""
+            }`}
+          >
+            <span>EDITAR ANUNCIOS</span>
+          </span>
 
-        <span
-          onClick={handleEditPhotoGalery} // Agrego el evento onClick
-          className={`edit__button__selected__admin${
-            editGallery ? " edit__button__selected__admin-active" : ""
-          }`}
-        >
-          <span>EDITAR GALERIA</span>
-        </span>
-
+          <span
+            onClick={handleEditPhotoGalery} // Agrego el evento onClick
+            className={`edit__button__selected__admin${
+              editGallery ? " edit__button__selected__admin-active" : ""
+            }`}
+          >
+            <span>EDITAR GALERIA</span>
+          </span>
+        </section>
         {/* El main segun la eleccion */}
         {/* Edicion de turnos */}
         {editShifts ? (
@@ -269,54 +270,56 @@ export const Edit = () => {
               </span>
             </div>
             <div className="admin__list-shifts">
-              {shiftList.length >= 1
-                ? shiftList.map((turno) => {
-                    return (
-                      turno.dateShift == fechaFormateada && (
-                        <div className="shifts__shift" key={turno.idShift}>
-                          <h3 className="shift__info">
-                            {SelectedCancha.nameCourt}
-                          </h3>
-                          <span className="shift__schedule">
-                            {" "}
-                            <i className="bx bx-time-five"></i>{" "}
-                            {turno.hourShift}hs a {<FormatHour turno={turno} />}
-                            hs
-                          </span>
+              {shiftList.length >= 1 ? (
+                shiftList.map((turno) => {
+                  return (
+                    turno.dateShift == fechaFormateada && (
+                      <div className="shifts__shift" key={turno.idShift}>
+                        <h3 className="shift__info">
+                          {SelectedCancha.nameCourt}
+                        </h3>
+                        <span className="shift__schedule">
+                          {" "}
+                          <i className="bx bx-time-five"></i> {turno.hourShift}
+                          hs a {<FormatHour turno={turno} />}
+                          hs
+                        </span>
 
-                          <div className="shift__status">
-                            <p>
-                              <strong>Estado</strong>:{" "}
-                              {!turno.shiftReserved
-                                ? "No reservado"
-                                : "Reservado"}
-                            </p>
-                            {turno.shiftReserved ? (
-                              <button
-                                className="shift__submit"
-                                onClick={() => {
-                                  cancelShift(turno.reservation.idReservation);
-                                }}
-                              >
-                                Cancelar
-                              </button>
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                          <button
-                            className="shift__submit"
-                            onClick={() => {
-                              deleteShift(turno.idShift);
-                            }}
-                          >
-                            Eliminar
-                          </button>
+                        <div className="shift__status">
+                          <p>
+                            <strong>Estado</strong>:{" "}
+                            {!turno.shiftReserved
+                              ? "No reservado"
+                              : "Reservado"}
+                          </p>
+                          {turno.shiftReserved ? (
+                            <button
+                              className="shift__submit"
+                              onClick={() => {
+                                cancelShift(turno.reservation.idReservation);
+                              }}
+                            >
+                              Cancelar
+                            </button>
+                          ) : (
+                            ""
+                          )}
                         </div>
-                      )
-                    );
-                  })
-                : "No hay turnos"}
+                        <button
+                          className="shift__submit"
+                          onClick={() => {
+                            deleteShift(turno.idShift);
+                          }}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    )
+                  );
+                })
+              ) : (
+                <h2 className="Shifts__no-shifts">No hay turnos para hoy</h2>
+              )}
             </div>
           </main>
         ) : null}

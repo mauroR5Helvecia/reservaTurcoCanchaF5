@@ -1,3 +1,9 @@
+@media (width <=1470px) {
+    .Bookings__container .reserved-shifts__container .reservation__container {
+        width: 47%;
+    }
+}
+
 @media (width <=1170px) {
 
     .contact__container {
@@ -16,6 +22,32 @@
             padding: 0.5rem 1rem;
             height: 60%;
         }
+    }
+
+    .Bookings__container .reserved-shifts__container .reservation__container {
+        width: 90%;
+    }
+
+    .register__court {
+        flex-direction: column;
+        align-content: center;
+        gap: 2rem;
+
+        .register__form {
+            width: 100%;
+        }
+
+        .court__list {
+            width: 100%;
+
+            .court__article {
+                width: 48.5%;
+            }
+        }
+    }
+
+    .admin__content {
+        padding: 1rem;
     }
 
 }
@@ -63,6 +95,66 @@
 
     .content__private {
         height: 77vh;
+    }
+
+    .Bookings__container {
+        padding: 0;
+        flex-direction: column;
+
+        .reserved-shifts__container {
+            min-height: 600px;
+        }
+    }
+
+    .Bookings__announcement {
+        width: 100%;
+        min-width: 250px;
+
+    }
+
+    .admin__header {
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .days__form {
+        width: 100%;
+    }
+
+    .days__dates-and-days {
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .edit__button__selected__admin {
+        font-size: 0.78rem;
+    }
+}
+
+@media(width <=690px) {
+    .register__court {
+        flex-direction: column;
+        align-content: center;
+        gap: 2rem;
+
+        .register__form {
+            width: 100%;
+        }
+
+        .court__list {
+            width: 100%;
+
+            .court__article {
+                width: 100%
+            }
+        }
+    }
+
+    .announcement__form-text,
+    .announcement__form-photos {
+        width: 100%;
     }
 }
 
@@ -128,9 +220,17 @@
     }
 
     .aside__private {
+        flex-wrap: wrap;
+
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+        margin-top: 0.5rem;
+
         .aside__button {
+            width: 40%;
+            height: 40px;
             font-size: 9px;
-            padding: 0.3rem 0.7rem;
+            padding: 0.1rem 0.7rem;
 
             .aside__button-icon {
                 font-size: 1.4rem;
@@ -145,6 +245,10 @@
             width: 350px;
             height: 250px;
         }
+    }
+
+    .admin__content {
+        padding: 1rem;
     }
 
 }

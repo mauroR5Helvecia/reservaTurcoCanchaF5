@@ -26,6 +26,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
 
 }
 
@@ -467,7 +469,6 @@
 }
 
 
-
 .list__shifts {
     list-style: none;
     width: 100%;
@@ -476,15 +477,23 @@
     overflow-y: scroll;
 }
 
+.list__container__submenu {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -0.5rem;
+}
+
 .edit__button__selected__admin {
+    display: block;
     background-color: #9d9db5;
-    width: 15%;
+    width: fit-content;
+    height: 40px;
     color: white;
     padding: 10px 20px;
-    margin: 15px 3px 20px 3px;
     transition: all 250ms ease-in-out;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 0.3rem;
     /* Otros estilos según tus necesidades */
 
     &:hover {
@@ -720,7 +729,7 @@
     .home__shifts {
         padding-right: 2rem;
         width: 65%;
-        background-color: var(--primary-color);
+        background-color: var(--secondary-background-color);
         backdrop-filter: blur(5px);
         padding: 2rem;
         border-radius: 0.5rem;
@@ -742,7 +751,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: var(--primary-color);
+        background-color: var(--secondary-background-color);
         padding-top: 1rem;
         border-radius: 0.4rem;
         border-bottom-left-radius: 0.7rem;
@@ -924,7 +933,7 @@
 
 .admin__header {
     width: 100%;
-    padding-left: 1.5rem;
+    padding-left: 0.5rem;
     padding-top: 0.5rem;
 
 
@@ -940,6 +949,7 @@
     width: 99%;
     height: 81vh;
     padding: 2rem;
+    margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.46);
     backdrop-filter: blur(25px);
     border-radius: 0.5rem;
@@ -1124,6 +1134,7 @@
 
     .dates__more-days-label {
         width: 40%;
+        min-width: 140px;
         display: flex;
         align-items: center;
         padding: 0.5rem;
@@ -1190,6 +1201,10 @@
 
 }
 
+.Shifts__no-shifts {
+    font-size: 2rem;
+    color: white;
+}
 
 .shift__day {
     width: 140px;
@@ -1342,6 +1357,7 @@
 
 .Bookings__container {
     width: 100%;
+    min-height: 600px;
     height: 100%;
     display: flex;
     justify-content: space-around;
@@ -1378,6 +1394,7 @@
 
 .Bookings__announcement {
     width: 30%;
+    min-width: 370px;
     gap: 2rem;
     display: flex;
     flex-direction: column;
@@ -1407,7 +1424,7 @@
 
     textarea {
         resize: none;
-        min-width: 280px;
+        min-width: 200px;
         padding: 0.3rem;
         min-height: 170px;
 
@@ -1422,11 +1439,21 @@
         background-color: black;
         color: white;
     }
+
+    label {
+        min-width: 200px;
+        width: 90%;
+
+        textarea {
+            width: 100%;
+        }
+    }
+
 }
 
 .announcement__file-upload {
     height: 200px;
-    width: 300px;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: space-between;
