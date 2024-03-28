@@ -92,6 +92,7 @@ export const Schedules = () => {
     <div className="Schedules__container">
       <form onSubmit={shiftsCreator} className="days__form">
         <h2>Definir días y horarios disponibles</h2>
+        
         <CourtSelector
           canchas={canchas}
           setSelectedCancha={setSelectedCancha}

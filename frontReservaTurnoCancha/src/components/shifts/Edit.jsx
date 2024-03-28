@@ -251,12 +251,13 @@ export const Edit = () => {
                   limit={35}
                 />
               </div>
-
-              <CourtSelector
-                canchas={canchas}
-                setSelectedCancha={setSelectedCancha}
-                setLastCourtSelector={setLastCourtSelector}
-              />
+              <div>
+                <CourtSelector
+                  canchas={canchas}
+                  setSelectedCancha={setSelectedCancha}
+                  setLastCourtSelector={setLastCourtSelector}
+                />
+              </div>
             </header>
             <h2 className="list__shifts-title">Turnos definidos</h2>
             <div className="shifts__extra-info">

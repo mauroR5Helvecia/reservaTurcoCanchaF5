@@ -19,6 +19,10 @@ export const Shifts = () => {
 
   const [shift, setShift] = useState({});
 
+  const userDataString = localStorage.getItem("user");
+  const userData = JSON.parse(userDataString);
+  const username = userData.name;
+
   useLayoutEffect(() => {
     getCanchas();
   }, []);
@@ -47,9 +51,16 @@ export const Shifts = () => {
 
     const data = await request.json();
 
+
+
     setCanchas(data.response);
     setSelectedCancha(data.response[0]);
     setShiftList(data.response[0].listShift);
+
+
+
+    
+  
   };
 
   const activeModal = (dateShift, hourShift, idShift) => {
@@ -60,7 +71,7 @@ export const Shifts = () => {
       dateShift,
       hourShift,
       location: SelectedCancha.location,
-      usuario: "Pablo Romero",
+      usuario: username,
     };
     //Definir el turno a reservar
     setShift(turnoInfo);

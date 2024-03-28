@@ -9,7 +9,7 @@ export const Footer = () => {
         }
       >
         <i className="bx bx-football aside__button-icon"></i>
-        <span>Canchas</span>
+        <span  className="aside__button__text">Canchas</span>
       </NavLink>
       <NavLink
         to="Dias"
@@ -18,7 +18,7 @@ export const Footer = () => {
         }
       >
         <i className="bx bx-list-check aside__button-icon"></i>
-        <span>Horarios</span>
+        <span  className="aside__button__text">Horarios</span>
       </NavLink>
       <NavLink
         to={"Reservas"}
@@ -27,7 +27,7 @@ export const Footer = () => {
         }
       >
         <i className="bx bx-cog aside__button-icon"></i>
-        <span>Reservas</span>
+        <span  className="aside__button__text">Reservas</span>
       </NavLink>
 
       <NavLink
@@ -37,7 +37,7 @@ export const Footer = () => {
         }
       >
         <i className="bx bx-cog aside__button-icon"></i>
-        <span> Editar horarios</span>
+        <span  className="aside__button__text"> Editar</span>
       </NavLink>
     </aside>
   );

@@ -72,17 +72,17 @@ public class AuthController {
         usuario.setCodigoVerificacion(codeVerify);
 
         //Enviar por email el codigo de verificacion
-        System.out.println("llego hasta aca 1");
+
         String subject = "Código de Verificación";
         String message = "Tu código de verificación es: " + codeVerify;
         EmailDTOVerify emailDTOVerify = new EmailDTOVerify(email, subject, message);
 
-        System.out.println("llego hasta aca 2");
+
 
         mailController.sendVerifyemail(emailDTOVerify);
 
 
-        System.out.println("llego hasta aca 3");
+
       Usuario createdUsuario = usuarioServiceInterface.save(usuario);
 
 

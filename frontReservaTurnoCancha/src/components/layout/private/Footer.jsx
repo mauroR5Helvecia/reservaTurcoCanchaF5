@@ -13,9 +13,9 @@ export const Footer = () => {
       </NavLink>
       <NavLink
         to="MisTurnos"
-        className={({ isActive }) =>
+        className= {({ isActive }) =>
           isActive ? "aside__button aside__button-active" : "aside__button"
-        }
+        } 
       >
         <i className="bx bx-list-check aside__button-icon"></i>
         <span>Mis turnos </span>

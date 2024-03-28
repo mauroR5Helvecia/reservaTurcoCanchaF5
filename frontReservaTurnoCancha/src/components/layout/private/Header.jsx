@@ -3,6 +3,11 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../assets/img/futbol.svg";
 export const Header = () => {
   const [logout, setLogout] = useState(false);
+
+  const userDataString = localStorage.getItem("user");
+const userData = JSON.parse(userDataString);
+const username = userData.name;
+
   return (
     <header className="user__header">
       <section className="header__title-container">
@@ -15,7 +20,7 @@ export const Header = () => {
           setLogout(!logout);
         }}
       >
-        <h2 className="header__user-name">Pablo Romero</h2>
+        <h2 className="header__user-name">{username}</h2>
         <img
           src="https://imgs.search.brave.com/CAtVOv-guW4Ksxe5xp71hwQC-tjx4VdiCT4oPycaFnQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Y29tcHV0ZXJob3Bl/LmNvbS9qYXJnb24v/Zy9ndWVzdC11c2Vy/LnBuZw"
           alt=""

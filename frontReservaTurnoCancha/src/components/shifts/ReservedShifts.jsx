@@ -61,7 +61,7 @@ export const ReservedShifts = ({ endpoint = "alldaysuser" }) => {
       {shifts.map((shift) => {
         return (
           <article className="reservation__container" key={shift.idReservation}>
-            <h3 className="reservation__title">Turno reservado</h3>
+            <h3 className="reservation__title">RESERVADO</h3>
 
             <div className="reservation__info">
               <p>
