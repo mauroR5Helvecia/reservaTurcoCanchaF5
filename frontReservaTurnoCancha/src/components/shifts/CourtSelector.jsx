@@ -35,6 +35,7 @@ CourtSelector.propTypes = {
       nameCourt: PropTypes.string.isRequired,
     })
   ).isRequired,
-  setSelectedCancha: PropTypes.number.isRequired,
-  setLastCourtSelector: PropTypes.number
+  setSelectedCancha: PropTypes.func.isRequired,
+  setLastCourtSelector: PropTypes.oneOfType([PropTypes.number, PropTypes.func])
 };
+

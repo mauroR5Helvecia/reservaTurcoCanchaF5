@@ -26,9 +26,12 @@ export const Edit = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editShifts]);
+
   useEffect(() => {
-    setShiftList(SelectedCancha.listShift);
-  }, [SelectedCancha.listShift]);
+    if (SelectedCancha && SelectedCancha.listShift) {
+      setShiftList(SelectedCancha.listShift);
+    }
+  }, [SelectedCancha]);
 
   let formaTime = () => {
     let day = startDate.getDate();
@@ -51,15 +54,18 @@ export const Edit = () => {
         "Content-Type": "application/json",
       },
     });
-
+  
     const data = await request.json();
-
+  
     setCanchas(data.response);
-
-    // Aca deberia pasarle la ultima seleccionada
-    setSelectedCancha(data.response[lastCourtSelector]);
-    setShiftList(data.response[lastCourtSelector].listShift);
+  
+    // si data.response[lastCourtSelector] esté definido
+    if (data.response && data.response[lastCourtSelector]) {
+      setSelectedCancha(data.response[lastCourtSelector]);
+      setShiftList(data.response[lastCourtSelector].listShift);
+    }
   };
+  
 
   const cancelShift = async (idShift) => {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -262,14 +268,15 @@ export const Edit = () => {
             <h2 className="list__shifts-title">Turnos definidos</h2>
             <div className="shifts__extra-info">
               <span>
-                Capacidad : {SelectedCancha.capacity}{" "}
+                Capacidad : {SelectedCancha && SelectedCancha.capacity}{" "}
                 <i className="bx bx-group shifts__extra-icon"></i>
               </span>
               <span>
-                Precio x turno : {SelectedCancha.price}
+                Precio x turno : {SelectedCancha && SelectedCancha.price}
                 <i className="bx bx-dollar shifts__extra-icon"></i>
               </span>
             </div>
+
             <div className="admin__list-shifts">
               {shiftList.length >= 1 ? (
                 shiftList.map((turno) => {

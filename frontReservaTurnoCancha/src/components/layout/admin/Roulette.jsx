@@ -24,12 +24,16 @@ export const Roulette = () => {
     const request = await fetch(Global.url + "photogalery/latestfive", {
       method: "GET",
     });
-
+  
     const data = await request.json();
-
-    setImages(data.response);
-    console.log(data);
+  
+    if (Array.isArray(data.response)) {
+      setImages(data.response);
+    } else {
+      console.log("La respuesta no es un array:", data.response);
+    }
   };
+  
   return (
     <div className="slider" id="slider">
       {images.map((gallery) => (
