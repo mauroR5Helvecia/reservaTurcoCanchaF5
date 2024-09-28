@@ -1,5 +1,4 @@
 package backEndReservaTurno.backend.security.entity;
-import backEndReservaTurno.backend.Entity.Reservation;
 import backEndReservaTurno.backend.security.util.Role;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;

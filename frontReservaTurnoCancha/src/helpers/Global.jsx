@@ -1,3 +1,3 @@
 export const Global = {
-  url: "http://localhost:8500/apireserva/",
+  url: "http://localhost:8080/apireserva/",
 };

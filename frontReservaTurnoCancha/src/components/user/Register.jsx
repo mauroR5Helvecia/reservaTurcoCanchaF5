@@ -29,6 +29,8 @@ export const Register = () => {
         },
       });
 
+      console.log(request)
+
       toast.info("Se ha enviado un código de verificación a tu email");
       localStorage.setItem("email", newUser.email);
 
